@@ -2,7 +2,7 @@
 ## Analisis y Desarrollo de Software
 ### centro de procesos industriales y construccion
 ---
-![](https://tinyurl.com/5n78mrz4)
+![GOKU](https://tinyurl.com/5n78mrz4)
 |ID| Topic| Description                         |
 |--|------| -----                               |
 |01|Emmet||Work Flow - Markup & Styling         |
