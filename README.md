@@ -2,7 +2,8 @@
 ## Analisis y Desarrollo de Software
 ### centro de procesos industriales y construccion
 ---
-![GOKU](https://tinyurl.com/5n78mrz4)
+
+![GOKU](https://tinyurl.com/5n78mrz4)       |
 
 | ID |THEME |Description                            |
 |--- |---   |---                                    |
