@@ -2,11 +2,6 @@
 ## Analisis y Desarrollo de Software
 ### centro de procesos industriales y construccion
 ---
-![GOKU](https://tinyurl.com/5n78mrz4)
-|ID| Topic| Description                         |
-|--|------| -----                               |
-|01|Emmet||Work Flow - Markup & Styling         |
-|02|HTML |Structure - Hypertext Makup Languaje  |
-|03|CSS  |Look & Fell - Cascading Style Sheets  |         |
+![GOKU](https://tinyurl.com/5n78mrz4)       |
 
 [ADSO Files DRIVE](https://tinyurl.com/5n78mrz4)
