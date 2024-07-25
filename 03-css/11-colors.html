@@ -38,15 +38,31 @@
         div.colors div.row div.olive {
             background-color: olive;
         }
-        div.colors div.row div:first-child,
-        div.colors div.row div:last-child {
-            color: white;
-        }
-        div.colors {
+        div.row {
             display: flex;
-            flex-direction: column;
+        }
+        div.colors div.row div {
+            height: 80px;
+            width: 80px;
+            font-size: 0.5rem;
+            justify-content: center;
             align-items: center;
-            margin: 2rem auto;
+            display: flex;
+        }
+        div.colors div.row div.purple {
+            background-color: purple;
+        }
+        div.colors div.row div.fuchsia {
+            background-color: fuchsia;
+        }
+        div.colors div.row div.white {
+            background-color: white;
+        }
+        div.colors div.row div.lime {
+            background-color: lime;
+        }
+        div.colors div.row div.green {
+            background-color: green;
         }
         div.row {
             display: flex;
@@ -59,21 +75,43 @@
             align-items: center;
             display: flex;
         }
-        div.rgb div.row div.purple {
-            background-color: #800080;
+        div.colors div.row div.navy {
+            background-color: navy;
         }
-        div.rgb div.row div.fuchsia {
-            background-color: #ff00ff;
+        div.colors div.row div.blue {
+            background-color: blue;
         }
-        div.rgb div.row div.white {
-            background-color: #ffff;
+        div.colors div.row div.aqua {
+            background-color: aqua;
         }
-        div.rgb div.row div.lime {
-            background-color: #00ff00;
+        div.colors div.row div.teal {
+            background-color: teal;
         }
-        div.rgb div.row div.green {
-            background-color: #008000;
+        div.row {
+            display: flex;
         }
+        div.colors div.row div {
+            height: 80px;
+            width: 80px;
+            font-size: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+        div.colors div.row div.black {
+            background-color: black;
+        }
+        div.colors div.row div.silver {
+            background-color: silver;
+        }
+        div.colors div.row div.gray {
+            background-color: gray;
+        }
+        div.colors div.row div:first-child,
+        div.colors div.row div:last-child {
+            color: white;
+        }
+        
     </style>
 </head> 
 <body class="css">
@@ -106,17 +144,20 @@
                 <div class="lime">lime</div>
                 <div class="green">green</div>
             </div>
-        </div>
-        <h3>RGB Decimal</h3>
-        <div class="rgb">
-            <div class="row row2">
-                <div class="purple">purple</div>
-                <div class="fuchsia">fuchsia</div>
-                <div class="white">white</div>
-                <div class="lime">lime</div>
-                <div class="green">green</div>
+            <div class="row row3">
+                <div class="navy">navy</div>
+                <div class="blue">blue</div>
+                <div class="aqua">aqua</div>
+                <div class="teal">teal</div>
+                
+            </div>
+            <div class="row row4">
+                <div class="black">black</div>
+                <div class="silver">silver</div>
+                <div class="gray">gray</div>
             </div>
         </div>
+        <h3>RGB Decimal</h3>
         <h3>RGB Hexadecimal</h3>
         <h3>HSL:</h3>
      </section>
