@@ -1,28 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24-challenge-layout</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head> 
-<body class="css">
-    <nav>
-        <a href="../">
-            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
-        </a>
-    </nav>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprite</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+        html {
+            border: 7px solid white;
+        }
+        body {
+            background-color: #17a053;
+            
+            font-family: "Poppins", sans-serif;
+        }
+        menu {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            padding: 0;
+        }
+        menu a {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            text-decoration: none;
+            border-bottom: 7px white solid;
+            text-transform: uppercase;
+        }
+
+        menu a:hover {
+            background-color: rgb(3, 3, 3, 0.692);
+            border-bottom: 7px solid rgb(197, 197, 78);
+        }
+
+        div.images {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.4);
+            margin: 0 auto;
+            width: 900px;
+            padding: 10px;
+        }
+
+        div.sprites {
+            background: url(imagenes/sprite.png);
+            background-position: -480px -5px;
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            height: 200px;
+            width: 328px;
+            border: 2px solid white;
+        }
+
+        div figcaption {
+            text-align: center;
+            color: black;
+            font-size: x-large;
+            font-weight: bold;
+            background-color: #fff9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+        }
+
+        div figcaption:hover {
+            background-color: rgba(255, 255, 255, 0.808);
+        }
+
+        section.first {
+            background-color: rgba(0, 0, 0, 0.4);
+            margin: 0 auto;
+            width: 900px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        div.info {
+            background-color: white;
+            display: flex;
+            gap: 35px;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin-bottom: 10px 0;
+        }
+
+        .img {
+            width: 100px;
+            position: absolute;
+            left: 18%;
+        }
+        .img1 {
+            width: 70px;
+            position: absolute;
+            right: 18%;
+        }
+        .log {
+            width: 200px;
+            height: 180;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        div p {
+            width: 60%;
+            text-align: justify;
+            line-height: 1.4em;
+        }
+
+        div p:hover {
+            color: #17a053;
+        }
+
+        div aside.first {
+            background-position: -282px -499px;
+            height: 95px;
+            width: 109px;
+        }
+
+        div aside.second {
+            background-position: -88px -210px;
+            height: 173px;
+            width: 109px;
+        }
+
+        footer {
+            width: 915px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            gap: 2.5rem;
+            height: 260px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        div.third {
+            background: url(imagenes/);
+            background-position: -500px -420px;
+            height: 180px;
+            width: 245px;
+        }
+
+        div.link {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            gap: 3.5rem;
+        }
+
+        div.link a {
+            text-decoration: none;
+            color: black;
+            font-size: medium;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 120px;
+            padding-bottom: 10px;
+            border-bottom: 7px solid white
+        }
+
+        div.link a:hover {
+            border-bottom: 7px solid #11743c;
+        }
+    
+    </style>
+</head>
+
+<body>
     <main>
-        <header>
-            <h1>24-challenge-layout</h1>
-            <p>
-                Solved   
-            </p>
-     </header>
-     <section>
-
-     </section>
+        <div class="logo"></div>
+        <img src="imagenes/spriteweb.png" alt="" class="log">
+        <menu>
+            <a href="#">Inicio</a>
+            <a href="#">Nosotros</a>
+            <a href="#">Portafolio</a>
+            <a href="#">Servicios</a>
+            <a href="#">Contacto</a>
+        </menu>
+        <section>
+            <div class="images">
+                <div class="sprites">
+                    <figcaption>Sprite 01</figcaption>
+                </div>
+                <div class="sprites">
+                    <figcaption>Sprite 02</figcaption>
+                </div>
+                <div class="sprites">
+                    <figcaption>Sprite 03</figcaption>
+                </div>
+            </div>
+        </section>
+        <br />
+        <section class="first">
+            <div class="info">
+                <aside class="first"></aside>
+                <img src="imagenes/logo.png" alt="" class="img">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum fugit aliquam impedit magnam quod, maxime deserunt cupiditate ratione ea saepe odit quasi culpa quam dolor voluptatibus reprehenderit quis a iusto corrupti hic placeat dolores aut! Dolorum ipsam architecto tempora blanditiis, accusantium pariatur omnis sunt enim error dolor quas, consequatur cupiditate eius necessitatibus, quidem corrupti officiis reprehenderit voluptate perspiciatis magni nostrum!
+                </p>
+                <img src="imagenes/lata.png" alt="" class="img1">
+                <aside class="second"></aside>
+            </div>
+            <div class="info">
+                <aside class="first"></aside>
+                <img src="imagenes/logo.png" alt="" class="img">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum fugit aliquam impedit magnam quod, maxime deserunt cupiditate ratione ea saepe odit quasi culpa quam dolor voluptatibus reprehenderit quis a iusto corrupti hic placeat dolores aut! Dolorum ipsam architecto tempora blanditiis, accusantium pariatur omnis sunt enim error dolor quas, consequatur cupiditate eius necessitatibus, quidem corrupti officiis reprehenderit voluptate perspiciatis magni nostrum!
+                </p>
+                <img src="imagenes/lata.png" alt="" class="img1">
+                <aside class="second"></aside>
+            </div>
+            <div class="info">
+                <aside class="first"></aside>
+                <img src="imagenes/logo.png" alt="" class="img">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum fugit aliquam impedit magnam quod, maxime deserunt cupiditate ratione ea saepe odit quasi culpa quam dolor voluptatibus reprehenderit quis a iusto corrupti hic placeat dolores aut! Dolorum ipsam architecto tempora blanditiis, accusantium pariatur omnis sunt enim error dolor quas, consequatur cupiditate eius necessitatibus, quidem corrupti officiis reprehenderit voluptate perspiciatis magni nostrum!
+                </p>
+                <img src="imagenes/lata.png" alt="" class="img1">
+                <aside class="second"></aside>
+            </div>
+        </section>
+        <br />
+        <footer>
+            <div class="third"></div>
+            <img src="imagenes/spriteend.png" alt="" class="imgend">
+            <div class="link">
+                <a href="#">Inicio</a>
+                <a href="#">Nosotros</a>
+                <a href="#">Portafolio</a>
+                <a href="#">Servicios</a>
+                <a href="#">Contacto</a>
+            </div>
+        </footer>
     </main>
-
- </body>
+</body>
 </html>
