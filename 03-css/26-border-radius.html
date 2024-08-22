@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00-template</title>
+    <title>26-border-radius</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        section div {
+            background-color: #000;
+            height: 140px;
+            margin-block: 1rem;
+            margin-inline: auto;
+            width: 140px;
+        }
+        div.bradius1 {border-radius: 50%;}
+        div.bradius2{border-radius: 40px 0;}
+        div.bradius3{border-radius: 140px 0 0 140px;}
+        div.bradius4{border-radius: 140px 0 140px 140px;}
+    </style>
 </head> 
 <body class="css">
     <nav>
@@ -14,13 +27,20 @@
     </nav>
     <main>
         <header>
-            <h1>00-template</h1>
+            <h1>26-border-radius</h1>
             <p>
-                
+                Property defines the radius of the element's corners.
             </p>
      </header>
      <section>
-
+        <h3>border-radius: 50%</h3>
+        <div class="bradius1"></div>
+        <h3>border-radius: 40px 0</h3>
+        <div class="bradius2"></div>
+        <h3>border-radius: 140px 0 0 140px</h3>
+        <div class="bradius3"></div>
+        <h3>border-radius: 140px 0 140px 0 </h3>
+        <div class="bradius4"></div>
      </section>
     </main>
 

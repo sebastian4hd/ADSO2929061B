@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00-template</title>
+    <title>28-challenge-shadow</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        figure.frame {
+            height: calc(37 * 20px);
+            margin: 2rem auto;
+            width: calc(27 * 20);
+            zoom:0.8
+        }
+        div.squares {
+            background: url(imagenes/square.png);
+            opacity: 0.4;
+            z-index: 2;
+            margin-top: -20px;
+            height: calc(37 * 20px);
+        }
+        div.Goku {
+            background-color: ;
+            height: 20px;
+            width: 20px;
+            box-shadow: 20px 0 0 0 #fff,
+                        40px 0 0 0 #000,
+                         ;
+        }
+    </style>
 </head> 
 <body class="css">
     <nav>
@@ -14,13 +37,16 @@
     </nav>
     <main>
         <header>
-            <h1>00-template</h1>
+            <h1>28-challenge-shadow</h1>
             <p>
-                
+               Box Shadow - Pixel Art (Goku).
             </p>
      </header>
      <section>
-
+        <figure class="frame">
+            <div class="Goku"></div>
+            <div class="squares"></div>
+        </figure>
      </section>
     </main>
 
