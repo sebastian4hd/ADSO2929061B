@@ -3,78 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>45-challenge-gird</title>
+    <title>45 - Challenge</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-      body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120vh;
-    background-color: #f0f0f0;
-}
+        main header p{
+            color: white;
+        }
+        .rectangle1 {
+            margin-top: 3rem;
+            height: 400px;
+            width: fit-content;
+            border: 3px solid #000;
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            gap: 5px;
+            background-color: black;
+            border-bottom: none;
+        }
+        .rectangle2 {
+            border: 2px solid #000;
+            border-top: 5px solid black;
+            width: fit-content;
+            height: 600px;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: repeat(4, 150px);
+            gap: 4.9px;
+            background-color: black;
+        }
+        .c1r1 {
+            background: url(imagenes/SonGohan.webp);
+            background-position: 50%;
+            background-size: 140%;
+            background-repeat: no-repeat;
+            width: 200px;
+            background-position-y: 30px;
+        }
+        .c2r1 {
+            grid-row: 1 / 3;
+            grid-column: 2 / 3;
+            background: url(imagenes/FreezaNegro.webp) 50% / 150%;
+            background-repeat: no-repeat;
+            height: 400px;
+        }
+        .c3r1 {
+            background: url(imagenes/gogeta.webp) 40% / 100%;
+        }
+        .c1r2 {
+            background: url(imagenes/dragonballz.webp)
+            no-repeat 18% / 181%;        
+            width: 150px;
+        }
+        .c2r2 {
+            background: url(imagenes/goku3.avif) 50% / 80%;
+            width: 200px;
+            background-position-x: center;
+            background-repeat: no-repeat;
+        }
+        .c1r3 {
+            background: url(imagenes/SonGohan.webp);
+        }
+        .leftbig {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            background: url(imagenes/gokuandbroly.avif) 50% / cover ;
+        }
+        .row1c2 {
+            background: url(imagenes/gokus.webp) 40% /cover;
+        }
+        .row1c3 {
+            background: url(imagenes/gohan2.avif) 50% /cover;
+        }
+        .row3c1 {
+            background: url(imagenes/broly.jpeg) 50% / cover;
+        }
+        .row3c2 {
+            background: url(imagenes/GokuFin.webp) 50% / cover;
+        }
+        
+        .rightbig {
+            grid-column: 3 / 5;
+            grid-row: 2 / 4;
+            background: url(imagenes/UltraInstintoGoku.jpg) 50% / cover;
+        }
 
-.image-collage {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    max-width: 1200px;
-    padding: 10px; 
-    border-radius: 15px; 
-    background-color: #fff;
-}
-
-.image-collage img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border: 5px solid #333;
-    border-radius: 10px; 
-}
-
-@media (max-width: 768px) {
-    .image-collage {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .image-collage {
-        grid-template-columns: 1fr;
-    }
-}
+        .back {
+            background: #fff9;
+            width: 640px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 50px;
+            position: relative;
+        }
     </style>
-</head> 
+</head>
 <body class="css">
     <nav>
-        <a href="../">
-            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
         </a>
     </nav>
     <main>
         <header>
-            <h1>45-challenge-gird</h1>
+            <h1> 45 - Challenge </h1>
             <p>
                 Irregular Gallery.
             </p>
-     </header>
-     <section>
-        <div class="image-collage">
-            <img src="imagenes/FreezaNegro.webp" alt="Image 1">
-            <img src="imagenes/dragonballz.webp" alt="Image 2">
-            <img src="imagenes/gogeta.webp" alt="Image 3">
-            <img src="imagenes/gohan2.avif" alt="Image 4">
-            <img src="imagenes/goku3.avif" alt="Image 5">
-            <img src="imagenes/GokuFin.webp" alt="Image 6">
-            <img src="imagenes/gokus.webp" alt="Image 7">
-            <img src="imagenes/gokuandgohan.jpg" alt="Image 8">
-            <img src="imagenes/SonGohan.webp" alt="Image 9">
-            <img src="imagenes/ultrainst.jpg" alt="Image 10">
-        </div>
-     </section>
+        </header>
+        <section class="back">
+            <div class="rectangle1">
+                <div class="square c1r1"></div>
+                <div class="square c2r1"></div>
+                <div class="square c3r1"></div>
+                <div class="square c1r2"></div>
+                <div class="square c2r2"></div>
+                <div class="square c1r3"></div>
+            </div>
+            <div class="rectangle2">
+                <div class="square leftbig "></div>
+                <div class="square row1c2"></div>
+                <div class="square row1c3"></div>
+                <div class="square rightbig"></div>
+                <div class="square row3c1"></div>
+                <div class="square row3c2"></div>
+            </div>
+    </section>
     </main>
- </body>
+    
+</body>
 </html>
