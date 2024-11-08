@@ -7,16 +7,15 @@ html(lang="en")
         link(rel="stylesheet", href="../../css/styles.css")
         style.
             li {
-            height: 70px;
+            height: 50px;
             }
             p.list {
             display: flex;
             height: 100%;
-            width: 70px;
-            align-items: center;
+            width: 50px;
             justify-content: center;
             background-color: #0008;
-            color: #fff;
+            color: #ffffff;
             }
     body.pug 
         nav 
@@ -29,6 +28,6 @@ html(lang="en")
                 p Provides an exercise to apply the learned concepts.
             section
                 ul
-                    each val, index in '#08fafa', '#17c8fa', '#3296fa', '#4b64fa', '#6432fa', '#7d01fa', '#9601fa', '#af01fa', '#c801fa', '#e101fa',
-                        li(style='list-style: none; border-bottom: 2px solid #Fff; background-color:'+val)
+                    each val, index in ['#00e5ff', '#00b8d4', '#0091ea', '#2962ff', '#6200ea', '#aa00ff', '#d500f9', '#f500f5', '#ff00ff', '#ff00ff',]
+                        li(style='list-style: none; border-bottom: 4px solid #Fff; background-color:'+val)
                             p.list= index+1
