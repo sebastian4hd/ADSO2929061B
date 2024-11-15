@@ -5,27 +5,33 @@ header {
     justify-content: space-between;
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.034);
-  }
   
-  header ul {
-    display: flex;
-    list-style: none;
-  }
+    ul {
+      display: flex;
+      list-style: none;
   
-  header ul li.bigg {
-      align-items: center;
-    cursor: alias;
-    display: flex;
-    margin: auto;
-    height: 60px;
-    width: 100px;
-  }
+      li {
+        &.bigg {
+          align-items: center;
+          cursor: alias;
+          display: flex;
+          margin: auto;
+          height: 60px;
+          width: 100px;
+        }
   
-  header ul li:is(:hover) {
-    background-color: #ffc0dc;
-    transition: 0.2s ease-in;
-    align-items: center;
-    border-radius: 5px;
+        &:is(:hover) {
+          background-color: #ffc0dc;
+          transition: 0.2s ease-in;
+          align-items: center;
+          border-radius: 5px;
+        }
+  
+        a {
+          width: auto; // Ajustar a lo necesario
+        }
+      }
+    }
   }
   
   .toggle-menu,
@@ -44,25 +50,35 @@ header {
       background-color: #f2f2f2d5;
       padding: 20px;
     }
+  
     .toggle-menu:checked ~ .menu {
       display: flex;
     }
+  
     .toggle-menu-label {
       display: block;
     }
-    header ul li {
-      margin: 10px 0;
-      width: 700px;
-    }
-    header ul li:is(:hover) {
-      background-color: #ffc0dc;
-      transition: 0.2s ease-in;
-    }
-    header ul li a {
-      width: 900px;
-    }
-    header ul li.bigg {
-      width: 100%;
+  
+    header {
+      ul {
+        li {
+          margin: 10px 0;
+          width: 700px;
+  
+          &:is(:hover) {
+            background-color: #ffc0dc;
+            transition: 0.2s ease-in;
+          }
+  
+          a {
+            width: 900px;
+          }
+  
+          &.bigg {
+            width: 100%;
+          }
+        }
+      }
     }
   }
   
