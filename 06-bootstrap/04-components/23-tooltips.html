@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>04- figures</title>
+    <title>23- tooltips</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
@@ -15,18 +15,36 @@
     </nav>
     <main>
         <header>
-            <h1>04- figures</h1>
+            <h1>23- tooltips</h1>
             <p>
-                Displaying related images and text with the figure component
+                Examples for adding custom Bootstrap tooltips with CSS and JavaScript using CSS3 for animations and data-bs-attributes for local title storage.
+
             </p>
         </header>
         <section class="content">
             <h3 class="my-4">Example:</h3>
-            <figure class="figure">
-                <img src="https://placehold.co/400x200/darkviolet/white" class="figure-img img-fluid rounded" alt="...">
-                <figcaption class="figure-caption">A caption for the above image.</figcaption>
-            </figure>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
+                Tooltip on top
+                </button>
+                <br><br>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tooltip on right">
+                Tooltip on right
+                </button>
+                <br><br>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
+                Tooltip on bottom
+                </button>
+                <br><br>
+                <button type="button" class="btn btn-secondary float-end" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Tooltip on left">
+                Tooltip on left
+                </button>
         </section>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        </script>
     </main>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>

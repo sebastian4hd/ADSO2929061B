@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>04- figures</title>
+    <title>15- offcanvas</title>
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
@@ -15,18 +15,45 @@
     </nav>
     <main>
         <header>
-            <h1>04- figures</h1>
+            <h1>15- offcanvas</h1>
             <p>
-                Displaying related images and text with the figure component
+              Build hidden sidebars into your project for navigation, shopping carts, and more with a few classes and our JavaScript plugin.
+
             </p>
         </header>
         <section class="content">
             <h3 class="my-4">Example:</h3>
-            <figure class="figure">
-                <img src="https://placehold.co/400x200/darkviolet/white" class="figure-img img-fluid rounded" alt="...">
-                <figcaption class="figure-caption">A caption for the above image.</figcaption>
-            </figure>
+            <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                Link with href
+              </a>
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Button with data-bs-target
+              </button>
+              
+              <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <div>
+                    Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                  </div>
+                  <div class="dropdown mt-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
         </section>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
     </main>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
