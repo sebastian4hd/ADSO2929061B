@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-flex-grid</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head> 
+<body class="tailwind">
+    <nav>
+        <a href="../">
+            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>02-flex-grid</h1>
+            <p>
+                Manages flexible and grid-based layouts.
+            </p>
+     </header>
+     <section>
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    mb-10">Flex Basis</h2>
+        <div class="flex flex-row gap-2">
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg basis-1/4">01</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg basis-1/2">02</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg basis-1/4">03</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Flex Direction</h2>
+        <h3 class="my-4">Row</h3>
+        <div class="flex flex-row gap-2">
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4 text-right">Row Reverse</h3>
+        <div class="flex flex-row-reverse gap-2">
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4">Column</h3>
+        <div class="flex flex-col gap-2">
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4">Column Reverse</h3>
+        <div class="flex mx-auto flex-col-reverse space-y-reverse space-y-2">
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Flex Wrap</h2>
+        <h3 class="my-4">Don't Wrap</h3>
+        <div class="flex flex-nowrap gap-2">
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4">Wrap Normally</h3>
+        <div class="flex flex-wrap gap-2">
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border w-2/5 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Flex Grow</h2>
+        <h3 class="my-4">Grow (02)</h3>
+        <div class="flex gap-2">
+            <div class="border flex-none w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">01</div>
+            <div class="border grow h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border flex-none w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4">Don't Grow (02)</h3>
+        <div class="flex gap-2">
+            <div class="border grow w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">01</div>
+            <div class="border grow-0 h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border grow w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">03</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Flex Shrink</h2>
+        <h3 class="my-4">Shrink (02)</h3>
+        <div class="flex gap-2">
+            <div class="border flex-none w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">01</div>
+            <div class="border shrink w-96 h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border flex-none w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">03</div>
+        </div>
+        <h3 class="my-4">Don't Shrink (02)</h3>
+        <div class="flex gap-2">
+            <div class="border flex-1 w-14 h-14 font-mono font-bold text-center bg-sky-400 p-4 rounded-lg">01</div>
+            <div class="border shrink-0 w-72 h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Order</h2>
+        <div class="flex gap-2 justify-between">
+            <div class="border w-14 h-14 order-last font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">01</div>
+            <div class="border w-14 h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">02</div>
+            <div class="border w-14 h-14 font-mono font-bold text-center bg-sky-800 text-white p-4 rounded-lg">03</div>
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Grid Template Columns</h2>
+        <div class="grid grid-cols-6 gap-2">
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">7</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">8</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">9</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">10</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">11</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">12</div>   
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Grid Columns Start / End</h2>
+        <h3 class="my-4">Spanning Columns</h3>      
+        <div class="grid grid-cols-3 gap-2">
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div>
+            <div class="col-span-2 border font-mono font-bold text-center p-4 bg-sky-400 rounded-lg">4</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div>
+            <div class="col-span-2 border font-mono font-bold text-center p-4 bg-sky-400 rounded-lg">7</div>  
+        </div>
+        <h3 class="my-4">Starting & Ending</h3>      
+        <div class="grid grid-cols-6 gap-2">
+            <div class="col-start-2 col-span-4 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="col-start-1 col-end-3 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="col-end-7 col-span-2 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div>
+            <div class="col-start-1 col-end-7 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div> 
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Grid Template Rows</h2>
+        <div class="grid grid-rows-3 grid-flow-col gap-2">
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">7</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">8</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">9</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">10</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">11</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">12</div>   
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Grid Rows Start / End</h2>
+        <h3 class="my-4">Spanning Rows</h3>      
+        <div class="grid grid-rows-3 grid-flow-col gap-2">
+            <div class="row-span-3 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="col-span-2 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="row-span-2 col-span-2 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4">Starting & Ending</h3>      
+        <div class="grid grid-rows-3 grid-flow-col gap-2">
+            <div class="row-start-2 row-span-2 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="row-end-3 row-span-2 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="row-start-1 row-end-4 border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Gap</h2>
+        <div class="grid grid-cols-3 gap-x-12 gap-y-4">
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div> 
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Justify Content</h2>
+        <h3 class="my-4">Start</h3> 
+        <div class="flex justify-start gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4 text-center">Center</h3> 
+        <div class="flex justify-center gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4 text-right">End</h3> 
+        <div class="flex justify-end gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4 text-center">Space Between</h3> 
+        <div class="flex justify-between gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4 text-center">Space Around</h3> 
+        <div class="flex justify-around gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <h3 class="my-4 text-center">Space Evenly</h3> 
+        <div class="flex justify-evenly gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+        </div>
+        <!--  -->
+        <h2 class="text-2xl
+                    border-b-2
+                    opacity-80
+                    pb-4
+                    my-10">Justify Items</h2>
+        <h3 class="my-4">Start</h3> 
+        <div class="grid grid-cols-3 justify-items-start gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div> 
+        </div>
+        <h3 class="my-4 text-right">End</h3> 
+        <div class="grid grid-cols-3 justify-items-end gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div> 
+        </div>
+        <h3 class="my-4 text-center">Center</h3> 
+        <div class="grid grid-cols-3 justify-items-center gap-4">
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border w-14 font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div> 
+        </div>
+        <h3 class="my-4 text-left">Stretch</h3> 
+        <div class="grid grid-cols-3 justify-items-stretch gap-4">
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">1</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">2</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">3</div> 
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">4</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">5</div>
+            <div class="border font-mono font-bold text-center p-4 bg-sky-800 text-white rounded-lg">6</div> 
+        </div>
+    </section>
+    </main>
+    <script src="js/tailwind.js"></script>
+ </body>
+</html>
