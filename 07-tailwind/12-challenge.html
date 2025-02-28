@@ -1,28 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12-challenge</title>
-    <link rel="stylesheet" href="../css/styles.css">
-</head> 
-<body class="tailwind">
-    <nav>
-        <a href="../">
-            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
-        </a>
-    </nav>
-    <main>
-        <header>
-            <h1>12-challenge</h1>
-            <p>
-                Lorem
-            </p>
-     </header>
-     <section>
+    <title>Language Learning UI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function showLessonScreen() {
+            document.getElementById('home-screen').classList.add('hidden');
+            document.getElementById('lesson-screen').classList.remove('hidden');
+        }
+        function showLevelScreen() {
+            document.getElementById('lesson-screen').classList.add('hidden');
+            document.getElementById('level-screen').classList.remove('hidden');
+        }
+        function goBackToHome() {
+            document.getElementById('lesson-screen').classList.add('hidden');
+            document.getElementById('home-screen').classList.remove('hidden');
+        }
+        function goBackToLesson() {
+            document.getElementById('level-screen').classList.add('hidden');
+            document.getElementById('lesson-screen').classList.remove('hidden');
+        }
+        function startTest() {
+            document.getElementById('level-screen').classList.add('hidden');
+            document.getElementById('home-screen').classList.remove('hidden');
+        }
+    </script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100 p-4 bg-sky-500">
+    <div id="home-screen" class="bg-white p-6 rounded-2xl border-sky-600 rounded-4 shadow-lg max-w-sm text-center">
+        <img src="/07-tailwind/images/english.avif" alt="Welcome" class="w-full rounded-lg mb-4">
+        <h1 class="text-2xl font-bold">StandUp</h1>
+        <p class="text-gray-600 mb-4">Are you ready to learn languages easily in the funniest way?</p>
+        <button onclick="showLessonScreen()" class="bg-black text-white py-2 px-4 rounded-lg w-full">Get started</button>
+    </div>
 
-     </section>
-    </main>
-    <script src="js/tailwind.js"></script>
- </body>
+    <div id="lesson-screen" class="bg-white p-6 rounded-2xl shadow-lg max-w-sm hidden">
+        <button onclick="goBackToHome()" class="text-gray-500 mb-4">&larr;</button>
+        <h2 class="text-xl font-bold mb-4">A2 - Elementary</h2>
+        <img src="/07-tailwind/images/englishpeople.jpg" alt="Lesson Image" class="w-full rounded-lg mb-4">
+        <div class="bg-gray-100 p-3 rounded-lg mb-2 flex justify-between">
+            <span class="text-gray-700 text-sm">Lesson 1 - How are you?</span>
+            <span class="bg-gray-300 text-gray-700 text-xs px-2 py-2 rounded-2xl">0%</span>
+        </div>
+        <div class="bg-gray-100 p-3 rounded-lg mb-2 flex justify-between">
+            <span class="text-gray-700 text-sm">Lesson 2 - Pronunciation</span>
+            <span class="bg-gray-300 text-gray-700 text-xs px-2 py-2 rounded-2xl">0%</span>
+        </div>
+        <div class="bg-gray-100 p-3 rounded-lg mb-2 flex justify-between">
+            <span class="text-gray-700 text-sm">Lesson 3 - Demonstrative pronouns</span>
+            <span class="bg-gray-300 text-gray-700 text-xs px-2 py-2 rounded-2xl">0%</span>
+        </div>
+        <div class="bg-gray-100 p-3 rounded-lg mb-2 flex justify-between">
+            <span class="text-gray-700 text-sm">Lesson 4 - Present continuous</span>
+            <span class="bg-gray-300 text-gray-700 text-xs px-2 py-2 rounded-2xl">0%</span>
+        </div>
+        <button onclick="showLevelScreen()" class="bg-black text-white py-2 px-4 rounded-lg w-full mt-4">Next</button>
+    </div>
+
+    <div id="level-screen" class="bg-white p-6 rounded-2xl shadow-lg max-w-sm hidden">
+        <h2 class="text-xl font-bold mb-4">Choose your language level</h2>
+        <div class="bg-indigo-800 text-white p-4 rounded-lg mb-4">
+            <ul>
+                <li class="py-2 cursor-pointer">A1 - Basic</li>
+                <li class="py-2 cursor-pointer">A2 - Elementary</li>
+                <li class="py-2 cursor-pointer">B1 - Pre-Intermediate</li>
+                <li class="py-2 cursor-pointer">B2 - Intermediate</li>
+            </ul>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Or take a test to determine the level. It will take about 10 minutes.</p>
+        <button onclick="startTest()" class="bg-black text-white py-2 px-4 rounded-lg w-full">Start test</button>
+    </div>
+</body>
 </html>
