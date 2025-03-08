@@ -3,60 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>05-methods-object</title>
+    <title>06-types-objects</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        main section h3.pk-name {
-            font-size: 2rem;
-            text-align: center;
-        }
-        main section h4 {
-            background-color: #0003;
-            border-radius: 4px;
-            text-align: center;
-            font-size: 1.6rem;
-            margin: 0 auto;
-            padding: 0.4rem 1rem;
-            width: fit-content;
-        }
-
-        main section figure {
-            background-repeat: no-repeat;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin: 0 auto;
-            height: 192px;
-            width: 202px;
-        }
-        main section figure.alive {
-            background-position-x: 0px;
-        }
-        main section figure.attack {
-            background-position-x: -202px;
-        }
-        main section figure.feed {
-            background-position-x: -404px;
-        }
-        main section figure.dead {
-            background-position-x: -608px;
-        }
-        main section div.actions {
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            width: 150px;
-            button {
-                background: #0003;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                padding: 0.4rem 1rem;
-                transition: transform 0.2s ease-in;
-                &:hover {
-                    transform: scale(1.2);
+        section ul.object {
+            li {
+                b {
+                    font-weight: bold;
                 }
             }
         }
@@ -64,77 +17,43 @@
 </head> 
 <body class="js">
     <nav>
-        <a href="../">
+        <a href="./">
             <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
         </a>
     </nav>
     <main>
         <header>
-            <h1>05-methods-object</h1>
+            <h1>06-types-objects</h1>
             <p>
                 
             </p>
      </header>
      <section>
-        <h3 class="pk-name"></h3>
-        <h4 class="pk-hp"></h4>
-        <figure class="pk-image">
-        </figure>
-        <div class="actions">
-            <button class="btn-attack">Attack</button>
-            <button class="btn-feed">Feed</button>
-        </div>
-    </section>
+        <ul class="objects"></ul>
+     </section>
     </main>
     <script>
-        //Elements
-        const pkName  = document.querySelector('.pk-name')
-        const pkHp    = document.querySelector('.pk-hp')
-        const pkImage = document.querySelector('.pk-image')
-        //Buttons
-        const btnAttack = document.querySelector('.btn-attack')
-        const btnFeed   = document.querySelector('.btn-feed')
-        //Object
-        const pokemon = {
-            //Atributes
-            name: 'Snorlax',
-            hp: 100,
-            image: 'image/snorlax-sprite.png',
-            status: 'alive',
-            //Method
-            attack: function() {
-                alert('Attack')
-            },
-            feed: function() {
-                if(this < 200){
-                this.hp += 25
-                pkHp.textContent = `HP: ${this.hp}`
-                this.status = 'feed'
-                pkImage.classList.remove('alive', 'attack', 'dead')
-                pkImage.classList.add(`${this.status}`)
-                setTimeout(function() {
-                    pkImage.classList.remove('feed', 'attack', 'dead')
-                    pkImage.classList.add(`${this.status}`)
-                }, 1500)
-                }
-               
-            },
-            render: function() {
-                pkName.innerHTML = `${this.name} <small>[${this.type}]</small>`
-                pkHp.textContent = `HP: ${this.hp}`
-                pkImage.style.backgroundImage = 'url(${this.image})'
-            }
-        }
-
-        pokemon.render()
-
-        //Events
-        btnAttack.addEventListener('click', function(){
-            pokemon.attack()
-        })
-        btnFeed.addEventListener('click', function() {
-            pokemon.feed()
-        })
+    // Element
+        const objects = document.querySelector('.objects')
+        // Object String
+        let objString = new String
+        objects.innerHTML = `<li><b>Type:</b> ${objString.constructor.name} </li>`
+        // Object Number
+        let objNumber = new Number
+        objects.innerHTML += `<li><b>Type:</b> ${objNumber.constructor.name} </li>`
+        // Object Boolean
+        let objBoolean = new Boolean
+        objects.innerHTML += `<li><b>Type:</b> ${objBoolean.constructor.name} </li>`
+        // Object Array
+        let objArray = new Array
+        objects.innerHTML += `<li><b>Type:</b> ${objArray.constructor.name} </li>`
+        // Object Date
+        let objDate = new Date
+        objects.innerHTML += `<li><b>Type:</b> ${objDate.constructor.name} </li>`
+        // Object Object
+        let objObject = new Object
+        objects.innerHTML += `<li><b>Type:</b> ${objObject.constructor.name} </li>`
     </script>
+
  </body>
 </html>
