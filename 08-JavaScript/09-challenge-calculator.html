@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09-challenge-calculator</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .calculator {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .display {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        
+        button {
+            height: 50px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        button.operator {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        button.operator:hover {
+            background-color: #f57c00;
+        }
+        
+        button.clear {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        button.clear:hover {
+            background-color: #d32f2f;
+        }
+        
+        button.equals {
+            background-color: #4caf50;
+            color: white;
+            grid-column: span 2;
+        }
+        
+        button.equals:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head> 
+<body class="js">
+    <nav>
+        <a href="../">
+            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>09-challenge-calculator</h1>
+            <p>
+                
+            </p>
+        </header>
+        <section>
+            <div class="calculator">
+                <input type="text" class="display" id="display" disabled>
+                <div class="buttons">
+                    <button class="clear" onclick="clearDisplay()">C</button>
+                    <button onclick="appendToDisplay('/')">/</button>
+                    <button onclick="appendToDisplay('*')">×</button>
+                    <button onclick="backspace()">⌫</button>
+                    
+                    <button onclick="appendToDisplay('7')">7</button>
+                    <button onclick="appendToDisplay('8')">8</button>
+                    <button onclick="appendToDisplay('9')">9</button>
+                    <button class="operator" onclick="appendToDisplay('-')">-</button>
+                    
+                    <button onclick="appendToDisplay('4')">4</button>
+                    <button onclick="appendToDisplay('5')">5</button>
+                    <button onclick="appendToDisplay('6')">6</button>
+                    <button class="operator" onclick="appendToDisplay('+')">+</button>
+                    
+                    <button onclick="appendToDisplay('1')">1</button>
+                    <button onclick="appendToDisplay('2')">2</button>
+                    <button onclick="appendToDisplay('3')">3</button>
+                    <button class="equals" onclick="calculate()">=</button>
+                    
+                    <button onclick="appendToDisplay('0')">0</button>
+                    <button onclick="appendToDisplay('.')">.</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const display = document.getElementById('display');
+        
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+        
+        function clearDisplay() {
+            display.value = '';
+        }
+        
+        function backspace() {
+            display.value = display.value.slice(0, -1);
+        }
+        
+        function calculate() {
+            try {
+                let expression = display.value.replace(/×/g, '*');
+                display.value = eval(expression);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (/[0-9]/.test(key)) {
+                appendToDisplay(key);
+                event.preventDefault();
+            }
+            else if (/[\+\-\*\/]/.test(key)) {
+                appendToDisplay(key);
+                event.preventDefault();
+            }
+            else if (key === '.') {
+                appendToDisplay(key);
+                event.preventDefault();
+            }
+            else if (key === 'Enter') {
+                calculate();
+                event.preventDefault();
+            }
+            else if (key === 'Backspace') {
+                backspace();
+                event.preventDefault();
+            }
+            else if (key === 'Escape') {
+                clearDisplay();
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
