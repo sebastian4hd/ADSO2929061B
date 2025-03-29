@@ -6,13 +6,17 @@
     <title>09-challenge-calculator</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        .calculator {
-            max-width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        div.calculator {
+           width: 318px;
+           height: 623px;
+           background-color: #fff;
+           border-radius: 8px;
+           header {
+            position: relative;
+            border: 2px solid red;
+
+           }
+            
         }
         
         .display {
@@ -92,87 +96,14 @@
         </header>
         <section>
             <div class="calculator">
-                <input type="text" class="display" id="display" disabled>
-                <div class="buttons">
-                    <button class="clear" onclick="clearDisplay()">C</button>
-                    <button onclick="appendToDisplay('/')">/</button>
-                    <button onclick="appendToDisplay('*')">×</button>
-                    <button onclick="backspace()">⌫</button>
-                    
-                    <button onclick="appendToDisplay('7')">7</button>
-                    <button onclick="appendToDisplay('8')">8</button>
-                    <button onclick="appendToDisplay('9')">9</button>
-                    <button class="operator" onclick="appendToDisplay('-')">-</button>
-                    
-                    <button onclick="appendToDisplay('4')">4</button>
-                    <button onclick="appendToDisplay('5')">5</button>
-                    <button onclick="appendToDisplay('6')">6</button>
-                    <button class="operator" onclick="appendToDisplay('+')">+</button>
-                    
-                    <button onclick="appendToDisplay('1')">1</button>
-                    <button onclick="appendToDisplay('2')">2</button>
-                    <button onclick="appendToDisplay('3')">3</button>
-                    <button class="equals" onclick="calculate()">=</button>
-                    
-                    <button onclick="appendToDisplay('0')">0</button>
-                    <button onclick="appendToDisplay('.')">.</button>
-                </div>
-            </div>
+                <header>
+                    <input type="text" class="oper">
+                    <button class="mode"></button>
+                    <h4></h4>
+                </header>
         </section>
     </main>
 
-    <script>
-        const display = document.getElementById('display');
-        
-        function appendToDisplay(value) {
-            display.value += value;
-        }
-        
-        function clearDisplay() {
-            display.value = '';
-        }
-        
-        function backspace() {
-            display.value = display.value.slice(0, -1);
-        }
-        
-        function calculate() {
-            try {
-                let expression = display.value.replace(/×/g, '*');
-                display.value = eval(expression);
-            } catch (error) {
-                display.value = 'Error';
-            }
-        }
-        
-        document.addEventListener('keydown', function(event) {
-            const key = event.key;
-            
-            if (/[0-9]/.test(key)) {
-                appendToDisplay(key);
-                event.preventDefault();
-            }
-            else if (/[\+\-\*\/]/.test(key)) {
-                appendToDisplay(key);
-                event.preventDefault();
-            }
-            else if (key === '.') {
-                appendToDisplay(key);
-                event.preventDefault();
-            }
-            else if (key === 'Enter') {
-                calculate();
-                event.preventDefault();
-            }
-            else if (key === 'Backspace') {
-                backspace();
-                event.preventDefault();
-            }
-            else if (key === 'Escape') {
-                clearDisplay();
-                event.preventDefault();
-            }
-        });
-    </script>
+   
 </body>
 </html>
