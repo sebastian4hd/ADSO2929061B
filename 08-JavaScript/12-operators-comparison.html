@@ -6,22 +6,37 @@
     <title>00-template</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.4rem;
-            strong,output {
-                font-size: 1.6rem;
-            }
-            input {
-                border-radius: 0.4rem;
-                padding: 0.4rem;
-                width: 100px;
-            }
+        table.operators {
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 40px auto;
+            width: 380px;
         }
-        h4{
-            font-size: 1.6rem;
+        table thead th {
+            background-color: #f0db4f;
+            color: #000c;
+        }
+        table th,
+        table td {
+            background-color: #fffc;
+            border: 1px solid #333;
+            color: #333;
+            padding: 6px;
+        }
+        table thead input {
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-family: Poppins;
+            padding: 8px;
+            width: 120px;
+        }
+        table tbody td:first-child {
+            font-size: 1rem;
+            text-align: center;
+        }
+        table tbody tr:nth-child(even) td {
+            background-color: #fff8;
         }
     </style>
 </head> 
@@ -39,59 +54,94 @@
             </p>
      </header>
      <section>
-        <h3>01- Without params/args</h3>
-        <h4 class="greetin"></h4>
-
-        <h3>02- Winth params/args</h3>
-          <form>
-              <input type="Number" id="n1" min="1" max="9999" placeholder="number 1">
-              <strong>+</strong>
-              <input type="Number" id="n2" min="1" max="9999" placeholder="number 2">
-              <strong>=</strong>
-              <output></output>
-          </form>
-        <h3>03- return value</h3>
-        <h4 id="time"></h4>
+        <table class="operators">
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        <input type="number" placeholder="X Value">
+                        <input type="number" placeholder="Y Value">
+                    </th>
+                </tr>
+                <tr>
+                    <th>Operator</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&&</td>
+                    <td>AND</td>
+                    <td>(x<10 && y>1)</td>
+                    <td class="rs"></td>
+                </tr>
+                <tr>
+                    <td>||</td>
+                    <td>OR</td>
+                    <td>(x==5 || y==5)</td>
+                    <td class="rs"></td>
+                </tr>
+                <tr>
+                    <td>!</td>
+                    <td>NOT</td>
+                    <td>!(x==y)</td>
+                    <td class="rs"></td>
+                </tr>
+            </tbody>
+        </table>
      </section>
     </main>
     <script>
-        //elements
-        const greeting = document.querySelector('.greeting')
-        const number1 = document.querySelector('#n1')
-        const number2 = document.querySelector('#n2')
-        const result  = document.querySelector('output')
-        const time    = document.querySelector('#time')
-
-        //01- function without parameters/arguments (null)
-        function showGreeting() {
-            greeting.textContent = 'Welcome JS USER'
+        // results
+        const rss   = document.querySelectorAll('td.rs')
+        const input = document.querySelectorAll('input')
+        // Events
+        input[0].oninput = () => {
+            if (input[0].value != '' && input[1].value != '') {
+                if (input[0].value.length < 4) {
+                    // &&
+                    rss[0].innerText = (parseInt(input[0].value) < 10 && 
+                                        parseInt(input[1].value) > 1)
+                    // ||
+                    rss[1].innerText = (parseInt(input[0].value) == 5 ||
+                                        parseInt(input[1].value) == 5)
+                    // !
+                    rss[2].innerText = !(parseInt(input[0].value) ==
+                                        parseInt(input[1].value))
+        
+                } else {
+                    input[0].value = input[0].value.slice(0,-1)
+                }
+            } else {
+                for (let i = 0; i < rss.length; i++) {
+                    rss[i].innerText = ''
+                }
+            }
         }
-        showGreeting()//Call to fuction
-        //02 function with parameters/argumets
-        function showSum(n1, n2){
-            result.textContent =parseInt(n1) + parseInt(n2)
+        input[1].oninput = () => {
+            if (input[0].value != '' && input[1].value != '') {
+                if (input[1].value.length < 4) {
+                    // &&
+                    rss[0].innerText = (parseInt(input[0].value) < 10 && 
+                                        parseInt(input[1].value) > 1)
+                    // ||
+                    rss[1].innerText = (parseInt(input[0].value) == 5 ||
+                                        parseInt(input[1].value) == 5)
+                    // !
+                    rss[2].innerText = !(parseInt(input[0].value) ==
+                                        parseInt(input[1].value))
+        
+                } else {
+                    input[1].value = input[1].value.slice(0,-1)
+                }
+            } else {
+                for (let i = 0; i < rss.length; i++) {
+                    rss[i].innerText = ''
+                }
+            }
         }
-        //Event listener with array function
-        number1.addEventListener('input',()=>{
-            showSum(number1.value, number2.value)
-        })
-        //Oter way : 
-        number2.oninput = () =>{
-        showSum(number1.value, number2.value)
-        }
+    </script>
 
-
-
-
-        // 03 function return value
-        function showTime(){
-            let ndate = new Date()
-            //operador ternari 
-            let meridian = (parseInt(ndate.getHours()) <= 12)? 'am' :'pm'
-            return `${ndate.getHours()}: ${ndate.getMinutes()} ${meridian}`
-        }
-        time.textContent= `Time: ${showTime()}`
-
-            </script>
  </body>
 </html>
