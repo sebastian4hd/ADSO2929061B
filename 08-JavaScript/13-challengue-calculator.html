@@ -4,211 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>13 - Challenge Calculator</title>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/styles.css">
     <style>
-        div.calculator {
-            background: url(images/calculadora/calc-ling.svg) no-repeat center;
-            border-radius: 20px;
-            transition: all 0.4s ease-in;
-            height: 625px;
-            width: 360px;
-            header {
-                position: relative;
-                border-radius: 10px;
-                width: 330px;
-                height: 162px;
-                margin: 0 auto;
-                button.btn-mode{
-                    background: url(images/calculadora/btn-mode.svg);
-                    cursor: pointer;
-                    position: absolute;
-                    top: 8px;
-                    border-radius: 10px;
-                    border: none;
-                    height: 30px;
-                    width: 120px;
-                    transition: all 0.2s ease-in;
-                }
-            }
-            input.oper {
-                border: none;
-                outline: none;
-                display: flex;
-                background-color: transparent;
-                position: absolute;
-                top: 75px;
-                right: 0;
-                text-align: right;
-                font-size: 18px;
-                font-weight: 500;
-                width: 100%;
-            }
-            h4.result {
-                font-size: 40px;
-                text-align: right;
-                font-weight: 600;
-                position: absolute;
-                top: 58px;
-                right: 0;
-
-            }
-            footer{
-                display: grid;
-                grid-template-columns: repeat(4, 76px);
-                width: 310px;
-                gap: 5px;
-                margin: 0.6rem auto 0 auto;
-                button{
-                    transition: all 0.4s ease-in;
-                    cursor: pointer;
-                    border: none;
-                    height: 85px;
-                    width: 90px;
-                    position: relative;
-                &.btn-clear{
-                    background: url(images/calculadora/btn-clean.svg);
-                }
-                &.btn-del{
-                    background: url(images/calculadora/btn-del.svg);
-                }
-                &.btn-pow{
-                    background: url(images/calculadora/btn-pow.svg);
-                }
-                &.btn-mod{
-                    background: url(images/calculadora/btn-mod.svg);
-                }
-                &.btn-one{
-                    background: url(images/calculadora/btn-1.svg);
-                }
-                &.btn-two{
-                    background: url(images/calculadora/btn-2.svg);
-                }
-                &.btn-three{
-                    background: url(images/calculadora/btn-3.svg);
-                }
-                &.btn-multiply{
-                    background: url(images/calculadora/btn-mul.svg);
-                }
-                &.btn-four{
-                    background: url(images/calculadora/btn-4.svg);
-                }
-                &.btn-five{
-                    background: url(images/calculadora/btn-5.svg);
-                }
-                &.btn-six{
-                    background: url(images/calculadora/btn-6.svg);
-                }
-                &.btn-rest{
-                    background: url(images/calculadora/btn-rest.svg);
-                }
-                &.btn-seven{
-                    background: url(images/calculadora/btn-7.svg);
-                }
-                &.btn-eight{
-                    background: url(images/calculadora/btn-8.svg);
-                }
-                &.btn-nine{
-                    background: url(images/calculadora/btn-9.svg);
-                }
-                &.btn-sum{
-                    background: url(images/calculadora/btn-sum.svg);
-                }
-                &.btn-div{
-                    background: url(images/calculadora/btn-div.svg);
-                }
-                &.btn-zero{
-                    background: url(images/calculadora/btn-0.svg);
-                }
-                &.btn-dote{
-                    background: url(images/calculadora/btn-dote.svg);
-                }
-                &.btn-equal{
-                    background: url(images/calculadora/btn-equal.svg);
-                }
-                }
-            }
+        :root {
+            --bg-color: #C78989;
+            --calculator-bg: #fff;
+            --display-bg: #f9f9f9;
+            --display-border: #ddd;
+            --button-bg: #FFF600;  
+            --button-hover: #FFF600; 
+            --button-active: #FFF600; 
+            --operator-bg: #FFF600; 
+            --equals-bg: #FFF600; 
+            --equals-hover: #FFF600; 
+            --clear-bg: #EE1A1A; 
+            --clear-hover: #FFF600; 
+            --backspace-bg: #FFF600; 
+            --backspace-hover: #FFF600; 
+            --text-color: #333;
+            --toggle-bg: #e0e0e0; 
+            --button-radius: 20px; 
         }
 
-        /*DARK MODE*/
-        div.calculator.dark{
-            background: url(images/calculator/mode-dark.svg) no-repeat center;
-            header {
-                button.btn-mode{
-                    background: url(images/calculator/btn-mode-dark.svg);
-                }
-            }
-            input.oper {
-                color: #ffff;
-            }
-            h4.result{
-                color: #ffff;
-            }
-            footer{
-                button{
-                    transition: all 0.4s ease-in;
+        .dark-mode {
+            --bg-color: #121212;
+            --calculator-bg: #1e1e1e;
+            --display-bg: #2d2d2d;
+            --display-border: #444;
+            --button-bg: #0F1BFC; 
+            --button-hover: #0F1BFC; 
+            --button-active: #0F1BFC;
+            --operator-bg: #0F1BFC; 
+            --equals-bg: #0F1BFC; 
+            --equals-hover: #0F1BFC; 
+            --clear-bg: #EE1A1A; 
+            --clear-hover: #0F1BFC; 
+            --backspace-bg: #0F1BFC; 
+            --backspace-hover: #0F1BFC; 
+            --text-color: #f5f5f5;
+            --toggle-bg: #0F1BFC; 
+        }
 
-                &.btn-clear{
-                    background: url(images/calculator/btn-clear-dark.svg);
-                }
-                &.btn-del{
-                    background: url(images/calculator/btn-del-dark.svg);
-                }
-                &.btn-pow{
-                    background: url(images/calculator/btn-pow-dark.svg);
-                }
-                &.btn-mod{
-                    background: url(images/calculator/btn-mod-dark.svg);
-                }
-                &.btn-one{
-                    background: url(images/calculator/btn-one-dark.svg);
-                }
-                &.btn-two{
-                    background: url(images/calculator/btn-two-dark.svg);
-                }
-                &.btn-three{
-                    background: url(images/calculator/btn-three-dark.svg);
-                }
-                &.btn-multiply{
-                    background: url(images/calculator/btn-multiply-dark.svg);
-                }
-                &.btn-four{
-                    background: url(images/calculator/btn-four-dark.svg);
-                }
-                &.btn-five{
-                    background: url(images/calculator/btn-five-dark.svg);
-                }
-                &.btn-six{
-                    background: url(images/calculator/btn-six-dark.svg);
-                }
-                &.btn-rest{
-                    background: url(images/calculator/btn-rest-dark.svg);
-                }
-                &.btn-seven{
-                    background: url(images/calculator/btn-seven-dark.svg);
-                }
-                &.btn-eight{
-                    background: url(images/calculator/btn-eight-dark.svg);
-                }
-                &.btn-nine{
-                    background: url(images/calculator/btn-nine-dark.svg);
-                }
-                &.btn-sum{
-                    background: url(images/calculator/btn-sum-dark.svg);
-                }
-                &.btn-div{
-                    background: url(images/calculator/btn-div-dark.svg);
-                }
-                &.btn-zero{
-                    background: url(images/calculator/btn-zero-dark.svg);
-                }
-                &.btn-dote{
-                    background: url(images/calculator/btn-dote-dark.svg);
-                }
-                &.btn-equal{
-                    background: url(images/calculator/btn-equal-dark.svg);
-                }
-                }
-            }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        
+        .calculator-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .calculator {
+            background-color: var(--calculator-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .display {
+            background-color: var(--display-bg);
+            border: 2px solid var(--display-border);
+            border-radius: var(--button-radius);
+            padding: 15px 10px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 2em;
+            height: 50px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 12px;
+        }
+        
+        button {
+            border: none;
+            border-radius: var(--button-radius);
+            padding: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: var(--button-bg);
+            transition: all 0.2s;
+            color: var(--text-color);
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        button:active {
+            background-color: var(--button-active);
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .operator {
+            background-color: var(--operator-bg);
+        }
+        
+        .equals {
+            background-color: var(--equals-bg);
+            color: white;
+        }
+        
+        .equals:hover {
+            background-color: var(--equals-hover);
+        }
+        
+        .clear {
+            background-color: var(--clear-bg);
+            color: white;
+        }
+        
+        .clear:hover {
+            background-color: var(--clear-hover);
+        }
+
+        .backspace {
+            background-color: var(--backspace-bg);
+            color: white;
+        }
+        
+        .backspace:hover {
+            background-color: var(--backspace-hover);
+        }
+
+        .theme-toggle {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .toggle-btn {
+            background-color: var(--toggle-bg);
+            border: none;
+            border-radius: var(--button-radius);
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            background-color: var(--toggle-bg);
+        }
+
+        .toggle-icon {
+            margin-left: 5px;
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -226,44 +198,128 @@
             </p>
         </header>
         <section>
-            <div class="calculator">
-                <header>
-                    <button class="btn-mode"></button>
-                    <input type="text" class="oper" value="308 x 42" readonly>
-                    <h4 class="result">12.936</h4>
-                </header>
-                <footer>
-                    <button class="btn-clear"></button>
-                    <button class="btn-del"></button>
-                    <button class="btn-pow" data-opr="**"></button>
-                    <button class="btn-mod" data-opr="%"></button>
-                    <button class="btn-one" data-num="1"></button>
-                    <button class="btn-two" data-num="2"></button>
-                    <button class="btn-three" data-num="3"></button>
-                    <button class="btn-multiply" data-opr="*"></button>
-                    <button class="btn-four" data-num="4"></button>
-                    <button class="btn-five" data-num="5"></button>
-                    <button class="btn-six" data-num="6"></button>
-                    <button class="btn-rest" data-opr="-"></button>
-                    <button class="btn-seven" data-num="7"></button>
-                    <button class="btn-eight" data-num="8"></button>
-                    <button class="btn-nine" data-num="9"></button>
-                    <button class="btn-sum" data-opr="+"></button>
-                    <button class="btn-div" data-opr="/"></button>
-                    <button class="btn-zero" data-num="0"></button>
-                    <button class="btn-dote" data-opr="."></button>
-                    <button class="btn-equal"></button>
-                </footer>
-            </div>
+            <div class="calculator-container">
+                <div class="calculator">
+                    <div class="theme-toggle">
+                        <button class="toggle-btn" id="themeToggle">
+                            Modo Oscuro
+                            <span class="toggle-icon">🌙</span>
+                        </button>
+                    </div>
+                    <div class="display" id="display">0</div>
+                    <div class="buttons">
+                        <button class="clear" onclick="clearDisplay()">C</button>
+                        <button class="backspace" onclick="backspace()">&lt;</button>
+                        <button class="operator" onclick="appendToDisplay('%')">%</button>
+                        <button class="operator" onclick="appendToDisplay('/')">/</button>
+                        
+                        <button onclick="appendToDisplay('7')">7</button>
+                        <button onclick="appendToDisplay('8')">8</button>
+                        <button onclick="appendToDisplay('9')">9</button>
+                        <button class="operator" onclick="appendToDisplay('*')">x</button>
+                        
+                        <button onclick="appendToDisplay('4')">4</button>
+                        <button onclick="appendToDisplay('5')">5</button>
+                        <button onclick="appendToDisplay('6')">6</button>
+                        <button class="operator" onclick="appendToDisplay('-')">-</button>
+                        
+                        <button onclick="appendToDisplay('1')">1</button>
+                        <button onclick="appendToDisplay('2')">2</button>
+                        <button onclick="appendToDisplay('3')">3</button>
+                        <button class="operator" onclick="appendToDisplay('+')">+</button>
+                        
+                        <button class="operator" onclick="appendToDisplay('^')">^</button>
+                        <button onclick="appendToDisplay('0')">0</button>
+                        <button class="operator" onclick="appendToDisplay('.')">.</button>
+                        <button class="equals" onclick="calculate()">=</button>
+                    </div>
+                </div>
+            </div>        
         </section>
     </main>
     <script>
-        //buttons
-        const btnMode = document.querySelector('.btn-mode');
-        const divCal = document.querySelector('.calculator');
-        //Events
-        btnMode.addEventListener('click', () => {
-            divCal.classList.toggle('dark');
+        let currentDisplay = '0';
+        const display = document.getElementById('display');
+        const themeToggle = document.getElementById('themeToggle');
+        let darkMode = false;
+        
+        function updateDisplay() {
+            display.textContent = currentDisplay;
+        }
+        
+        function appendToDisplay(value) {
+            if (currentDisplay === '0' && value !== '.') {
+                currentDisplay = value;
+            } else {
+                currentDisplay += value;
+            }
+            updateDisplay();
+        }
+        
+        function clearDisplay() {
+            currentDisplay = '0';
+            updateDisplay();
+        }
+        
+        function backspace() {
+            if (currentDisplay.length === 1) {
+                currentDisplay = '0';
+            } else {
+                currentDisplay = currentDisplay.slice(0, -1);
+            }
+            updateDisplay();
+        }
+        
+        function calculate() {
+            try {
+                let expression = currentDisplay.replace(/x/g, '*');
+                expression = expression.replace(/\^/g, '**');
+                
+                const result = Function('"use strict";return (' + expression + ')')();
+                
+                currentDisplay = Number.isInteger(result) ? result.toString() : parseFloat(result.toFixed(6)).toString();
+                updateDisplay();
+            } catch (error) {
+                currentDisplay = 'Error';
+                updateDisplay();
+                setTimeout(clearDisplay, 1500);
+            }
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                themeToggle.innerHTML = 'Modo Claro <span class="toggle-icon">☀️</span>';
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeToggle.innerHTML = 'Modo Oscuro <span class="toggle-icon">🌙</span>';
+            }
+        });
+
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (/[0-9]/.test(key)) {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendToDisplay(key);
+            } else if (key === '^' || key === '%') {
+                appendToDisplay(key);
+            } else if (key === '.') {
+                appendToDisplay('.');
+            } else if (key === 'Enter') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearDisplay();
+            } else if (key === 'Backspace') {
+                backspace();
+            } else if (key === 'd' || key === 'D') {
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    themeToggle.click();
+                }
+            }
         });
     </script>
 </body>
