@@ -321,6 +321,132 @@
                 }
             }
         });
+
+        // Key Events
+        document.addEventListener('keyup', (event) => {
+            // console.log(event.keyCode)
+            // 0-9       => keyCode: 48,49,50,51,52,53,54,55,56,57
+            // Backspace => keyCode: 8
+            // Enter     => keyCode: 13
+            // Delete    => keyCode: 46
+            // %         => keyCode: 16-53
+            // +         => keyCode: 187
+            // -         => keyCode: 189
+            // .         => keyCode: 190
+            // /         => keyCode: 16-55
+            // ^         => keyCode: 219
+            // *         => keyCode: 221
+ 
+            switch (event.keyCode) {
+                // Numbers 0 to 9 - - - - 
+                case 48:
+                    isOper = true
+                    addToOperation(0)
+                    break;
+                case 49:
+                    isOper = true
+                    addToOperation(1)
+                    break;
+                case 50:
+                    isOper = true
+                    addToOperation(2)
+                    break;
+                case 51:
+                    isOper = true
+                    addToOperation(3)
+                    break;
+                case 52:
+                    isOper = true
+                    addToOperation(4)
+                    break;
+                case 53:
+                    if (event.shiftKey) {
+                        if(isOper) {
+                            addToOperation('%')
+                            isOper = false
+                        }
+                    } else {
+                        isOper = true
+                        addToOperation(5)
+                    }
+                    break;
+                case 54:
+                    isOper = true
+                    addToOperation(6)
+                    break;
+                case 55:
+                    if (event.shiftKey) {
+                        if(isOper) {
+                            addToOperation('/')
+                            isOper = false
+                        }
+                    } else {
+                        isOper = true
+                        addToOperation(7)
+                    }
+                    break;
+                case 56:
+                    isOper = true
+                    addToOperation(8)
+                    break;
+                case 57:
+                    isOper = true
+                    addToOperation(9)
+                    break;
+                // Operators - - - 
+                case 8:
+                    operation.value = operation.value.slice(0, -1)
+                    if(isNaN(operation.value.slice(-1))) {
+                        isOper = false
+                    } else {
+                        isOper = true
+                    }
+                    break;
+                case 13:
+                    if(operation.value.length != '' ) {
+                        result.textContent = '=' + eval(operation.value)
+                    }
+                    break;
+                case 46:
+                    operation.value = ''
+                    result.textContent = ''
+                    break;
+                case 187:
+                    if(isOper) {
+                        addToOperation('+')
+                        isOper = false
+                    }
+                    break;
+                case 189:
+                    if(isOper) {
+                        addToOperation('-')
+                        isOper = false
+                    }
+                    break;
+                case 190:
+                    if(isOper) {
+                        addToOperation('.')
+                        isOper = false
+                    }
+                    break;
+                case 219:
+                    if(isOper) {
+                        addToOperation('**')
+                        isOper = false
+                    }
+                    break;
+                case 221:
+                    if(isOper) {
+                        addToOperation('*')
+                        isOper = false
+                    }
+                    break;
+                // Default - - -
+                default:
+                    break;
+            }
+ 
+        }) 
     </script>
 </body>
 </html>
