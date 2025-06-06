@@ -1,109 +1,371 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>17-pokedex-api</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        ul.list {
-            list-style: none;
-            display: grid;
-            margin: 2rem auto;
-            gap: 0.4rem;
-            grid-template-columns: repeat(4,1fr);
-            margin: 0;
-            padding: 0;
-            li {
-                background-color: #fff9;
-                border: 2px solid #0009;
-                border-radius: 0.4rem;
-                width: 88px;
-                transition: all 0.4s ease;
-            }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../css/styles.css">
+  <title>Pokédex API</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f4e04d;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .card, .generation-card, .stats-card {
+      background-color: #1c1c1c;
+      border-radius: 1rem;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .generation-card {
+      background-color: #C59F9F;
+      color: #000;
+      width: 400px;
+    }
+
+    .stats-card {
+      background-color: #1c1c1c;
+      color: #fff;
+      width: 300px;
+    }
+
+    .stats-card h2 {
+      text-transform: capitalize;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+      text-align: left;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .stat-name {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .stat-value {
+      font-size: 0.9rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background-color: #333;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #4CAF50;
+      border-radius: 5px;
+    }
+
+    img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      margin: 1rem 0;
+    }
+
+    button {
+      background-color: #e63946;
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    select.generation {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      margin: 1rem 0;
+      width: 100%;
+    }
+
+    ul.list {
+      list-style: none;
+      display: grid;
+      margin-top: 1.5rem;
+      gap: 0.6rem;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      padding: 0;
+    }
+
+    ul.list li {
+      background-color: #fff9;
+      border: 2px solid #0009;
+      border-radius: 0.4rem;
+      padding: 0.5rem;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    ul.list li:hover {
+      background-color: #0009;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    ul.list h3, ul.list h4 {
+      margin: 0.2rem 0;
+      font-size: 0.8rem;
+    }
+
+    img.loader.hidden {
+      display: none;
+    }
+
+    img.loader {
+      width: 150px;
+      height: 150px;
+      margin: 1rem auto;
+      display: block;
+    }
+
+    .pokemon-types {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .type {
+      display: flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      color: white;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    }
+
+    .type img {
+      width: 12px;
+      height: 12px;
+      margin-right: 3px;
+    }
+
+    .type-normal { background-color: #A8A878; }
+    .type-fire { background-color: #F08030; }
+    .type-water { background-color: #6890F0; }
+    .type-electric { background-color: #F8D030; }
+    .type-grass { background-color: #78C850; }
+    .type-ice { background-color: #98D8D8; }
+    .type-fighting { background-color: #C03028; }
+    .type-poison { background-color: #A040A0; }
+    .type-ground { background-color: #E0C068; }
+    .type-flying { background-color: #A890F0; }
+    .type-psychic { background-color: #F85888; }
+    .type-bug { background-color: #A8B820; }
+    .type-rock { background-color: #B8A038; }
+    .type-ghost { background-color: #705898; }
+    .type-dragon { background-color: #7038F8; }
+    .type-dark { background-color: #705848; }
+    .type-steel { background-color: #B8B8D0; }
+    .type-fairy { background-color: #EE99AC; }
+  </style>
+</head>
+<body>
+
+  <!-- Tarjeta de inicio -->
+  <section class="card" id="intro-card">
+    <h2>Pokédex</h2>
+    <img src="image/ashketchumpng.png" alt="Ash">
+    <button onclick="goToGenerationCard()">Ver Pokémon</button>
+  </section>
+
+  <!-- Tarjeta de generación -->
+  <section class="generation-card hidden" id="generation-card">
+    <h2>Pokemones</h2>
+    <select class="generation">
+      <option value="">Seleccione Generación...</option>
+      <option value="0">Primera Generación</option>
+      <option value="1">Segunda Generación</option>
+      <option value="2">Tercera Generación</option>
+      <option value="3">Cuarta Generación</option>
+      <option value="4">Quinta Generación</option>
+      <option value="5">Sexta Generación</option>
+      <option value="6">Séptima Generación</option>
+      <option value="7">Octava Generación</option>
+    </select>
+    <img class="loader hidden" src="image/loader.gif" alt="loading...">
+    <ul class="list hidden"></ul>
+  </section>
+
+  <section class="stats-card hidden" id="stats-card">
+    <h2 id="pokemon-name"></h2>
+    <img id="pokemon-image" src="" alt="">
+    <div class="stats-container" id="stats-container">
+    </div>
+    <button onclick="goBackToGenerationCard()">Volver</button>
+  </section>
+
+  <script>
+    const generationSelect = document.querySelector('.generation');
+    const list = document.querySelector('.list');
+    const loader = document.querySelector('.loader');
+    const statsCard = document.getElementById('stats-card');
+    const pokemonName = document.getElementById('pokemon-name');
+    const pokemonImage = document.getElementById('pokemon-image');
+    const statsContainer = document.getElementById('stats-container');
+
+    const generations = {
+      generation: [
+        { start: 1, end: 151 },
+        { start: 152, end: 251 },
+        { start: 252, end: 386 },
+        { start: 387, end: 493 },
+        { start: 494, end: 649 },
+        { start: 650, end: 721 },
+        { start: 722, end: 809 },
+        { start: 810, end: 898 }
+      ]
+    };
+
+    generationSelect.addEventListener('change', function () {
+      const value = this.value;
+      if (value !== "") {
+        const { start, end } = generations.generation[value];
+        loadPokemons(start, end);
+      }
+    });
+
+    function goToGenerationCard() {
+      document.getElementById('intro-card').classList.add('hidden');
+      document.getElementById('generation-card').classList.remove('hidden');
+
+      generationSelect.value = "0";
+      const { start, end } = generations.generation[0];
+      loadPokemons(start, end);
+    }
+
+    function goBackToGenerationCard() {
+      statsCard.className = 'stats-card hidden';
+      document.getElementById('generation-card').classList.remove('hidden');
+    }
+
+    const loadPokemons = async (start, end) => {
+      list.innerHTML = '';
+      loader.classList.remove('hidden');
+      list.classList.add('hidden');
+
+      for (let pk = start; pk <= end; pk++) {
+        try {
+          const url = `https://pokeapi.co/api/v2/pokemon/${pk}`;
+          const response = await fetch(url);
+          const data = await response.json();
+
+          let imgPk = pk < 10 ? '00' + data.id : pk < 100 ? '0' + data.id : data.id;
+
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <h3>#${imgPk}</h3>
+            <h4>${data.name}</h4>
+            <img src="https://www.serebii.net/swordshield/pokemon/${imgPk}.png" alt="${data.name}">
+            <div class="pokemon-types">
+              ${data.types.map(type => `
+                <span class="type type-${type.type.name}">
+                  <img src="https://raw.githubusercontent.com/duiker101/pokemon-type-svg-icons/master/icons/${type.type.name}.svg" alt="${type.type.name}">
+                  ${type.type.name}
+                </span>
+              `).join('')}
+            </div>
+          `;
+          
+          li.addEventListener('click', () => showPokemonStats(data));
+          
+          list.appendChild(li);
+        } catch (err) {
+          console.error("Error fetching Pokémon:", err);
         }
-    </style>
-</head> 
-<body class="js">
-    <nav>
-        <a href="../">
-            <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
-        </a>
-    </nav>
-    <main>
-        <header>
-            <h1>17-pokedex-api</h1>
-            <p>
-                
-            </p>
-     </header>
-     <section>
-        <select class="generation">
-            <option value="">Select Generation...</option>
-            <option value="0">First Generation </option>
-            <option value="1">Second Generation </option>
-            <option value="2">Third Generation </option>
-            <option value="3">Fourth Generation </option>
-            <option value="4">Fifth Generation </option>
-            <option value="5">Sixth Generation </option>
-            <option value="6">Seventh Generation </option>
-            <option value="7">Eight Generation </option>
-        </select>
-        <img class="loader hidden" src="" alt="">
-        <ul class="list"></ul>
-     </section>
-    </main>
-    <script>
+      }
 
-        //Element
-         const generation = document.querySelector('.generation')
+      loader.classList.add('hidden');
+      list.classList.remove('hidden');
+    }
 
-        const list = document.querySelector('.list')
+    async function showPokemonStats(pokemonData) {
+      const primaryType = pokemonData.types[0].type.name;
+      statsCard.className = `stats-card type-${primaryType}`;
+      
+      document.getElementById('generation-card').classList.add('hidden');
+      statsCard.classList.remove('hidden');
 
-        //Object
-        const generations = {
-            generation: [
-                {start: 1,   end:151 },
-                {start: 152, end:251 },
-                {start: 252, end:386 },
-                {start: 387, end:493 },
-                {start: 494, end:649 },
-                {start: 650, end:721 },
-                {start: 722, end:809 },
-                {start: 810, end:850 }
+      pokemonName.textContent = pokemonData.name;
+      let imgPk = pokemonData.id < 10 ? '00' + pokemonData.id : 
+                 pokemonData.id < 100 ? '0' + pokemonData.id : 
+                 pokemonData.id;
+      pokemonImage.src = `https://www.serebii.net/swordshield/pokemon/${imgPk}.png`;
 
-            ]   
-            
-        }
+      statsContainer.innerHTML = '';
+      
+      const stats = [
+        { name: 'HP', value: pokemonData.stats[0].base_stat },
+        { name: 'Attack', value: pokemonData.stats[1].base_stat },
+        { name: 'Defense', value: pokemonData.stats[2].base_stat },
+        { name: 'Sp. Attack', value: pokemonData.stats[3].base_stat },
+        { name: 'Sp. Defense', value: pokemonData.stats[4].base_stat },
+        { name: 'Speed', value: pokemonData.stats[5].base_stat },
+        { name: 'Total', value: pokemonData.stats.reduce((total, stat) => total + stat.base_stat, 0) }
+      ];
 
-        //Event
-        generation.addEventListener('change', function(event){
-            const start = generations.generation[this.value].start
-            const end = generations.generation[this.value].end
-            loadPokemons(start, end)
-        })
-
-
-
-        //Function
-        const loadPokemons = async (start, end) => {
-            list.innerHTML = ``
-            loader.classList.remove('hidden')
-            List.classList.add('hidden')
-            setTimeout(() => {
-                loader.classList.add('hidden')
-                list.classList.remove('hidden')
-            },5000)
-            for(let pk = start; pk <= end; pk++){
-                const url = `https://pokeapi.co/api/v2/pokemon/${pk}`
-                const response = await fetch(url)
-                const data = await response.json()
-                list.innerHTML += `<li>${data.name}</li>`
-            }
-            
-        }
-
-
-    </script>
- </body>
+      stats.forEach(stat => {
+        const statItem = document.createElement('div');
+        statItem.className = 'stat-item';
+        
+        const max = stat.name === 'Total' ? 600 : 255;
+        const percentage = Math.min((stat.value / max) * 100, 100);
+        
+        statItem.innerHTML = `
+          <div class="stat-header">
+            <span class="stat-name">${stat.name}</span>
+            <span class="stat-value">${stat.value}</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: ${percentage}%"></div>
+          </div>
+        `;
+        statsContainer.appendChild(statItem);
+      });
+    }
+  </script>
+</body>
 </html>
