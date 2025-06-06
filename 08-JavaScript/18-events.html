@@ -3,24 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>17-pokedex-api</title>
+    <title>00-template</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
-        ul.list {
-            list-style: none;
-            display: grid;
-            margin: 2rem auto;
-            gap: 0.4rem;
-            grid-template-columns: repeat(4,1fr);
-            margin: 0;
-            padding: 0;
-            li {
-                background-color: #fff9;
-                border: 2px solid #0009;
-                border-radius: 0.4rem;
-                width: 88px;
-                transition: all 0.4s ease;
+        .section-dbl {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            button {
+                background-color: #b7a63c;
+                border-radius: 5px;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                padding: 0.6rem;
+                width: 160px;
             }
+        }
+        .section-keyup {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            input {
+                border: 2px solid #b7a63c;
+                border-radius: 5px;
+                padding: 0.5rem;
+                width: 140px;
+            }
+        }
+        .section-change {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.6rem;
+            select {
+                border: 2px solid #b7a63c;
+                border-radius: 5px;
+                padding: 0.5rem;
+                width: 160px;
+            }
+            p {
+                zoom: 3;
+                margin: 0;
+            }
+        }
+        .event-mouse {
+            background-color: #fff;
+            border-radius: 50%;
+            border: 4px solid #b7a63c;
+            margin: 0.6rem auto;
+            display: flex;
+            object-fit: cover;
+            height: 200px;
+            width: 200px;
         }
     </style>
 </head> 
@@ -32,78 +69,88 @@
     </nav>
     <main>
         <header>
-            <h1>17-pokedex-api</h1>
+            <h1>00-template</h1>
             <p>
                 
             </p>
      </header>
      <section>
-        <select class="generation">
-            <option value="">Select Generation...</option>
-            <option value="0">First Generation </option>
-            <option value="1">Second Generation </option>
-            <option value="2">Third Generation </option>
-            <option value="3">Fourth Generation </option>
-            <option value="4">Fifth Generation </option>
-            <option value="5">Sixth Generation </option>
-            <option value="6">Seventh Generation </option>
-            <option value="7">Eight Generation </option>
-        </select>
-        <img class="loader hidden" src="" alt="">
-        <ul class="list"></ul>
-     </section>
+            <h3>Event: onload</h3>
+            <h4 class="event-load"></h4>
+            <h3>Event: dblclick</h3>
+            <div class="section-dbl">
+                <button>Button</button>
+                <h4 class="event-dbl">0 Double clicks</h4>
+            </div>
+            <h3>Event: onkeyup</h3>
+            <div class="section-keyup">
+                <input type="text" placeholder="Enter text...">
+                <h4 class="event-keyup">null</h4>
+            </div>
+            <h3>Event: onresize</h3>
+            <h4 class="event-resize">No resize</h4>
+            <h3>Event: onchange</h3>
+            <div class="section-change">
+                <select>
+                    <option value="🙂" selected>Select an animal...</option>
+                    <option value="🐮">🐮 Cow</option>
+                    <option value="🐷">🐷 Pig</option>
+                    <option value="🐶">🐶 Dog</option>
+                    <option value="🦊">🦊 Fox</option>
+                    <option value="🐻">🐻 Bear</option>
+                </select>
+                <p class="event-change">🙂</p>
+            </div>
+            <h3>Event: onmouseover</h3>
+            <img src="image/jiji2.webp" class="event-mouse" alt="Jiji">
+        </section>
     </main>
     <script>
+        //Elements
+        const eventLoad = document.querySelector('.event-load')
+        const eventDbl = document.querySelector('.event-dbl')
+        const eventKeyup = document.querySelector('.event-keyup')
+        const eventResize = document.querySelector('.event-resize')
+        const eventChange = document.querySelector('.event-change')
+        const eventMouse = document.querySelector('.event-mouse')
 
-        //Element
-         const generation = document.querySelector('.generation')
-
-        const list = document.querySelector('.list')
-
-        //Object
-        const generations = {
-            generation: [
-                {start: 1,   end:151 },
-                {start: 152, end:251 },
-                {start: 252, end:386 },
-                {start: 387, end:493 },
-                {start: 494, end:649 },
-                {start: 650, end:721 },
-                {start: 722, end:809 },
-                {start: 810, end:850 }
-
-            ]   
-            
+        //onload
+        window.onload = function() {
+            eventLoad.textContent = 'The Page was loaded!'
         }
 
-        //Event
-        generation.addEventListener('change', function(event){
-            const start = generations.generation[this.value].start
-            const end = generations.generation[this.value].end
-            loadPokemons(start, end)
+        //Dblclick
+        const btn = document.querySelector('.section-dbl button')
+        let count = 0
+        btn.addEventListener('dblclick', () => {
+            eventDbl.textContent = `${++count} Double Click`
         })
 
-
-
-        //Function
-        const loadPokemons = async (start, end) => {
-            list.innerHTML = ``
-            loader.classList.remove('hidden')
-            List.classList.add('hidden')
-            setTimeout(() => {
-                loader.classList.add('hidden')
-                list.classList.remove('hidden')
-            },5000)
-            for(let pk = start; pk <= end; pk++){
-                const url = `https://pokeapi.co/api/v2/pokemon/${pk}`
-                const response = await fetch(url)
-                const data = await response.json()
-                list.innerHTML += `<li>${data.name}</li>`
-            }
-            
+        //onkeyup
+        const input = document.querySelector('.section-keyup input')
+        input.onkeyup = function(event) {
+            eventKeyup.textContent = `${this.value}`
         }
 
+        //onresize
+        window.onresize = function() {
+            eventResize.textContent = `Window width: ${window.outerWidth}px`
+        }
 
+        //onchange
+        const select = document.querySelector('.section-change select')
+        select.addEventListener('change', function() {
+            eventChange.textContent = `${this.value}`
+        })
+
+        //onmouseover/onmouseleave
+        eventMouse.addEventListener('mouseover',() => {
+            this.src = 'image/jiji2.web'
+        })
+
+        eventMouse.addEventListener('mouseleave',() => {
+            this.src = 'image/jiji1.web'
+        })
     </script>
  </body>
 </html>
