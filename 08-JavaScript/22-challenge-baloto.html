@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baloto Game</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    .section-fondo {
+      position: relative;
+      background: url('image/fondo.png') no-repeat center center;
+      background-size: cover;
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cancha {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      margin: auto;
+    }
+
+    .button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 45px;
+      background: #678621;
+      opacity: 33%;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .button:hover {
+      background: white;
+      color: #1AAB8A;
+    }
+
+    .ball {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      display: none;
+      text-align: center;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .ball img {
+      width: 100%;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .ball span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+    }
+
+    #ball1 { top: 140px; left: 50%; transform: translateX(-50%); }
+    #ball2 { top: 230px; left: 60px; }
+    #ball3 { top: 230px; right: 60px; }
+    #ball4 { top: 320px; left: 80px; }
+    #ball5 { top: 320px; right: 80px; }
+
+    .contenedor-circulo {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+    }
+
+    .circulo {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: girar 3s infinite linear;
+    }
+
+    .circulo img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .circulo span {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #FFD700;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes girar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 10px;
+    }
+
+    .modal-content img {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="js">
+  <nav>
+    <a href="../">
+        <svg xmlns='http://www.w3.org/2000/svg'  width='540' height='450' viewBox='0 0 1080 900'><rect fill='#2111FF' width='1080' height='900'/><g fill-opacity='.1'><polygon fill='#444' points='90 150 0 300 180 300'/><polygon points='90 150 180 0 0 0'/><polygon fill='#AAA' points='270 150 360 0 180 0'/><polygon fill='#DDD' points='450 150 360 300 540 300'/><polygon fill='#999' points='450 150 540 0 360 0'/><polygon points='630 150 540 300 720 300'/><polygon fill='#DDD' points='630 150 720 0 540 0'/><polygon fill='#444' points='810 150 720 300 900 300'/><polygon fill='#FFF' points='810 150 900 0 720 0'/><polygon fill='#DDD' points='990 150 900 300 1080 300'/><polygon fill='#444' points='990 150 1080 0 900 0'/><polygon fill='#DDD' points='90 450 0 600 180 600'/><polygon points='90 450 180 300 0 300'/><polygon fill='#666' points='270 450 180 600 360 600'/><polygon fill='#AAA' points='270 450 360 300 180 300'/><polygon fill='#DDD' points='450 450 360 600 540 600'/><polygon fill='#999' points='450 450 540 300 360 300'/><polygon fill='#999' points='630 450 540 600 720 600'/><polygon fill='#FFF' points='630 450 720 300 540 300'/><polygon points='810 450 720 600 900 600'/><polygon fill='#DDD' points='810 450 900 300 720 300'/><polygon fill='#AAA' points='990 450 900 600 1080 600'/><polygon fill='#444' points='990 450 1080 300 900 300'/><polygon fill='#222' points='90 750 0 900 180 900'/><polygon points='270 750 180 900 360 900'/><polygon fill='#DDD' points='270 750 360 600 180 600'/><polygon points='450 750 540 600 360 600'/><polygon points='630 750 540 900 720 900'/><polygon fill='#444' points='630 750 720 600 540 600'/><polygon fill='#AAA' points='810 750 720 900 900 900'/><polygon fill='#666' points='810 750 900 600 720 600'/><polygon fill='#999' points='990 750 900 900 1080 900'/><polygon fill='#999' points='180 0 90 150 270 150'/><polygon fill='#444' points='360 0 270 150 450 150'/><polygon fill='#FFF' points='540 0 450 150 630 150'/><polygon points='900 0 810 150 990 150'/><polygon fill='#222' points='0 300 -90 450 90 450'/><polygon fill='#FFF' points='0 300 90 150 -90 150'/><polygon fill='#FFF' points='180 300 90 450 270 450'/><polygon fill='#666' points='180 300 270 150 90 150'/><polygon fill='#222' points='360 300 270 450 450 450'/><polygon fill='#FFF' points='360 300 450 150 270 150'/><polygon fill='#444' points='540 300 450 450 630 450'/><polygon fill='#222' points='540 300 630 150 450 150'/><polygon fill='#AAA' points='720 300 630 450 810 450'/><polygon fill='#666' points='720 300 810 150 630 150'/><polygon fill='#FFF' points='900 300 810 450 990 450'/><polygon fill='#999' points='900 300 990 150 810 150'/><polygon points='0 600 -90 750 90 750'/><polygon fill='#666' points='0 600 90 450 -90 450'/><polygon fill='#AAA' points='180 600 90 750 270 750'/><polygon fill='#444' points='180 600 270 450 90 450'/><polygon fill='#444' points='360 600 270 750 450 750'/><polygon fill='#999' points='360 600 450 450 270 450'/><polygon fill='#666' points='540 600 630 450 450 450'/><polygon fill='#222' points='720 600 630 750 810 750'/><polygon fill='#FFF' points='900 600 810 750 990 750'/><polygon fill='#222' points='900 600 990 450 810 450'/><polygon fill='#DDD' points='0 900 90 750 -90 750'/><polygon fill='#444' points='180 900 270 750 90 750'/><polygon fill='#FFF' points='360 900 450 750 270 750'/><polygon fill='#AAA' points='540 900 630 750 450 750'/><polygon fill='#FFF' points='720 900 810 750 630 750'/><polygon fill='#222' points='900 900 990 750 810 750'/><polygon fill='#222' points='1080 300 990 450 1170 450'/><polygon fill='#FFF' points='1080 300 1170 150 990 150'/><polygon points='1080 600 990 750 1170 750'/><polygon fill='#666' points='1080 600 1170 450 990 450'/><polygon fill='#DDD' points='1080 900 1170 750 990 750'/></g></svg>
+    </a>
+  </nav>
+  <main>
+    <header>
+      <h1>Baloto Game</h1>
+      <p>¡Juega y prueba tu suerte!</p>
+    </header>
+
+    <section class="section-fondo">
+      <div class="cancha">
+        <button id="iniciar" class="button">JUEGA</button>
+
+        <div class="ball" id="ball1"><img src="image/balon.png"><span></span></div>
+        <div class="ball" id="ball2"><img src="image/balon.png"><span></span></div>
+        <div class="ball" id="ball3"><img src="image/balon.png"><span></span></div>
+        <div class="ball" id="ball4"><img src="image/balon.png"><span></span></div>
+        <div class="ball" id="ball5"><img src="image/balon.png"><span></span></div>
+
+        <div class="contenedor-circulo">
+          <div class="circulo" id="goldenBall">
+            <img src="image/balon.png">
+            <span></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultadoModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <img id="resultadoImagen" src="" alt="Resultado">
+          <h2 id="resultadoTexto">Resultado</h2>
+        </div>
+      </div>
+      <a href="https://www.figma.com/design/kfuwbd19XpXeGbAsZkYYN4/Untitled?node-id=0-1&m=dev&t=wGbIHLX5alp7QaTe-1 class="figma-button" target="_blank">
+    Ver diseño en Figma
+        </a>
+
+      <script>
+        document.getElementById("iniciar").addEventListener("click", function () {
+          let numbers = new Set();
+
+          while (numbers.size < 5) {
+            numbers.add(Math.floor(Math.random() * 43) + 1);
+          }
+
+          let numbersArray = Array.from(numbers);
+          let goldenNumber;
+          do {
+            goldenNumber = Math.floor(Math.random() * 9) + 1;
+          } while (numbersArray.includes(goldenNumber));
+
+          let balls = document.querySelectorAll(".ball");
+          balls.forEach((ball, index) => {
+            setTimeout(() => {
+              ball.style.display = "block";
+              ball.querySelector("span").textContent = numbersArray[index];
+            }, index * 500);
+          });
+
+          let goldenBall = document.getElementById("goldenBall");
+          goldenBall.style.animation = "none";
+          void goldenBall.offsetWidth;
+          goldenBall.style.animation = "girar 3s infinite linear";
+
+          setTimeout(() => {
+            goldenBall.querySelector("span").textContent = goldenNumber;
+
+            if (typeof confetti !== 'undefined') {
+              confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+              });
+            }
+
+            const gano = goldenNumber % 2 === 0;
+            const modal = document.getElementById("resultadoModal");
+            const texto = document.getElementById("resultadoTexto");
+            const imagen = document.getElementById("resultadoImagen");
+
+            if (gano) {
+              texto.textContent = "¡Ganaste!";
+              imagen.src = "image/OnceC.png";
+              imagen.style.display = "block";
+            } else {
+              texto.textContent = "¡Perdiste soy de la B!";
+              imagen.src = "image/B.png";
+              imagen.style.display = "block";
+            }
+
+            modal.style.display = "block";
+
+            document.querySelector(".close").onclick = function () {
+              modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            };
+          }, balls.length * 500 + 500);
+        });
+      </script>
+    </section>
+  </main>
+</body>
+</html>
