@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>25- Challenge Arrays</title>
+    <title>25 - Challenge-Array</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-    <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+     <style>
         @font-face {
             font-family: 'FinkHeavy';
             src: url(fonts/FinkHeavy.ttf);
         }
         div.app {
-            background: url(images/arrays/bg-app.png) no-repeat center;
+            background: url(image/narutof.jpg) no-repeat center;
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
@@ -48,35 +47,35 @@
         }
         div.app nav.villagers div.villager1,
         div.app figure.result div.villager1 {
-            background: url(images/arrays/vill01.png) no-repeat center;
+            background: url(image/Arrays/tnauto\ 2.svg) no-repeat center;
         }
         div.app nav.villagers div.villager2,
         div.app figure.result div.villager2 {
-            background: url(images/arrays/vill02.png) no-repeat center;
+            background: url(image/Arrays/titachi\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager3,
         div.app figure.result div.villager3 {
-            background: url(images/arrays/vill03.png) no-repeat center;
+            background: url(image/Arrays/tsaske\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager4,
         div.app figure.result div.villager4 {
-            background: url(images/arrays/vill04.png) no-repeat center;
+            background: url(image/Arrays/tgaraa\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager5,
         div.app figure.result div.villager5 {
-            background: url(images/arrays/vill05.png) no-repeat center;
+            background: url(image/Arrays/tkakashi\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager6,
         div.app figure.result div.villager6 {
-            background: url(images/arrays/vill06.png) no-repeat center;
+            background: url(image/Arrays/tshikamaru\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager7,
         div.app figure.result div.villager7 {
-            background: url(images/arrays/vill07.png) no-repeat center;
+            background: url(image/Arrays/tmadara\ 1.svg) no-repeat center;
         }
         div.app nav.villagers div.villager8,
         div.app figure.result div.villager8 {
-            background: url(images/arrays/vill08.png) no-repeat center;
+            background: url(image/Arrays/trock\ 1.svg) no-repeat center;
         }
 
         div.app nav.options {
@@ -93,12 +92,12 @@
             -webkit-appearance: none;
             appearance: none;
             cursor: pointer;
-            color: #87643C;
+            color: red;
             font-weight: 600;
             border: none;
             text-align: center;
             outline: none;
-            background: url(images/arrays/bg-switch.svg) no-repeat center;
+            background: url(image/Arrays/Rectangle\ 9.svg) no-repeat center;
             height: 54px;
             width: 114px;
             transition: background 0.2s ease-in;
@@ -110,22 +109,22 @@
             margin-top: 2px;
             cursor: text;
             &::placeholder {
-                color: #87643C;
+                color: red;
                 text-align: center;
                 font-family: 'FinkHeavy';
             }
         }
         div.app nav.options input[type=checkbox].position {
-            background: url(images/arrays/switch-first.svg) no-repeat center;
+            background: url(image/Arrays/Rectangle\ 9\ \(1\).svg) no-repeat center;
         }
         div.app nav.options input[type=checkbox].position:checked {
-            background: url(images/arrays/switch-last.svg) no-repeat center;
+            background: url(image/Arrays/Rectangle\ 9\ \(2\).svg) no-repeat center;
         }
         div.app nav.options input[type=checkbox].action {
-            background: url(images/arrays/switch-add.svg) no-repeat center;
+            background: url(image/Arrays/Rectangle\ 9.svg) no-repeat center;
         }
         div.app nav.options input[type=checkbox].action:checked {
-            background: url(images/arrays/switch-remove.svg) no-repeat center;
+            background: url(image/Arrays/Rectangle\ 9.svg) no-repeat center;
         }
         div.app button {
             border: none;
@@ -140,10 +139,10 @@
             transform: scale(1.1);
         }
         div.app button.btn-add {
-            background: url(images/arrays/btn-add.svg) no-repeat center;
+            background: url(image/Arrays/btn-add.svg) no-repeat center;
         }
         div.app button.btn-remove {
-            background: url(images/arrays/btn-remove.svg) no-repeat center;
+            background: url(image/Arrays/btn-remove\ \(1\).svg) no-repeat center;
         }
 
         div.wrapper {
@@ -185,31 +184,45 @@
             left: 0;
             width: 10px;
         }
-
+        #figma-btn {
+            background: #ca4101;
+            color: red;
+            border: 2px solid #e4e001;
+            padding: 15px 15px;
+            border-radius: 18px; /* Redondeado solo abajo */
+            cursor: pointer;
+            font-weight: bold;
+            width: 30%; /* Mismo ancho que el section */
+            text-align: center;
+            transition: all 0.3s;
+            margin-top: 2px; /* Para "pegarlo" visualmente */
+        }
     </style>
 </head>
 <body class="js">
-    <nav class="controls">
+    <nav>
         <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
         </a>
     </nav>
     <main>
         <header>
-            <h1>25- Challenge</h1>
-            <h2>Solve problems using array manipulation.</h2>
+            <h1> 25 - Challenge-Array </h1>
+            <p>
+              Solve problems using array manipulation.  
+            </p>
         </header>
         <section>
             <div class="app">
                 <nav class="villagers">
-                    <div class="villager villager1 animate__animated animate__infinite"></div>
-                    <div class="villager villager2 animate__animated animate__infinite"></div>
-                    <div class="villager villager3 animate__animated animate__infinite"></div>
-                    <div class="villager villager4 animate__animated animate__infinite"></div>
-                    <div class="villager villager5 animate__animated animate__infinite"></div>
-                    <div class="villager villager6 animate__animated animate__infinite"></div>
-                    <div class="villager villager7 animate__animated animate__infinite"></div>
-                    <div class="villager villager8 animate__animated animate__infinite"></div>
+                    <div class="villager villager1 animate_animated animate_infinite"></div>
+                    <div class="villager villager2 animate_animated animate_infinite"></div>
+                    <div class="villager villager3 animate_animated animate_infinite"></div>
+                    <div class="villager villager4 animate_animated animate_infinite"></div>
+                    <div class="villager villager5 animate_animated animate_infinite"></div>
+                    <div class="villager villager6 animate_animated animate_infinite"></div>
+                    <div class="villager villager7 animate_animated animate_infinite"></div>
+                    <div class="villager villager8 animate_animated animate_infinite"></div>
                 </nav>
                 <nav class="options">
                     <input class="position" type="checkbox">
@@ -222,6 +235,9 @@
                     </figure>
                 </div>
             </div>
+            <button id="figma-btn" onclick="window.open('https://www.figma.com/design/RvHNjTKvJQPxwNmtxCEMRg/25-challenge-arrays?node-id=0-1&t=GEAYl8iaj6JYMg14-1')">
+                Ver Figma
+            </button>
         </section>
     </main>
     <script>
@@ -301,7 +317,7 @@
                     result.innerHTML += `<div class="${array_vills[i]} animate__animated animate__rubberBand"><span>${i}</span></div>`
                 }
             } else {
-                alert('Please:\n1. Select a Villager')
+                alert('Please:\n1. Add a Dragon Ball Z character or villain')
             }
         })
     </script>
