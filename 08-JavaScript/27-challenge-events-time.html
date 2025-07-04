@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>27-desafío-eventos-tiempo</title>
-   <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>27-challengue-events-time</title>
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     body {
       margin: 0;
@@ -13,36 +13,53 @@
       color: #fff;
       text-align: center;
     }
+
     main {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 0;
     }
-    section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    #contenedorJuego {
+      position: relative;
+      width: 400px;
+      background: url('image/fondoE.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 10px;
+      overflow: hidden;
     }
-    .marcador {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin: 15px 0;
-      font-size: 16px;
-    }
-    .puntuacion, .record {
-      padding: 10px 20px;
-      border-radius: 20px;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid #fff;
-      min-width: 120px;
-    }
+
     #areaJuego {
       display: block;
-      margin: 0 auto;
-      border: 3px solid #fff;
-      border-radius: 10px;
+      width: 100%;
+      background: transparent;
+      border: none;
     }
+
+    .marcador {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 8px 12px;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .puntuacion, .record, .tiempo, .vidas {
+      padding: 8px 14px;
+      border-radius: 20px;
+      background: rgba(50, 50, 50, 0.6);
+      font-weight: bold;
+      color: white;
+      font-size: 14px;
+      min-width: 120px;
+      text-align: center;
+    }
+
     .fin-juego {
       position: absolute;
       top: 50%;
@@ -53,7 +70,9 @@
       border-radius: 15px;
       display: none;
       border: 2px solid #fff;
+      z-index: 20;
     }
+
     .boton-reiniciar {
       margin-top: 15px;
       padding: 10px 20px;
@@ -62,26 +81,43 @@
       color: #fff;
       border-radius: 10px;
       cursor: pointer;
+      font-size: 1rem;
     }
+
     .boton-reiniciar:hover {
       background: #66fcf1;
+    }
+
+    @keyframes sacudida {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-4px, 2px); }
+      40% { transform: translate(4px, -2px); }
+      60% { transform: translate(-4px, -2px); }
+      80% { transform: translate(4px, 2px); }
+      100% { transform: translate(0, 0); }
+    }
+    .temblor {
+      animation: sacudida 0.2s ease;
     }
   </style>
 </head>
 <body class="js">
   <main>
     <header>
-      <h1>27-desafío-eventos-tiempo</h1>
-      <p>
-        Crea desafíos interactivos basados en el tiempo.
-      </p>
+      <h1>27-challengue-events-time</h1>
+      <p></p>
     </header>
-    <section>
+
+    <section id="contenedorJuego">
       <div class="marcador">
         <div class="puntuacion">Esquivados: <span id="contadorPuntuacion">0</span></div>
         <div class="record">Récord: <span id="contadorRecord">0</span></div>
+        <div class="tiempo">Tiempo: <span id="cronometro">0</span>s</div>
+        <div class="vidas">Vidas: <span id="vidas">❤️❤️❤️</span></div>
       </div>
+
       <canvas id="areaJuego" width="400" height="600"></canvas>
+
       <div class="fin-juego" id="panelFinJuego">
         <h2>¡Fin!</h2>
         <p>Esquivaste <span id="valorPuntuacionFinal">0</span> meteoritos</p>
@@ -90,6 +126,7 @@
       </div>
     </section>
   </main>
+
   <script>
     const areaJuego = document.getElementById('areaJuego');
     const ctx = areaJuego.getContext('2d');
@@ -99,9 +136,8 @@
     const valorPuntuacionFinal = document.getElementById('valorPuntuacionFinal');
     const avisoNuevoRecord = document.getElementById('avisoNuevoRecord');
     const panelFinJuego = document.getElementById('panelFinJuego');
-
-    const imagenFondo = new Image();
-    imagenFondo.src = 'image/fondoE.png';
+    const cronometro = document.getElementById('cronometro');
+    const vidasElemento = document.getElementById('vidas');
 
     const imagenNave = new Image();
     imagenNave.src = 'image/naveES.png';
@@ -109,8 +145,8 @@
     const imagenMeteorito = new Image();
     imagenMeteorito.src = 'image/meteorito.png';
 
-    const anchoNave = 50;
-    const altoNave = 50;
+    const anchoNave = 80;
+    const altoNave = 80;
     let posicionXNave = areaJuego.width / 2 - anchoNave / 2;
     const posicionYNave = areaJuego.height - altoNave - 10;
     let direccionX = 0;
@@ -118,11 +154,15 @@
 
     let meteoritos = [];
     let temporizadorMeteorito = 0;
+    let velocidadMeteorito = 4;
 
     let puntuacion = 0;
     let recordMaximo = parseInt(localStorage.getItem('recordMeteoritos')) || 0;
     contadorRecord.textContent = recordMaximo;
 
+    let vidas = 3;
+    let tiempo = 0;
+    let intervaloTiempo;
     let juegoActivo = true;
 
     function crearMeteoritoAleatorio() {
@@ -134,12 +174,7 @@
     }
 
     function dibujarJuego() {
-      if (imagenFondo.complete) {
-        ctx.drawImage(imagenFondo, 0, 0, areaJuego.width, areaJuego.height);
-      } else {
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, areaJuego.width, areaJuego.height);
-      }
+      ctx.clearRect(0, 0, areaJuego.width, areaJuego.height);
 
       if (imagenNave.complete) {
         ctx.drawImage(imagenNave, posicionXNave, posicionYNave, anchoNave, altoNave);
@@ -165,16 +200,22 @@
         temporizadorMeteorito = 0;
       }
 
-      meteoritos.forEach(m => m.y += 4);
+      meteoritos.forEach(m => m.y += velocidadMeteorito);
 
-      meteoritos.forEach(m => {
+      meteoritos.forEach((m, i) => {
         if (
           m.y + m.tamaño > posicionYNave &&
           m.y < posicionYNave + altoNave &&
           m.x + m.tamaño > posicionXNave &&
           m.x < posicionXNave + anchoNave
         ) {
-          finalizarJuego();
+          meteoritos.splice(i, 1);
+          vidas--;
+          actualizarVidas();
+          sacudirPantalla();
+          if (vidas <= 0) {
+            finalizarJuego();
+          }
         }
       });
 
@@ -186,6 +227,14 @@
         }
         return true;
       });
+    }
+
+    function actualizarVidas() {
+      const corazones = ['❤️','❤️','❤️'];
+      for (let i = 0; i < 3 - vidas; i++) {
+        corazones[i] = '🖤';
+      }
+      vidasElemento.textContent = corazones.join('');
     }
 
     function finalizarJuego() {
@@ -200,7 +249,10 @@
       } else {
         avisoNuevoRecord.style.display = 'none';
       }
+
       panelFinJuego.style.display = 'block';
+      clearInterval(intervaloTiempo);
+      clearInterval(dificultadIntervalo);
     }
 
     function reiniciarJuego() {
@@ -209,37 +261,73 @@
       meteoritos = [];
       puntuacion = 0;
       contadorPuntuacion.textContent = puntuacion;
+      vidas = 3;
+      actualizarVidas();
+      tiempo = 0;
+      cronometro.textContent = tiempo;
       juegoActivo = true;
       panelFinJuego.style.display = 'none';
+      velocidadMeteorito = 4;
+
+      clearInterval(intervaloTiempo);
+      intervaloTiempo = setInterval(() => {
+        if (!juegoActivo) return;
+        tiempo++;
+        cronometro.textContent = tiempo;
+      }, 1000);
+
+      clearInterval(dificultadIntervalo);
+      dificultadIntervalo = setInterval(() => {
+        velocidadMeteorito += 0.2;
+      }, 5000);
+
+      loop();
     }
 
-    function cambiarDireccion(direccion) {
-      if (!juegoActivo) {
-        reiniciarJuego();
-        return;
+    window.addEventListener('keydown', e => {
+      if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+        direccionX = -1;
+      } else if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+        direccionX = 1;
       }
-      if (direccion === 'izquierda') direccionX = -1;
-      else if (direccion === 'derecha') direccionX = 1;
-    }
-
-    function detenerDireccion() {
-      direccionX = 0;
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'ArrowLeft' || e.key === 'a') cambiarDireccion('izquierda');
-      if (e.key === 'ArrowRight' || e.key === 'd') cambiarDireccion('derecha');
-    });
-    document.addEventListener('keyup', e => {
-      if (['ArrowLeft', 'ArrowRight', 'a', 'd'].includes(e.key)) detenerDireccion();
     });
 
-    function bucleJuego() {
+    window.addEventListener('keyup', e => {
+      if (
+        e.code === 'ArrowLeft' || e.code === 'KeyA' ||
+        e.code === 'ArrowRight' || e.code === 'KeyD'
+      ) {
+        direccionX = 0;
+      }
+    });
+
+    function loop() {
+      if (!juegoActivo) return;
       moverObjetos();
       dibujarJuego();
+      requestAnimationFrame(loop);
     }
 
-    setInterval(bucleJuego, 30);
+    function sacudirPantalla() {
+      areaJuego.classList.add('temblor');
+      setTimeout(() => {
+        areaJuego.classList.remove('temblor');
+      }, 200);
+    }
+
+    actualizarVidas();
+
+    let dificultadIntervalo = setInterval(() => {
+      velocidadMeteorito += 0.2;
+    }, 5000);
+
+    intervaloTiempo = setInterval(() => {
+      if (!juegoActivo) return;
+      tiempo++;
+      cronometro.textContent = tiempo;
+    }, 1000);
+
+    loop();
   </script>
 </body>
 </html>

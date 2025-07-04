@@ -1,189 +1,282 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 26-events-time</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-    section h4.clock {
-        font-size: 2.8rem;
-        text-align: center;
-        margin: 1rem 0;
-    } 
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>27-desafío-eventos-tiempo</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      background: #000;
+      color: #fff;
+      text-align: center;
+    }
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     section {
-        input {
-            margin-top: 1rem;
-            border: 2px solid #b7a63c;
-            border-radius: 5px;
-            padding: 0.5rem;
-            width: 260px;
-        }
-        button {
-            background-color: #b7a63c;
-            border-radius: 5px;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 0.6rem;
-            width: 114px;
-        }
-
-        h4.refresh {
-            font-size: 1.6rem;
-            text-align: center;
-        }
-
-        figure.sky {
-            background: url(images/clouds-sky.jpg) no-repeat center /cover;
-            border-radius: 4px;
-            border: 4px solid #b7a63c;
-            height: 400px;
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto;
-            width: 380px;
-
-            img.goku {
-                position: absolute;
-                top: 140px;
-                left: 140px;
-                transition: left 0.2s ease-in;
-            }
-        }
-    } 
-</style>
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .marcador {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    .puntuacion, .record, .tiempo {
+      padding: 10px 20px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #fff;
+      min-width: 120px;
+    }
+    #areaJuego {
+      display: block;
+      margin: 0 auto;
+      border: 3px solid #fff;
+      border-radius: 10px;
+    }
+    .fin-juego {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.9);
+      padding: 30px;
+      border-radius: 15px;
+      display: none;
+      border: 2px solid #fff;
+    }
+    .boton-reiniciar {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #45a29e;
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .boton-reiniciar:hover {
+      background: #66fcf1;
+    }
+  </style>
 </head>
 <body class="js">
-    <nav>
-        <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
-        </a>
-    </nav>
-    <main>
-        <header>
-            <h1> 26-events-time </h1>
-            <p>
-                Handle time-based events and intervals.
-            </p>
-        </header>
-        <section>
-            <h3>SetInterval: Digital Clock</h3>
-            <h4 class="clock"></h4>
-            <h3>SetTimeout: Refresh Page</h3>
-            <input class="time-to-refresh" type="number" placeholder="Number of second">
-            <button class="btn-settime">Set Time</button>
-            <h4 class="refresh"></h4>
-            <h3>Move Element: </h3>
-            <small><strong>Press Left & Right Keys</strong></small>
-            <figure class="sky">
-                <img src="images/goku.png" class="goku">
-            </figure>
-        </section>
-    </main>
-    <script>
-        const clock = document.querySelector('.clock');
-        const timeToRefresh = document.querySelector('.time-to-refresh');
-        const btnSetTime = document.querySelector('.btn-settime');
-        const refresh = document.querySelector('h4.refresh');
-        const goku = document.querySelector('.goku');
+  <main>
+    <header>
+      <h1>27-desafío-eventos-tiempo</h1>
+      <p>
+        Crea desafíos interactivos basados en el tiempo.
+      </p>
+    </header>
+    <section>
+      <div class="marcador">
+        <div class="puntuacion">Esquivados: <span id="contadorPuntuacion">0</span></div>
+        <div class="record">Récord: <span id="contadorRecord">0</span></div>
+        <div class="tiempo">Tiempo: <span id="cronometro">0</span>s</div>
+      </div>
+      <canvas id="areaJuego" width="400" height="600"></canvas>
+      <div class="fin-juego" id="panelFinJuego">
+        <h2>¡Fin!</h2>
+        <p>Esquivaste <span id="valorPuntuacionFinal">0</span> meteoritos</p>
+        <p id="avisoNuevoRecord" style="display:none;color:#66fcf1;">🎉 ¡Nuevo récord!</p>
+        <button class="boton-reiniciar" onclick="reiniciarJuego()">Jugar otra vez</button>
+      </div>
+    </section>
+  </main>
 
-        // SetInterval
-        clock.textContent = `Loading...`
-        setInterval(function(){
-            let currentTime = new Date().toLocaleTimeString()
-            clock.textContent = currentTime
-        }, 1000)
+  <script>
+    const areaJuego = document.getElementById('areaJuego');
+    const ctx = areaJuego.getContext('2d');
 
-        // SetTimeout
-        btnSetTime.addEventListener('click', () => {
-            if(!timeToRefresh.value.length > 0) {
-                alert('Please enter a number of seconds.')
-            } else {
-                let count = 1
-                let time = parseInt(timeToRefresh.value)
-                refresh.textContent = `${time} seconds`
-                btnSetTime.style.pointerEvents = 'none'
-                btnSetTime.style.opacity = '0.5'
-                const st = setInterval(() => {
-                    refresh.textContent = `${time-count} seconds`
-                    count++
-                }, 1000)
-                setTimeout(() => {
-                    window.location.reload()
-                }, (time * 1000))
-            }
-        })
+    const contadorPuntuacion = document.getElementById('contadorPuntuacion');
+    const contadorRecord = document.getElementById('contadorRecord');
+    const valorPuntuacionFinal = document.getElementById('valorPuntuacionFinal');
+    const avisoNuevoRecord = document.getElementById('avisoNuevoRecord');
+    const panelFinJuego = document.getElementById('panelFinJuego');
+    const cronometro = document.getElementById('cronometro');
 
-        // Event keyUP
-        let positionX = 140
-        let positionY = 140 
+    const imagenFondo = new Image();
+    imagenFondo.src = 'image/fondoE.png';
 
-        window.addEventListener('keyup', event => {
-            //console.log(event.keyCode)
-            //Left => 37 | Top => 38 | Right => 39 | Bottom => 40
-            console.log(event.code)
+    const imagenNave = new Image();
+    imagenNave.src = 'image/naveES.png';
 
-            if(event.code == 'ArrowRight') {
-                if(positionX < 340){
-                    positionX += 40
-                    goku.style.transform = `rotateY(180deg)`
-                    goku.style.left = `${positionX}px`
-                } else {
-                    positionX = -60
-                    goku.style.display = 'none'
-                    setTimeout(() => {
-                        goku.style.display = 'block'
-                    }, 200)
-                    goku.style.left = `${positionX}px`
-                }
-            }
+    const imagenMeteorito = new Image();
+    imagenMeteorito.src = 'image/meteorito.png';
 
-            if(event.code == 'ArrowLeft') {
-                if(positionX > -60){
-                    positionX -= 40
-                    goku.style.transform = `rotateY(0deg)`
-                    goku.style.left = `${positionX}px`
-                } else {
-                    positionX = 340
-                    goku.style.display = 'none'
-                    setTimeout(() => {
-                        goku.style.display = 'block'
-                    }, 200)
-                    goku.style.left = `${positionX}px`
-                }
-            }
+    const anchoNave = 50;
+    const altoNave = 50;
+    let posicionXNave = areaJuego.width / 2 - anchoNave / 2;
+    const posicionYNave = areaJuego.height - altoNave - 10;
+    let direccionX = 0;
+    const velocidadNave = 6;
 
-            if(event.code == 'ArrowUp') {
-                if(positionY > -60){
-                    positionY -= 40
-                    goku.style.top = `${positionY}px`
-                } else {
-                    positionY = 340
-                    goku.style.display = 'none'
-                    setTimeout(() => {
-                        goku.style.display = 'block'
-                    }, 200)
-                    goku.style.top = `${positionY}px`
-                }
-            }
+    let meteoritos = [];
+    let temporizadorMeteorito = 0;
 
-            if(event.code == 'ArrowDown') {
-                if(positionY < 340){
-                    positionY += 40
-                    goku.style.top = `${positionY}px`
-                } else {
-                    positionY = -60
-                    goku.style.display = 'none'
-                    setTimeout(() => {
-                        goku.style.display = 'block'
-                    }, 200)
-                    goku.style.top = `${positionY}px`
-                }
-            }
-        });
+    let puntuacion = 0;
+    let recordMaximo = parseInt(localStorage.getItem('recordMeteoritos')) || 0;
+    contadorRecord.textContent = recordMaximo;
 
-    </script>
+    let juegoActivo = true;
+
+    // Nuevas variables para eventos de tiempo
+    let tiempo = 0;
+    let intervaloTiempo;
+    let dificultadIntervalo;
+    let velocidadMeteorito = 4;
+
+    function crearMeteoritoAleatorio() {
+      return {
+        x: Math.random() * (areaJuego.width - 40),
+        y: -40,
+        tamaño: 50
+      };
+    }
+
+    function dibujarJuego() {
+      if (imagenFondo.complete) {
+        ctx.drawImage(imagenFondo, 0, 0, areaJuego.width, areaJuego.height);
+      } else {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, areaJuego.width, areaJuego.height);
+      }
+
+      if (imagenNave.complete) {
+        ctx.drawImage(imagenNave, posicionXNave, posicionYNave, anchoNave, altoNave);
+      }
+
+      meteoritos.forEach(m => {
+        if (imagenMeteorito.complete) {
+          ctx.drawImage(imagenMeteorito, m.x, m.y, m.tamaño, m.tamaño);
+        }
+      });
+    }
+
+    function moverObjetos() {
+      if (!juegoActivo) return;
+
+      posicionXNave += direccionX * velocidadNave;
+      if (posicionXNave < 0) posicionXNave = 0;
+      if (posicionXNave + anchoNave > areaJuego.width) posicionXNave = areaJuego.width - anchoNave;
+
+      temporizadorMeteorito++;
+      if (temporizadorMeteorito > 30) {
+        meteoritos.push(crearMeteoritoAleatorio());
+        temporizadorMeteorito = 0;
+      }
+
+      meteoritos.forEach(m => m.y += velocidadMeteorito);
+
+      meteoritos.forEach(m => {
+        if (
+          m.y + m.tamaño > posicionYNave &&
+          m.y < posicionYNave + altoNave &&
+          m.x + m.tamaño > posicionXNave &&
+          m.x < posicionXNave + anchoNave
+        ) {
+          finalizarJuego();
+        }
+      });
+
+      meteoritos = meteoritos.filter(m => {
+        if (m.y > areaJuego.height) {
+          puntuacion++;
+          contadorPuntuacion.textContent = puntuacion;
+          return false;
+        }
+        return true;
+      });
+    }
+
+    function finalizarJuego() {
+      juegoActivo = false;
+      valorPuntuacionFinal.textContent = puntuacion;
+      clearInterval(intervaloTiempo);
+      clearInterval(dificultadIntervalo);
+
+      if (puntuacion > recordMaximo) {
+        recordMaximo = puntuacion;
+        localStorage.setItem('recordMeteoritos', recordMaximo);
+        contadorRecord.textContent = recordMaximo;
+        avisoNuevoRecord.style.display = 'block';
+      } else {
+        avisoNuevoRecord.style.display = 'none';
+      }
+      panelFinJuego.style.display = 'block';
+    }
+
+    function reiniciarJuego() {
+      posicionXNave = areaJuego.width / 2 - anchoNave / 2;
+      direccionX = 0;
+      meteoritos = [];
+      puntuacion = 0;
+      tiempo = 0;
+      velocidadMeteorito = 4;
+      contadorPuntuacion.textContent = puntuacion;
+      cronometro.textContent = tiempo;
+      juegoActivo = true;
+      panelFinJuego.style.display = 'none';
+
+      clearInterval(intervaloTiempo);
+      clearInterval(dificultadIntervalo);
+
+      // Iniciar cronómetro
+      intervaloTiempo = setInterval(() => {
+        if (!juegoActivo) return;
+        tiempo++;
+        cronometro.textContent = tiempo;
+      }, 1000);
+
+      // Aumentar dificultad cada 10 segundos
+      dificultadIntervalo = setInterval(() => {
+        if (!juegoActivo) return;
+        velocidadMeteorito += 0.5;
+      }, 10000);
+
+      // Finalizar juego automáticamente después de 60 segundos
+      setTimeout(() => {
+        if (juegoActivo) finalizarJuego();
+      }, 60000);
+    }
+
+    function cambiarDireccion(direccion) {
+      if (!juegoActivo) {
+        reiniciarJuego();
+        return;
+      }
+      if (direccion === 'izquierda') direccionX = -1;
+      else if (direccion === 'derecha') direccionX = 1;
+    }
+
+    function detenerDireccion() {
+      direccionX = 0;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft' || e.key === 'a') cambiarDireccion('izquierda');
+      if (e.key === 'ArrowRight' || e.key === 'd') cambiarDireccion('derecha');
+    });
+
+    document.addEventListener('keyup', e => {
+      if (['ArrowLeft', 'ArrowRight', 'a', 'd'].includes(e.key)) detenerDireccion();
+    });
+
+    function bucleJuego() {
+      moverObjetos();
+      dibujarJuego();
+    }
+
+    setInterval(bucleJuego, 30);
+    reiniciarJuego(); // Inicia el juego automáticamente al cargar
+  </script>
 </body>
 </html>
