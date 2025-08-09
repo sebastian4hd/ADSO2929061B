@@ -55,7 +55,7 @@
             </div>
             <button class="save">Guardar</button>
         </form>
-        <?php
+        <?php 
             if($_POST) {
                 $errors = 0;
                 foreach ($_POST as $key => $value) {
@@ -68,7 +68,7 @@
                 }
                 //var_dump($_POST);
                 //var_dump($_FILES);
- 
+
                 if($errors == 0) {
                     $name      = $_POST['name'];
                     $specie_id = $_POST['specie_id'];
@@ -76,18 +76,18 @@
                     $sex_id    = $_POST['sex_id'];
                     $photo     = time().".".pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
                     move_uploaded_file($_FILES['photo']['tmp_name'], "../uploads/".$photo);
- 
+
                     if(addPet($name, $specie_id, $breed_id, $sex_id, $photo, $conx)) {
                         $_SESSION['message'] = "La Mascota $name se adicionó con exito!";
                         echo "<script>window.location.replace('dashboard.php')</script>";
                     }
- 
+
                 } else {
                     $_SESSION['error'] = "Todos los campos son requeridos!";
                 }
- 
+
             }
- 
+
             if(isset($_SESSION['error'])) {
                 include 'errors.php';
                 unset($_SESSION['error']);
@@ -98,11 +98,11 @@
         const preview = document.querySelector('#preview')
         const upload  = document.querySelector('.upload')
         const photo   = document.querySelector('#photo')
- 
+
         upload.addEventListener('click', function() {
             photo.click()
         })
- 
+
         photo.addEventListener('change', function() {
             preview.src = window.URL.createObjectURL(this.files[0])
         })

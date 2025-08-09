@@ -5,11 +5,11 @@
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
- 
+
     // Login
     function login($email, $password, $conx) {
         try {
-           $sql = "SELECT *
+           $sql = "SELECT * 
                    FROM users
                    WHERE email = :email
                    AND password = :password
@@ -18,7 +18,7 @@
             $stmt->bindparam(":email", $email);
             $stmt->bindparam(":password", $password);
             $stmt->execute();
- 
+
             if($stmt->rowCount() > 0) {
                 $usr = $stmt->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['uid'] = $usr['id'];
@@ -31,7 +31,7 @@
             echo "Error: " . $e->getMessage();
         }
     }
- 
+
     // List Pets
     function listPets($conx) {
         try {
@@ -52,7 +52,7 @@
             echo "Error: " . $e->getMessage();
         }
     }
- 
+
     // Add Pet
     function addPet($name, $specie_id, $breed_id, $sex_id, $photo, $conx) {
         try {
@@ -71,25 +71,6 @@
             } else {
                 return false;
             }
-            
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-
-    // Delete Pet
-    function deletePet($id, $conx) {
-        try {
-            $sql = "DELETE 
-                    FROM pets
-                    WHERE id = :id";
-            $stmt = $conx->prepare($sql);
-            $stmt->bindparam(":id", $id);
-            if($stmt->execute()) {
-                return true;
-            } else {
-                return false;
-            }  
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -107,54 +88,14 @@
                          species AS s,
                          breeds AS b,
                          sexes AS x
-                    WHERE x.id = p.specie_id
+                    WHERE s.id = p.specie_id
                     AND b.id = p.breed_id
                     AND p.id = :id";
             $stmt = $conx->prepare($sql);
             $stmt->bindparam(":id", $id);
             $stmt->execute();
             return $stmt->fetch();
-
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
- 
-    // List Breeds
-    function listBreeds($conx) {
-        try {
-            $sql = "SELECT *
-                    FROM breeds";
-            $stmt = $conx->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-    
-    // List Breeds
-    function listSexes($conx) {
-        try {
-            $sql = "SELECT *
-                    FROM sexes";
-            $stmt = $conx->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-    // List Species
-    function listSpecies($conx) {
-        try {
-            $sql = "SELECT *
-                    FROM species";
-            $stmt = $conx->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
- 

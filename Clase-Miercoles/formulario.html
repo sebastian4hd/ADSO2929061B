@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registro</h1>
+    <form id="formulario">
+            <div>FORMULARIO DE INSCRIPCION</div>
+            <p>NOMBRE: <input type="text" id="nombre"></p>
+            <p>APELLIDO: <input type="text" id="Apellidos"></p>
+            <p>CORREO: <input type="email" id="correo"></p>
+            <p>CONTRASEÑA: <input type="password" id="password"></p>
+            <p>TELEFONO: <input type="tel" id="telefono"></p>
+            <p>FECHA DE NACIMINETO <input type="date"  id="fecha"></p>
+            <button>Enviar <input type="submit"></button>
+        </form>
+        <p id="mensaje"></p>
+        <script>
+            const form = document.getElementById("formulario");
+            const mensaje = document.getElementById("mensaje");
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault(); // Evita el envio si hay errores
+                let errores = [];
+
+                let nomrbre = document.getElementById("nombre").value.trim();
+                let apellidos = document.getElementById("Apellidos").value.trim();
+                let correo = document.getElementById("correo").value.trim();
+                let password = document.getElementById("password").value.trim();
+                let telefono = document.getElementById("telefono").value.trim();
+                let fecha = document.getElementById("fecha").value.trim();
+
+                if(!nombre && !apellidos && !correo && !password && !telefono && !fecha) {
+                    mensaje.style.color = "red"
+                    mensaje.innerHTML = "Llena el formulario"
+                    return;
+                }
+
+                // Validaciones
+                if (nombre === "") errores.push("");
+                if (apellidos === "") errores.push("");
+
+               if (!correo.includes("@") || !correo.includes(".")) {
+                    errores.push("")
+               }
+
+                if (password.length < 6) errores.push("");
+
+                if(isNaN(telefono) || telefono.lenght < 7 || telefono.lenght > 15) {
+                    errores.push("")
+                }
+
+                if (fecha === "") errores.push("");
+
+                if (errores.lenght > 0) {
+                    mensaje.style.color = "red";
+                    mensaje.innerHTML = errores.join("<br>");
+                } else {
+                    mensaje.style.color = "green";
+                    mensaje.innerHTML = "Formulario enviado con exito";
+                    form.reset();
+                }
+            });
+              
+            
+
+        </script>
+</body>
+</html>

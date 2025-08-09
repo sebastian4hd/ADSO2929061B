@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu mejor amigo en casa - Show</title>
-    <link rel="stylesheet" href="<?=$css?>master.css"">
+    <link rel="stylesheet" href="<?=$css?>master.css">
 </head>
 <body>
     <main class="show">
@@ -19,7 +19,7 @@
             <a href="dashboard.php" class="back"></a>
             <a href="../close.php" class="close"></a>
         </header>
-        <?php
+        <?php 
             $id = $_GET['id'];
             $pet = showPet($id, $conx);
         ?>

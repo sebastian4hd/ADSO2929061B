@@ -42,7 +42,7 @@
                </td>
            </tr>
             <?php endforeach ?>
-            <?php
+            <?php 
                 if(isset($_SESSION['message'])) {
                     include 'message.php';
                     unset($_SESSION['message']);
@@ -54,7 +54,7 @@
         <script>
             function deletePet(id, name) {
             
-                if(confirm(`Esta usted seguro? Va eliminar a ${name}`)) {
+                if(confirm(Esta usted seguro? Va eliminar a ${name})) {
                     window.location.replace('delete.php?id='+id)
                 }
             }
