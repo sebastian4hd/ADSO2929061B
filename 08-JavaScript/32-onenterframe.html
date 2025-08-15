@@ -3,68 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>29-localstorage</title>
+    <title>00-template</title>
     <link rel="stylesheet" href="../css/styles.css">
-     <style>
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 1rem;
-            gap: 1rem;
-        }
+    <style>
+    div.chimp {
+        background: url(images/chimp-sprite.png) no-repeat;
+        background-position-x: 0;
+        border-radius: 0.4rem;
+        height: 270px;
+        margin: 2rem auto;
+        width: 360px;
+    }
+    div.controls {
+        margin: 0 auto;
+        width: 338px;
 
         button {
-            background-color: #b7a63c;
-            border-radius: 5px;
-            border: none;
-            color: #fff;
             cursor: pointer;
-            padding: 0.6rem;
-            width: 80px;
-        }
-
-        input {
-            border: 2px solid #b7a63c;
-            border-radius: 5px;
-            padding: 0.5rem;
-            width: 220px;
-        }
-
-        ol {
-            list-style-position: inside;
-            padding: 0;
-            margin: 1rem auto;
-            width: 340px;
-
-            li {
-                background-color: #fff9;
-                padding: 2px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 0.8rem;
-                border-bottom: 2px solid #b7a63c;
-
-                &:last-child {
-                    border-bottom: none;
-                }
-
-                span {
-                    cursor: pointer;
-                    background-color: crimson;
-                    border-radius: 10px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 1.2rem;
-                    color: #fff;
-                    height: 16px;
-                    width: 16px;
-                }
+            border: none;
+            border-radius: 0.2rem;
+            color: #fff;
+            background-color: #a39536;
+            padding: 0.4rem;
+            width: 64px;
+            transition: transform 0.2s ease-in;
+            &:hover {
+                transform: scale(1.1);
             }
         }
-    </style>
+    }
+</style>
 </head> 
 <body class="js">
     <nav>
@@ -74,61 +42,22 @@
     </nav>
     <main>
         <header>
-            <h1>29-localstorage</h1>
+            <h1>00-template</h1>
             <p>
-                 Store data locally in the browser using localStorage.
+                
             </p>
      </header>
-    <section>
-            <div>
-                <input type="text" placeholder="Type Task">
-                <button>Add</button>
-            </div>
-            <ol class="tasks">
-            </ol>
+     <section>
+    <div class="chimp"></div>
+    <div class="controls">
+        <button class="idle">Idle</button>
+        <button class="walk">Walk</button>
+        <button class="run">Run</button>
+        <button class="sleep">Sleep</button>
+        <button class="attack">Attack</button>
+    </div>
     </section>
     </main>
-    <script>
-        //Elements
-        const task = document.querySelector('input')
-        const btnAdd = document.querySelector('button')
-        const tasks = document.querySelector('.tasks')
 
-        //Events
-        btnAdd.addEventListener('click', function(){
-            if(task.value.length > 0){
-                tasks.innerHTML += `<li>${task.value}<span>&times,</span></li>`
-                task.value = ''
-                SaveTasks()
-            }else{
-                alert('Please type a Task to Add!')
-            }
-        })
-
-        //Function
-        function SaveTasks(){
-            localStorage.setItem('tasks', tasks.innerHTML)
-            allowRemove()
-        }
-
-        function showTasks(){
-            if(localStorage.getItem('tasks').length > 0){
-                tasks.innerHTML = localStorage.getItem('tasks')
-            }
-        }
-        function allowRemove(){
-            const btnRemove = document.querySelectorAll('li span')
-            btnsRevome.forEach(element => {
-                element.addEventListener('click', function(){
-                    if(confirm('Are you Sure?')){
-                        this.parantNOde.remove()
-                        SaveTasks()
-                    }
-                })
-            })
-        }
-        showTasks()
-        allowRemove()
-    </script>
  </body>
 </html>
