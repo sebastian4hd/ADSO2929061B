@@ -58,6 +58,58 @@
     </div>
     </section>
     </main>
-
+    <script>
+        // Elements
+        const chimp  = document.querySelector('.chimp')
+        const idle   = document.querySelector('.idle')
+        const walk   = document.querySelector('.walk')
+        const run    = document.querySelector('.run')
+        const sleep  = document.querySelector('.sleep')
+        const attack = document.querySelector('.attack')
+ 
+        // Sprite Config
+        let config = {
+            withd: 360,
+            fps: 12,
+            frames: 5,
+            current: 0,
+            lastTime: 0
+        }
+ 
+        // Events
+        idle.addEventListener('click', (e) => {
+            config.frames = 5
+            chimp.style.backgroundPositionY = '0'
+        })
+        walk.addEventListener('click', (e) => {
+            config.frames = 6
+            chimp.style.backgroundPositionY = '-270px'
+        })
+        run.addEventListener('click', (e) => {
+            config.frames = 8
+            chimp.style.backgroundPositionY = '-540px'
+        })
+        sleep.addEventListener('click', (e) => {
+            config.frames = 4
+            chimp.style.backgroundPositionY = '-810px'
+        })
+        attack.addEventListener('click', (e) => {
+            config.frames = 10
+            chimp.style.backgroundPositionY = '-1080px'
+        })
+ 
+        // On Enter Frame
+        function animateChimp(timestamp) {
+            if(timestamp - config.lastTime > 1000 / config.fps) {
+                chimp.style.backgroundPositionX = `-${config.current * config.withd}px`
+                config.current = (config.current + 1) % config.frames
+                config.lastTime = timestamp
+            }
+            requestAnimationFrame(animateChimp)
+        }
+        requestAnimationFrame(animateChimp)
+ 
+    </script>
+ 
  </body>
 </html>
