@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Simpsons Memory Game</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .game-container {
+    background-image: url();
+    width: 650px; 
+    height: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px;
+    padding: 10px;
+    max-width: 500px;
+    margin: 0 auto; 
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    background-image: url('images/donut.png');
+    background-size: cover;
+    border: 3px solid #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-face-front {
+    transform: rotateY(180deg);
+}
+
+.card-face-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+    </style>
+    <style>
+.game-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 10px;
+}
+
+.card {
+    width: 150px;
+    height: 150px;
+    background-image: url('images/donut.png');
+    background-size: cover;
+    border: 3px solid #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-face-front {
+    transform: rotateY(180deg);
+}
+
+.card-face-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+    </style>
+</head> 
+<body class="jquery">
+    
+    <main>
+        <header>
+            <h1>The Simpsons Memory Game</h1>
+            <p>
+                Encuentra las parejas de Los Simpson
+            </p>
+        </header>
+        <section class="game-container">
+            <div class="stats">
+                <span id="moves-counter">Movimientos: 0</span>
+                <span id="time-counter">Tiempo: 0s</span>
+            </div>
+            <div class="board">
+                </div>
+        </section>
+    </main>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function() {
+            // Se necesitan 6 imágenes duplicadas para un tablero de 3x4 (12 cartas)
+            const images = ['bart.png', 'homer.png', 'lisa.png', 'marge.png', 'ralph.png', 'krusty.png', 'bart.png', 'homer.png', 'lisa.png', 'marge.png', 'ralph.png', 'krusty.png'];
+            const board = $('.board');
+            let flippedCards = [];
+            let matchedPairs = 0;
+            let moves = 0;
+            let timer;
+            let time = 0;
+
+            // Mezclar las imágenes
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+
+            const shuffledImages = shuffle(images);
+
+            // Generar las tarjetas
+            function createBoard() {
+                shuffledImages.forEach((imgSrc, index) => {
+                    const card = $('<div>').addClass('card').data('card-id', index);
+                    const frontFace = $('<div>').addClass('card-face card-face-front');
+                    const backFace = $('<div>').addClass('card-face card-face-back');
+                    
+                    $('<img>').attr('src', `images/${imgSrc}`).appendTo(frontFace);
+                    
+                    card.append(frontFace, backFace);
+                    board.append(card);
+                });
+            }
+
+            // Iniciar temporizador
+            function startTimer() {
+                timer = setInterval(() => {
+                    time++;
+                    $('#time-counter').text(`Tiempo: ${time}s`);
+                }, 1000);
+            }
+
+            // Manejar el clic de la tarjeta
+            board.on('click', '.card', function() {
+                if (!timer) {
+                    startTimer();
+                }
+
+                const currentCard = $(this);
+                if (currentCard.hasClass('flipped') || flippedCards.length === 2) {
+                    return;
+                }
+
+                currentCard.addClass('flipped');
+                flippedCards.push(currentCard);
+
+                if (flippedCards.length === 2) {
+                    moves++;
+                    $('#moves-counter').text(`Movimientos: ${moves}`);
+
+                    const [card1, card2] = flippedCards;
+                    const img1 = card1.find('img').attr('src');
+                    const img2 = card2.find('img').attr('src');
+
+                    if (img1 === img2) {
+                        // Si las tarjetas son iguales
+                        card1.off('click').removeClass('card').addClass('matched-card');
+                        card2.off('click').removeClass('card').addClass('matched-card');
+                        matchedPairs++;
+                        flippedCards = [];
+
+                        if (matchedPairs === images.length / 2) {
+                            clearInterval(timer);
+                            setTimeout(() => {
+                                alert(`¡Felicidades! Completaste el juego en ${moves} movimientos y ${time} segundos.`);
+                            }, 500);
+                        }
+                    } else {
+                        // Si las tarjetas no son iguales
+                        setTimeout(() => {
+                            card1.removeClass('flipped');
+                            card2.removeClass('flipped');
+                            flippedCards = [];
+                        }, 1000); // Voltear después de 1 segundo
+                    }
+                }
+            });
+
+            // Iniciar el juego
+            createBoard();
+        });
+    </script>
+</body>
+</html>
