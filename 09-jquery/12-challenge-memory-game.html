@@ -16,8 +16,8 @@
     }
 
     section {
-        width: 412px !important;
-        height: 777px !important;
+      width: 412px !important;
+      height: 777px !important;
       margin: 30px auto;
       background: url('images/simspn/fondo.png') center center/cover no-repeat;
       border-radius: 30px !important;
@@ -133,7 +133,7 @@
       background: rgba(163, 242, 36, 0.651);
       color: #000;
       border: none;
-      border-radius: 20px;
+      border-radius: 15px;
       font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
@@ -244,6 +244,14 @@
           );
         });
       }
+       setTimeout(function () {
+          $(".memory-card").addClass("flipped");
+          setTimeout(function () {
+            $(".memory-card").removeClass("flipped");
+            lock = false;
+          }, 1000);
+        }, 100);
+
       function cardClick($card) {
         if (flipped.length >= 2) return
         if (!gameStarted) {
@@ -305,8 +313,6 @@
           flipped = []
         })
       }
-
-      /** Timer **/
       function startTimer() {
         timer = 0
         $timer.text('0')
