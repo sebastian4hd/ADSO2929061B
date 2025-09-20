@@ -40,18 +40,22 @@
             </p>
      </header>
      <section>
-        <section>
         <article class="text"></article>
         <button class="btn-load">Load Text</button>
         <button class="btn-load-lp">Load last paragraph</button>
-</section>
      </section>
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script>
-        $(function(){
-
-        })
+        $(document).ready(function() {
+            // Events
+            $('.btn-load').click(function(event) {
+				$('.text').load('text/lorem.txt').hide().fadeIn(1200);
+			});
+			$('.btn-load-lp').click(function(event) {
+				$('.text').load('text/lorem.txt .lp').hide().fadeIn(1200);
+			});
+        });
     </script>
  </body>
 </html>
