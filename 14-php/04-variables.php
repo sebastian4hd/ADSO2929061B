@@ -1,11 +1,19 @@
-<?php 
+<?php
 
-    $title  = '02- Info';
-    $descripcion = 'Show all information of PHP';
+    $title = "04 - Variables";
+    $descripcion = "How to assing values";
 
+include 'template/header.php';
+    echo '<section>';
 
-    include 'template/header.php';
+    $num1 = 25.6;
+    $num2 = 4;
 
-    phpinfo();
+    $string1 = "This is a ";
+    $string2 = "string value ";
 
-    include 'template/footer.php';
+    echo "<p>$num1 + $num2 = " . ($num1 + $num2) . "</p>";
+    echo "<p>$string1 $string2</p>";
+    echo "<p>" . $string1 .' '. $string2 . "</p>";
+
+include 'template/footer.php';
