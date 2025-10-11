@@ -1,26 +1,45 @@
 <?php
 
-    $title = "33 - Filters";
-    $descripcion = "Learn how to use filters in PHP.";
+$title = "33 - Filters";
+$descripcion = "Learn how to use filters in PHP.";
 
 include 'template/header.php';
-    echo '<section>';
 
-    $email = "user@example.com";
-    $url = "http://example.com";
+echo '<section>';
+echo '<h2>Filtro de Ciudad y Edad</h2>';
 
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Valid email address.";
+echo '<form method="post" action="">';
+echo '<label for="city">Ciudad:</label><br>';
+echo '<input type="text" name="city" id="city" required placeholder="Ejemplo: Manizales"><br><br>';
+
+echo '<label for="age">Edad:</label><br>';
+echo '<input type="number" name="age" id="age" min="0" required><br><br>';
+
+echo '<input type="submit" value="Verificar">';
+echo '</form>';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $cityRaw = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
+    $city = mb_strtolower(trim($cityRaw));
+
+    $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT);
+
+    if ($age === false || $age < 0) {
+        echo "<p style='color:red;'>Edad inválida.</p>";
     } else {
-        echo "Invalid email address.";
+        if ($city === 'manizales') {
+            if ($age >= 18) {
+                echo "<p style='color:green;'>Aceptado: Vives en Manizales y tienes $age años.</p>";
+            } else {
+                echo "<p style='color:red;'>No aceptado: Debes tener al menos 18 años.</p>";
+            }
+        } else {
+            echo "<p style='color:red;'>No aceptado: No vives en Manizales.</p>";
+        }
     }
-    if (filter_var($url, FILTER_VALIDATE_URL)) {
-        echo "Valid URL.";
-    } else {
-        echo "Invalid URL.";
-    }
+}
 
+echo '</section>';
 
-    echo '</section>';
-
-include 'template/footer.php'; ?>
+include 'template/footer.php';
+?>

@@ -1,16 +1,19 @@
 <?php
-$title = '16- Loop Foreach';
-$descripcion = 'Loop that iterates over each element of an array';
+$title = '16- Loop For';
+$descripcion = 'A loop that repeats a block of code a specific number of times';
 
 include 'template/header.php';
 
-echo "<section style='display: flex; gap: 0.2rem;'>";
+echo "<section style='display: flex; flex-direction: column; gap: 0.5rem;'>";
 
-$signs = array( '♈ Aries','♉ Taurus','♊ Gemini','♋ Cancer','♌ Leo','♍ Virgo','♎ Libra','♏ Scorpio','♐ Sagittarius','♑ Capricorn','♒ Aquarius','♓ Pisces');
+echo "<h2>Tabla del 5</h2>";
 
-
-foreach ($signs as $sign) {
-    echo "<p>$sign</p>";
+for ($i = 1; $i <= 10; $i++) {
+    $resultado = 5 * $i;
+    echo "<p>5 × $i = $resultado</p>";
 }
 
+echo "</section>";
+
 include 'template/footer.php';
+?>

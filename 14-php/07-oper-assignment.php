@@ -5,7 +5,7 @@
 
 include 'template/header.php';
     echo '<section>';
-
+    $y = 3;
 ?>
 <table>
     <thead>

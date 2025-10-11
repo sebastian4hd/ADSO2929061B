@@ -1,5 +1,4 @@
 <?php
-
     $title = "26 - SSI";
     $descripcion = "Learn how to use Server Side Includes (SSI) in PHP.";
 

@@ -1,17 +1,24 @@
 <?php
 $title = '16- Loop Do While';
-$descripcion = 'A loop that repeats a block of code until a condition is true';
+$descripcion = '';
 
 include 'template/header.php';
 
-echo "<section style='display: flex; gap: 0.2rem; flex-wrap: wrap;'>";
+echo "<section style='display: flex; flex-direction: column; gap: 0.5rem;'>";
 
 $i = 1;
+$contador = 0;
 
-while ($i <= 10) {
-    echo "<p style='padding: 0.4rem 0.6rem; border: 2px solid #0006;'>$i</p>";
+do {
+    if ($i % 2 == 0) {
+        $cuadrado = $i * $i;
+        echo "<p style='padding: 0.4rem 0.6rem; border: 2px solid #0006;'>Número: $i — Cuadrado: $cuadrado</p>";
+        $contador++;
+    }
     $i++;
-}
+} while ($contador < 5);
 
+echo "</section>";
 
 include 'template/footer.php';
+?>

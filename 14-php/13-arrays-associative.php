@@ -16,7 +16,6 @@ $characters = array(
 $characters['Genya Shinazugawa'] = 20;
 $characters['Kanao Tsuyuri'] = 19;
 
-//var_dump($characters);
 
 foreach ($characters as $key => $value) {
     echo $key . ":" . $value . "<br>";

@@ -1,17 +1,25 @@
 <?php
-$title = '18 Loop Foreach';
-$descripcion = '';
+$title = '16- Loop Foreach';
+$descripcion = 'Loop that iterates over each key-value pair in an associative array';
 
 include 'template/header.php';
 
-echo "<section style='display: flex; gap: 0.2rem; flex-wrap: wrap;'>";
+echo "<section style='display: flex; flex-direction: column; gap: 0.5rem;'>";
 
-$i = 1;
+$languages = array(
+    'Python' => 1991,
+    'JavaScript' => 1995,
+    'Java' => 1995,
+    'C++' => 1985,
+    'PHP' => 1995,
+    'Go' => 2009
+);
 
-while ($i <= 10) {
-    echo "<p style='padding: 0.4rem 0.6rem; border: 2px solid #0006;'>$i</p>";
-    $i++;
+foreach ($languages as $language => $year) {
+    echo "<p><strong>$language</strong> fue creado en <strong>$year</strong>.</p>";
 }
 
+echo "</section>";
 
 include 'template/footer.php';
+?>
