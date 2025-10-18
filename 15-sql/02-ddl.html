@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 - structure</title>
+    <title>02-ddl</title>
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         section {
@@ -15,7 +15,7 @@
                 color: white;
                 width: 100%;
                 min-height: 10px;
-
+                
             }
         }
     </style>
@@ -28,50 +28,14 @@
     </nav>
     <main>
         <header>
-            <h1>01-basic</h1>
+            <h1>02-ddl</h1>
             <p>
                
             </p>
      </header>
      <section>
-            <h3>Connect to MSQL</h3>
-            <textarea name="" id="">msql --version</textarea>
-     </section>
-    </main>
-
- </body>
-</html>
-
-
-// Connect to MYSQL
-    mysql -u root 14-p 
-
-// MSQL VERSION
-    mysql --version
-
-// Show databes
-    show databases;
-
-// Create database pokeadso
-Create database pokeadso;
-
-// Create table gyms
-create table gyms (
-     id int auto_increment,
-     name varchar(32) not null unique,
-     PRIMARY KEY(id));
-
-// Create table Trainers
-     create table trainers (
-     id int auto_increment,
-     name varchar(32) not null unique,
-     level int not null,
-     gym_id int,
-     PRIMARY KEY(id),
-     FOREIGN KEY(gym_id) REFERENCES gyms(id));
-
-// Create table pokemons
-    create table pokemons (
+            <h3>CREATE TABLE</h3>
+            <textarea>create table pokemons (
      id int auto_increment,
      name varchar(32) not null unique,
      type varchar(32) not null,
@@ -81,13 +45,29 @@ create table gyms (
      accuaracy int not null,
      PRIMARY KEY(id),
      trainer_id int,
-     FOREIGN KEY(trainer_id) REFERENCES trainers(id));
+     FOREIGN KEY(trainer_id) REFERENCES trainers(id));</textarea>
+            <h3>ALTER TABLE FK:</h3>
+            <textarea>ALTER TABLE pokemons;
+ADD FOREIGN KEY(trainer_id) REFERENCES trainers(id);</textarea>
+            <h3>ALTR TABLE RENAME;</h3>
+            <textarea>ALTER TABLE pokemons
+RENAME TO chachacha;</textarea>
+             <h3>ALTR TABLE RENAME COLUMN;</h3>
+            <textarea>ALTER TABLE pokemons
+CHANGE nickname name VARCHAR(32) NOT NULL UNIQUE</textarea>
+            <h3>ALTER TABLE ADD COLUMN:</h3>
+            <textarea>ALTER TABLE pokemons
+ADD COLUMN color VARCHAR(16)</textarea>
+                <h3>DROP TABLE:</h3>
+            <textarea>DROP TABLE gyms;</textarea>
+            <h3>ALTER TABLE DROP COLUMN:</h3>
+            <textarea>ALTER TABLE pokemons
+DROP COLUMN color;</textarea>
+            <h3>ALTER TABLE ADD COLUMN AFTER COLUMN:</h3>
+            <textarea>ALTER TABLE pokemons
+ADD COLUMN speed VARCHAR(16) AFTER accuracy;</textarea>
+     </section>
+    </main>
 
-// DESCCRIBE table
-    describe pokemons;
-
-// Create Backup database
-    mysqldump -u root pokeadso > /Users/
-
-// Drop database 
-    drop database pokeadso;
+ </body>
+</html>
