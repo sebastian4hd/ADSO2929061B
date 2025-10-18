@@ -1,0 +1,48 @@
+// Connect to MYSQL
+    mysql -u root 14-p 
+
+// MSQL VERSION
+    mysql --version
+
+// Show databes
+    show databases;
+
+// Create database pokeadso
+Create database pokeadso;
+
+// Create table gyms
+create table gyms (
+     id int auto_increment,
+     name varchar(32) not null unique,
+     PRIMARY KEY(id));
+
+// Create table Trainers
+     create table trainers (
+     id int auto_increment,
+     name varchar(32) not null unique,
+     level int not null,
+     gym_id int,
+     PRIMARY KEY(id),
+     FOREIGN KEY(gym_id) REFERENCES gyms(id));
+
+// Create table pokemons
+    create table pokemons (
+     id int auto_increment,
+     name varchar(32) not null unique,
+     type varchar(32) not null,
+     strength int not null,
+     stamina int not null,
+     speed int not null,
+     accuaracy int not null,
+     PRIMARY KEY(id),
+     trainer_id int,
+     FOREIGN KEY(trainer_id) REFERENCES trainers(id));
+
+// DESCCRIBE table
+    describe pokemons;
+
+// Create Backup database
+    mysqldump -u root pokeadso > /Users/
+
+// Drop database 
+    drop database pokeadso;
