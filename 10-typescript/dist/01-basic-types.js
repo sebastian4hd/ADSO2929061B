@@ -7,9 +7,9 @@ const hobbies = ["Reading", "Running", "codigo"];
 const personalData = ["Hornet", 100];
 const dynamicVariable = "This can be anything";
 // Display in browser
-const output = document.getElementById('output');
-if (output) {
-    output.innerHTML = `
+const output01 = document.getElementById('output01');
+if (output01) {
+    output01.innerHTML = `
         <p><strong>Character:</strong> ${characterName}</p>
         <p><strong>Health:</strong> ${health}</p>
         <p><strong>Can Double Jump:</strong> ${canDoubleJump}</p>

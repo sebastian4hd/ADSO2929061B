@@ -1,11 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // Basic types: string, number, boolean
-const characterName: string = "Hornet";
-const health:        number = 100;
-const canDoubleJump: boolean = false;
-const hobbies:       string[] = ["Reading", "Running", "codigo"];
-const personalData:  [string, number] = ["Hornet", 100];
-const dynamicVariable: any = "This can be anything";
-
+const characterName = "Hornet";
+const health = 100;
+const canDoubleJump = false;
+const hobbies = ["Reading", "Running", "codigo"];
+const personalData = ["Hornet", 100];
+const dynamicVariable = "This can be anything";
 // Display in browser
 const output01 = document.getElementById('output01');
 if (output01) {
@@ -18,3 +19,4 @@ if (output01) {
         <p><strong>Dynamic Variable:</strong> ${dynamicVariable}</p>
     `;
 }
+//# sourceMappingURL=01-basic-types.js.map
