@@ -1,7 +1,7 @@
 <?php
 
 $title  = '01-class ';
-$descripcion = '';
+$descripcion = 'Blueprint for creating objects with shared properties and behaviors.';
 
 
 include 'template/header.php';
