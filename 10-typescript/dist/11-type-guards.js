@@ -1,67 +1,66 @@
 "use strict";
 const output11 = document.getElementById('output11');
 // Typeof guard
-function show(value) {
-    if (typeof value == 'string') {
-        return 'Bienvenido: ' + value;
+function formatLevel(level) {
+    if (typeof level === 'string') {
+        return 'Nivel: ' + level.toUpperCase();
     }
     else {
-        return value;
+        return 'Nivel ' + level + ' completado';
     }
 }
 // instanceof guard
-class Animal {
-    move(animal) {
-        if (animal instanceof Perro) {
-            return 'Camina';
+class Vehicle {
+    describe(vehicle) {
+        if (vehicle instanceof Car) {
+            return 'Tiene 4 ruedas';
         }
-        if (animal instanceof Bird) {
-            return 'Vuela';
+        if (vehicle instanceof Motorcycle) {
+            return 'Tiene 2 ruedas';
         }
+        return 'Vehículo desconocido';
     }
 }
-class Perro extends Animal {
+class Car extends Vehicle {
 }
-class Bird extends Animal {
+class Motorcycle extends Vehicle {
 }
-let perro = new Perro;
-let bird = new Bird;
-function isPlay(c) {
-    return c.suscription == 'Ps Plus';
+let car = new Car();
+let motorcycle = new Motorcycle();
+function isSpotify(service) {
+    return service.content === 'Música y Podcasts';
 }
-let xbox = {
-    powered: 'Microsoft',
-    latest: 'Series X',
-    suscription: 'GamePass'
+let netflix = {
+    company: 'Netflix Inc',
+    price: 15,
+    content: 'Series y Películas'
 };
-let ps5 = {
-    powered: 'Sony',
-    'latest': 'Ps5',
-    'suscription': 'Ps Plus'
+let spotify = {
+    company: 'Spotify AB',
+    price: 10,
+    content: 'Música y Podcasts'
 };
-function render(console) {
-    if (isPlay(console)) {
+function renderService(service) {
+    if (isSpotify(service)) {
         if (output11) {
-            for (let k in console) {
+            for (let k in service) {
                 const key = k;
-                output11.innerHTML += `<li class="w-full border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>${key}</span> ${console[key]}</li>`;
+                output11.innerHTML += `<li class="w-full border m-auto p-5 rounded-sm text-xl"><span class='badge badge-success'>${key}</span> ${service[key]}</li>`;
             }
         }
     }
 }
 if (output11) {
     output11.innerHTML += `
-        <h3 class='mb-2'>typeof Guard</h3>
-        <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>${typeof show('Hornet')}</span> ${show('Hornet')}</li>
-        <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>${typeof show(90)}</span> Has alcanzado el ${show(90)}% del juego</li>
-        
-        <h3 class='mb-2'>instanceof Guard</h3>
-        <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>Perro</span> Este animal: ${perro.move(perro)}</li>
-        <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>Pajaro</span> Este animal: ${bird.move(bird)}</li>
-        
-        <h3 class='mb-2'>type predicated / type assertion</h3>
-        
-        
-        `;
-    render(ps5);
+    <h3 class='mb-2'>typeof Guard</h3>
+    <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>${typeof formatLevel('Elite')}</span> ${formatLevel('Elite')}</li>
+    <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>${typeof formatLevel(42)}</span> ${formatLevel(42)}</li>
+    
+    <h3 class='mb-2'>instanceof Guard</h3>
+    <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>Auto</span> ${car.describe(car)}</li>
+    <li class="border m-auto p-5 rounded-sm text-xl"><span class='badge badge-primary'>Moto</span> ${motorcycle.describe(motorcycle)}</li>
+    
+    <h3 class='mb-2'>type predicate / type assertion</h3>
+    `;
+    renderService(spotify);
 }

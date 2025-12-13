@@ -14,34 +14,84 @@
                 <h1 class="text-5xl font-bold">Agregar Pokemon</h1>
                 <p class="py-2">Registra un nuevo Pokemon en la base de datos</p>
             </div>
-            <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div class="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl">
                 <form class="card-body" method="POST" action="<?= $data['url'] ?>store">
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Nombre del Pokemon</span>
-                        </label>
-                        <input type="text" name="name" placeholder="Ej: Pikachu" class="input input-bordered" required autofocus />
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control col-span-2">
+                            <label class="label">
+                                <span class="label-text">Nombre del Pokemon</span>
+                            </label>
+                            <input type="text" name="name" placeholder="Ej: Pikachu" class="input input-bordered" required autofocus />
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Tipo</span>
+                            </label>
+                            <select name="type" class="select select-bordered" required>
+                                <option disabled selected>Selecciona un tipo</option>
+                                <option value="Water">💧 Water</option>
+                                <option value="Grass">🌿 Grass</option>
+                                <option value="Fire">🔥 Fire</option>
+                                <option value="Electric">⚡ Electric</option>
+                                <option value="Normal">⭐ Normal</option>
+                                <option value="Poison">☠️ Poison</option>
+                                <option value="Ghost">👻 Ghost</option>
+                                <option value="Dragon">🐉 Dragon</option>
+                                <option value="Rock">🪨 Rock</option>
+                                <option value="Fighting">🥊 Fighting</option>
+                                <option value="Psychic">🔮 Psychic</option>
+                                <option value="Ice">❄️ Ice</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Entrenador</span>
+                            </label>
+                            <select name="trainer_id" class="select select-bordered">
+                                <option value="">Sin entrenador</option>
+                                <?php foreach($data['trainers'] as $trainer): ?>
+                                    <option value="<?= $trainer['id'] ?>">
+                                        <?= htmlspecialchars($trainer['name']) ?> (Lvl <?= $trainer['level'] ?>)
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Tipo</span>
-                        </label>
-                        <select name="type" class="select select-bordered" required>
-                            <option disabled selected>Selecciona un tipo</option>
-                            <option value="Water">💧 Water</option>
-                            <option value="Grass">🌿 Grass</option>
-                            <option value="Fire">🔥 Fire</option>
-                            <option value="Electric">⚡ Electric</option>
-                            <option value="Normal">⭐ Normal</option>
-                            <option value="Poison">☠️ Poison</option>
-                            <option value="Ghost">👻 Ghost</option>
-                            <option value="Dragon">🐉 Dragon</option>
-                            <option value="Rock">🪨 Rock</option>
-                            <option value="Fighting">🥊 Fighting</option>
-                            <option value="Psychic">🔮 Psychic</option>
-                            <option value="Ice">❄️ Ice</option>
-                        </select>
+
+                    <div class="divider">Estadísticas</div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">⚔️ Strength</span>
+                            </label>
+                            <input type="number" name="strength" value="100" min="1" max="1500" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">❤️ Stamina</span>
+                            </label>
+                            <input type="number" name="staming" value="100" min="1" max="320" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">⚡ Speed</span>
+                            </label>
+                            <input type="number" name="speed" value="50" min="1" max="120" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">🎯 Accuracy</span>
+                            </label>
+                            <input type="number" name="accuracy" value="50" min="1" max="232" class="input input-bordered" required />
+                        </div>
                     </div>
+
                     <div class="form-control mt-6">
                         <button type="submit" class="btn btn-success">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">

@@ -8,27 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function getPokemon(pk) {
+function getUser(userId) {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = 'https://pokeapi.co/api/v2/pokemon/' + pk;
+        const url = 'https://jsonplaceholder.typicode.com/users/' + userId;
         const res = yield fetch(url);
         return res;
     });
 }
-const output14 = document.getElementById('output14');
+const output14 = document.getElementById('output15');
 if (output14) {
-    getPokemon('ditto')
+    getUser(1)
         .then(res => res.json())
         .then(data => {
-        let pk = data;
-        output14.innerHTML += `<li class='badge badge-primary text-xl p-4'>${pk.name} <span class='badge badge-info text-white'>${pk.id}</span></li>
-                                `;
+        let user = data;
+        output14.innerHTML += `<li class='badge badge-success text-xl p-4'>${user.name} <span class='badge badge-warning text-white'>${user.username}</span></li>`;
     });
-    getPokemon('pikachu')
+    getUser(5)
         .then(res => res.json())
         .then(data => {
-        let pk = data;
-        output14.innerHTML += `<li class='badge badge-primary text-xl p-4'>${pk.name} <span class='badge badge-info text-white'>${pk.id}</span></li>
-                                `;
+        let user = data;
+        output14.innerHTML += `<li class='badge badge-success text-xl p-4'>${user.name} <span class='badge badge-warning text-white'>${user.username}</span></li>`;
     });
 }

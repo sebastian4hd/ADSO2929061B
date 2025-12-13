@@ -1,64 +1,52 @@
 "use strict";
-// ----------------------------
-// Mixins
-// ----------------------------
-function Combat(Base) {
+function Flying(Base) {
     return class extends Base {
-        attack() {
-            return "Hornet realiza un ataque con su aguja 🗡";
+        takeOff() {
+            return "El avión despega desde la pista ✈️";
         }
-        parry() {
-            return "Hornet ejecuta un contraataque perfecto ✨";
+        land() {
+            return "El avión aterriza suavemente 🛬";
         }
     };
 }
-function Agility(Base) {
+function Navigation(Base) {
     return class extends Base {
-        jump() {
-            return "Hornet salta con agilidad entre estructuras 🦗";
+        setRoute() {
+            return "Ruta establecida en el GPS 🗺️";
         }
-        dash() {
-            return "Hornet realiza un dash veloz 💨";
+        adjustAltitude() {
+            return "Ajustando altitud de crucero 📈";
         }
     };
 }
-function Exploration(Base) {
+function Communication(Base) {
     return class extends Base {
-        markLocation() {
-            return "Hornet marca una ubicación en Pharloom 🗺";
+        contactTower() {
+            return "Contactando con la torre de control 📡";
         }
     };
 }
-// ----------------------------
-// Clase base
-// ----------------------------
-class HornetBase {
-    constructor(name) {
-        this.name = name;
+class AircraftBase {
+    constructor(model) {
+        this.model = model;
     }
 }
-// ----------------------------
-// Clase final con mixins
-// ----------------------------
-class Hornet extends Exploration(Agility(Combat(HornetBase))) {
+class Aircraft extends Communication(Navigation(Flying(AircraftBase))) {
 }
-// ----------------------------
-// IMPRIMIR EN PAGINA HTML
-// ----------------------------
-const output = document.getElementById("output16");
-if (output) {
-    const hornet = new Hornet("Hornet");
-    const messages = [
-        hornet.attack(),
-        hornet.parry(),
-        hornet.jump(),
-        hornet.dash(),
-        hornet.markLocation()
+const output16 = document.getElementById("output17");
+if (output16) {
+    const plane = new Aircraft("Boeing 747");
+    const actions = [
+        plane.takeOff(),
+        plane.setRoute(),
+        plane.adjustAltitude(),
+        plane.contactTower(),
+        plane.land()
     ];
-    output.innerHTML = `
-    <h2>${hornet.name} — Habilidades</h2>
+    output16.innerHTML = `
+    <h2>${plane.model} — Operaciones de Vuelo</h2>
     <ul>
-      ${messages.map(msg => `<li>${msg}</li>`).join("")}
+      ${actions.map(action => `<li>${action}</li>`).join("")}
     </ul>
   `;
 }

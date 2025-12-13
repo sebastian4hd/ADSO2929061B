@@ -14,40 +14,91 @@
                 <h1 class="text-5xl font-bold">Editar Pokemon</h1>
                 <p class="py-2">Modifica la información de <?= htmlspecialchars($data['pokemon']['name']) ?></p>
             </div>
-            <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div class="card bg-base-100 w-full max-w-lg shrink-0 shadow-2xl">
                 <form class="card-body" method="POST" action="<?= $data['url'] ?>update/<?= htmlspecialchars($data['pokemon']['id']) ?>">
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">ID</span>
-                        </label>
-                        <input type="text" value="<?= htmlspecialchars($data['pokemon']['id']) ?>" class="input input-bordered" disabled />
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">ID</span>
+                            </label>
+                            <input type="text" value="<?= htmlspecialchars($data['pokemon']['id']) ?>" class="input input-bordered" disabled />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Nombre del Pokemon</span>
+                            </label>
+                            <input type="text" name="name" value="<?= htmlspecialchars($data['pokemon']['name']) ?>" class="input input-bordered" required autofocus />
+                        </div>
+                        
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Tipo</span>
+                            </label>
+                            <select name="type" class="select select-bordered" required>
+                                <option disabled>Selecciona un tipo</option>
+                                <option value="Water" <?= $data['pokemon']['type'] == 'Water' ? 'selected' : '' ?>>💧 Water</option>
+                                <option value="Grass" <?= $data['pokemon']['type'] == 'Grass' ? 'selected' : '' ?>>🌿 Grass</option>
+                                <option value="Fire" <?= $data['pokemon']['type'] == 'Fire' ? 'selected' : '' ?>>🔥 Fire</option>
+                                <option value="Electric" <?= $data['pokemon']['type'] == 'Electric' ? 'selected' : '' ?>>⚡ Electric</option>
+                                <option value="Normal" <?= $data['pokemon']['type'] == 'Normal' ? 'selected' : '' ?>>⭐ Normal</option>
+                                <option value="Poison" <?= $data['pokemon']['type'] == 'Poison' ? 'selected' : '' ?>>☠️ Poison</option>
+                                <option value="Ghost" <?= $data['pokemon']['type'] == 'Ghost' ? 'selected' : '' ?>>👻 Ghost</option>
+                                <option value="Dragon" <?= $data['pokemon']['type'] == 'Dragon' ? 'selected' : '' ?>>🐉 Dragon</option>
+                                <option value="Rock" <?= $data['pokemon']['type'] == 'Rock' ? 'selected' : '' ?>>🪨 Rock</option>
+                                <option value="Fighting" <?= $data['pokemon']['type'] == 'Fighting' ? 'selected' : '' ?>>🥊 Fighting</option>
+                                <option value="Psychic" <?= $data['pokemon']['type'] == 'Psychic' ? 'selected' : '' ?>>🔮 Psychic</option>
+                                <option value="Ice" <?= $data['pokemon']['type'] == 'Ice' ? 'selected' : '' ?>>❄️ Ice</option>
+                            </select>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Entrenador</span>
+                            </label>
+                            <select name="trainer_id" class="select select-bordered">
+                                <option value="">Sin entrenador</option>
+                                <?php foreach($data['trainers'] as $trainer): ?>
+                                    <option value="<?= $trainer['id'] ?>" <?= $data['pokemon']['trainer_id'] == $trainer['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($trainer['name']) ?> (Lvl <?= $trainer['level'] ?>)
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Nombre del Pokemon</span>
-                        </label>
-                        <input type="text" name="name" value="<?= htmlspecialchars($data['pokemon']['name']) ?>" class="input input-bordered" required autofocus />
+
+                    <div class="divider">Estadísticas</div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">⚔️ Strength</span>
+                            </label>
+                            <input type="number" name="strength" value="<?= htmlspecialchars($data['pokemon']['strength']) ?>" min="1" max="1500" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">❤️ Stamina</span>
+                            </label>
+                            <input type="number" name="staming" value="<?= htmlspecialchars($data['pokemon']['staming']) ?>" min="1" max="500" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">⚡ Speed</span>
+                            </label>
+                            <input type="number" name="speed" value="<?= htmlspecialchars($data['pokemon']['speed']) ?>" min="1" max="200" class="input input-bordered" required />
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">🎯 Accuracy</span>
+                            </label>
+                            <input type="number" name="accuracy" value="<?= htmlspecialchars($data['pokemon']['accuracy']) ?>" min="1" max="250" class="input input-bordered" required />
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">Tipo</span>
-                        </label>
-                        <select name="type" class="select select-bordered" required>
-                            <option disabled>Selecciona un tipo</option>
-                            <option value="Water" <?= $data['pokemon']['type'] == 'Water' ? 'selected' : '' ?>>💧 Water</option>
-                            <option value="Grass" <?= $data['pokemon']['type'] == 'Grass' ? 'selected' : '' ?>>🌿 Grass</option>
-                            <option value="Fire" <?= $data['pokemon']['type'] == 'Fire' ? 'selected' : '' ?>>🔥 Fire</option>
-                            <option value="Electric" <?= $data['pokemon']['type'] == 'Electric' ? 'selected' : '' ?>>⚡ Electric</option>
-                            <option value="Normal" <?= $data['pokemon']['type'] == 'Normal' ? 'selected' : '' ?>>⭐ Normal</option>
-                            <option value="Poison" <?= $data['pokemon']['type'] == 'Poison' ? 'selected' : '' ?>>☠️ Poison</option>
-                            <option value="Ghost" <?= $data['pokemon']['type'] == 'Ghost' ? 'selected' : '' ?>>👻 Ghost</option>
-                            <option value="Dragon" <?= $data['pokemon']['type'] == 'Dragon' ? 'selected' : '' ?>>🐉 Dragon</option>
-                            <option value="Rock" <?= $data['pokemon']['type'] == 'Rock' ? 'selected' : '' ?>>🪨 Rock</option>
-                            <option value="Fighting" <?= $data['pokemon']['type'] == 'Fighting' ? 'selected' : '' ?>>🥊 Fighting</option>
-                            <option value="Psychic" <?= $data['pokemon']['type'] == 'Psychic' ? 'selected' : '' ?>>🔮 Psychic</option>
-                            <option value="Ice" <?= $data['pokemon']['type'] == 'Ice' ? 'selected' : '' ?>>❄️ Ice</option>
-                        </select>
-                    </div>
+
                     <div class="form-control mt-6">
                         <button type="submit" class="btn btn-warning">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">

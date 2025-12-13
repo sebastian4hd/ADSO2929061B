@@ -1,20 +1,20 @@
 "use strict";
 const output15 = document.getElementById('output15');
-const input = document.querySelector('input');
-function age(age) {
-    if (age < 5)
-        throw new Error('Eres demasiado pequeño');
+const inputPassword = document.querySelector('#password');
+function validatePassword(password) {
+    if (password.length < 8)
+        throw new Error('La contraseña es muy corta');
     if (output15) {
-        output15.innerHTML = `<h2>Cumples el requisito de edad</h2>`;
+        output15.innerHTML = `<h2 class='text-green-500'>Contraseña válida</h2>`;
     }
 }
-if (input && output15) {
-    input.addEventListener('input', e => {
+if (inputPassword && output15) {
+    inputPassword.addEventListener('input', e => {
         try {
-            age(Number(input.value));
+            validatePassword(inputPassword.value);
         }
         catch (error) {
-            output15.innerHTML = `<h2 class='text-red-400 text-sm'>No cumples la edad requerida</h2>`;
+            output15.innerHTML = `<h2 class='text-red-400 text-sm'>La contraseña debe tener al menos 8 caracteres</h2>`;
         }
     });
 }

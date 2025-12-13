@@ -11,7 +11,7 @@
 <body>
     <div class="hero bg-base-200 min-h-screen">
         <div class="hero-content text-center">
-            <div class="max-w-md">
+            <div class="max-w-6xl">
                 <h1 class="text-5xl font-bold">MVC Pokemon</h1>
                 <h3 class="mb-10">Model View Controller</h3>
 
@@ -22,15 +22,15 @@
                     Add Pokemon
                 </a>
 
-                <div class="overflow-x-auto h-96 w-96">
-                    <table class="table table-xs table-pin-rows table-pin-cols">
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <td>Name</td>
-                                <td>Type</td>
-                                <td>Actions</td>
-                                <th></th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Trainer</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,6 +56,15 @@
                                     <span class="badge <?= $badgeClass ?>"><?= htmlspecialchars($pokemon['type']) ?></span>
                                 </td>
                                 <td>
+                                    <?php if ($pokemon['trainer_name']): ?>
+                                        <span class="badge badge-outline">
+                                            <?= htmlspecialchars($pokemon['trainer_name']) ?>
+                                        </span>
+                                    <?php else: ?>
+                                        <span class="text-gray-400 text-xs">Sin entrenador</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
                                     <a href="<?= $data['url'] ?>show/<?= $pokemon['id'] ?>" class="btn btn-xs btn-info" title="Ver detalles">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 256 256">
                                             <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
@@ -77,11 +86,6 @@
                         </tbody>
                     </table>
                 </div>
-
-                <p class="py-6">
-                    Sistema completo de gestión de Pokemones con URLs amigables
-                </p>
-                <a href="<?= $data['url'] ?>" class="btn btn-primary">Recargar Lista</a>
             </div>
         </div>
     </div>

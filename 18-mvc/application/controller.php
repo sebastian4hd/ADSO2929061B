@@ -9,7 +9,6 @@ class Controller {
         $this->model = new Model;
         $this->base_url = '/18-mvc/';
 
-        // Redirigir según la acción
         switch($action) {
             case 'add':
             case 'crear':
@@ -46,13 +45,11 @@ class Controller {
         }
     }
 
-    // Función helper para redireccionar
     private function redirect($path = '') {
         header('Location: ' . $this->base_url . $path);
         exit;
     }
 
-    // Mostrar lista de pokemones
     public function index() {
         $pokemons = $this->model->listPokemons();
         $data = [
@@ -62,26 +59,34 @@ class Controller {
         $this->load->view('welcome.php', $data);
     }
 
-    // Mostrar formulario de agregar
     public function add() {
-        $data = ['url' => $this->base_url];
+        $trainers = $this->model->listTrainers();
+        $data = [
+            'url' => $this->base_url,
+            'trainers' => $trainers
+        ];
         $this->load->view('add.php', $data);
     }
 
-    // Guardar nuevo pokemon
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = $_POST['name'];
-            $type = $_POST['type'];
+            $data = [
+                'name' => $_POST['name'],
+                'type' => $_POST['type'],
+                'trainer_id' => $_POST['trainer_id'] ?? null,
+                'strength' => $_POST['strength'] ?? 100,
+                'staming' => $_POST['staming'] ?? 100,
+                'speed' => $_POST['speed'] ?? 50,
+                'accuracy' => $_POST['accuracy'] ?? 50
+            ];
             
-            $this->model->createPokemon($name, $type);
-            $_SESSION['message'] = $name . ' ha sido agregado exitosamente';
+            $this->model->createPokemon($data);
+            $_SESSION['message'] = $data['name'] . ' ha sido agregado exitosamente';
             $_SESSION['message_type'] = 'success';
             $this->redirect();
         }
     }
 
-    // Mostrar detalles de un pokemon
     public function show($id) {
         if (!$id) {
             $this->redirect();
@@ -100,7 +105,6 @@ class Controller {
         $this->load->view('show.php', $data);
     }
 
-    // Mostrar formulario de editar
     public function edit($id) {
         if (!$id) {
             $this->redirect();
@@ -112,31 +116,38 @@ class Controller {
             $this->redirect();
         }
         
+        $trainers = $this->model->listTrainers();
         $data = [
             'pokemon' => $pokemon,
+            'trainers' => $trainers,
             'url' => $this->base_url
         ];
         $this->load->view('edit.php', $data);
     }
 
-    // Actualizar pokemon
     public function update($id) {
         if (!$id) {
             $this->redirect();
         }
         
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $name = $_POST['name'];
-            $type = $_POST['type'];
+            $data = [
+                'name' => $_POST['name'],
+                'type' => $_POST['type'],
+                'trainer_id' => $_POST['trainer_id'] ?? null,
+                'strength' => $_POST['strength'] ?? 100,
+                'staming' => $_POST['staming'] ?? 100,
+                'speed' => $_POST['speed'] ?? 50,
+                'accuracy' => $_POST['accuracy'] ?? 50
+            ];
             
-            $this->model->updatePokemon($id, $name, $type);
-            $_SESSION['message'] = $name . ' ha sido actualizado exitosamente';
+            $this->model->updatePokemon($id, $data);
+            $_SESSION['message'] = $data['name'] . ' ha sido actualizado exitosamente';
             $_SESSION['message_type'] = 'success';
             $this->redirect();
         }
     }
 
-    // Mostrar confirmación de eliminar
     public function delete($id) {
         if (!$id) {
             $this->redirect();
@@ -155,7 +166,6 @@ class Controller {
         $this->load->view('delete.php', $data);
     }
 
-    // Eliminar pokemon (acción real)
     public function destroy($id) {
         if (!$id) {
             $this->redirect();

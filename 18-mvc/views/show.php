@@ -14,59 +14,119 @@
                 <h1 class="text-5xl font-bold">Detalles del Pokemon</h1>
                 <p class="py-2">Información completa de <?= htmlspecialchars($data['pokemon']['name']) ?></p>
             </div>
-            <div class="card bg-base-100 w-full max-w-sm shadow-2xl">
+            <div class="card bg-base-100 w-full max-w-lg shadow-2xl">
                 <div class="card-body">
                     <div class="space-y-4">
-                        <div>
-                            <label class="label">
-                                <span class="label-text font-bold">ID:</span>
-                            </label>
-                            <div class="text-lg"><?= htmlspecialchars($data['pokemon']['id']) ?></div>
-                        </div>
-                        
-                        <div>
-                            <label class="label">
-                                <span class="label-text font-bold">Nombre:</span>
-                            </label>
-                            <div class="text-lg"><?= htmlspecialchars($data['pokemon']['name']) ?></div>
-                        </div>
-                        
-                        <div>
-                            <label class="label">
-                                <span class="label-text font-bold">Tipo:</span>
-                            </label>
+                        <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <?php 
-                                $typeColors = [
-                                    'Water' => 'badge-info',
-                                    'Grass' => 'badge-success',
-                                    'Fire' => 'badge-error',
-                                    'Electric' => 'badge-warning',
-                                    'Normal' => 'badge-secondary',
-                                    'Poison' => 'badge-primary',
-                                    'Ghost' => 'badge-accent',
-                                    'Dragon' => 'badge-secondary',
-                                    'Rock' => 'badge-neutral'
-                                ];
-                                $badgeClass = $typeColors[$data['pokemon']['type']] ?? 'badge-ghost';
-                                
-                                $typeEmojis = [
-                                    'Water' => '💧',
-                                    'Grass' => '🌿',
-                                    'Fire' => '🔥',
-                                    'Electric' => '⚡',
-                                    'Normal' => '⭐',
-                                    'Poison' => '☠️',
-                                    'Ghost' => '👻',
-                                    'Dragon' => '🐉',
-                                    'Rock' => '🪨'
-                                ];
-                                $emoji = $typeEmojis[$data['pokemon']['type']] ?? '❓';
-                                ?>
-                                <span class="badge <?= $badgeClass ?> badge-lg">
-                                    <?= $emoji ?> <?= htmlspecialchars($data['pokemon']['type']) ?>
-                                </span>
+                                <label class="label">
+                                    <span class="label-text font-bold">ID:</span>
+                                </label>
+                                <div class="text-lg"><?= htmlspecialchars($data['pokemon']['id']) ?></div>
                             </div>
+                            
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-bold">Nombre:</span>
+                                </label>
+                                <div class="text-lg"><?= htmlspecialchars($data['pokemon']['name']) ?></div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-bold">Tipo:</span>
+                                </label>
+                                <div>
+                                    <?php 
+                                    $typeColors = [
+                                        'Water' => 'badge-info',
+                                        'Grass' => 'badge-success',
+                                        'Fire' => 'badge-error',
+                                        'Electric' => 'badge-warning',
+                                        'Normal' => 'badge-secondary',
+                                        'Poison' => 'badge-primary',
+                                        'Ghost' => 'badge-accent',
+                                        'Dragon' => 'badge-secondary',
+                                        'Rock' => 'badge-neutral'
+                                    ];
+                                    $badgeClass = $typeColors[$data['pokemon']['type']] ?? 'badge-ghost';
+                                    
+                                    $typeEmojis = [
+                                        'Water' => '💧',
+                                        'Grass' => '🌿',
+                                        'Fire' => '🔥',
+                                        'Electric' => '⚡',
+                                        'Normal' => '⭐',
+                                        'Poison' => '☠️',
+                                        'Ghost' => '👻',
+                                        'Dragon' => '🐉',
+                                        'Rock' => '🪨'
+                                    ];
+                                    $emoji = $typeEmojis[$data['pokemon']['type']] ?? '❓';
+                                    ?>
+                                    <span class="badge <?= $badgeClass ?> badge-lg">
+                                        <?= $emoji ?> <?= htmlspecialchars($data['pokemon']['type']) ?>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="label">
+                                    <span class="label-text font-bold">Entrenador:</span>
+                                </label>
+                                <div>
+                                    <?php if ($data['pokemon']['trainer_name']): ?>
+                                        <a href="<?= $data['url'] ?>trainer/<?= $data['pokemon']['trainer_id'] ?>" class="badge badge-outline badge-lg">
+                                            <?= htmlspecialchars($data['pokemon']['trainer_name']) ?>
+                                        </a>
+                                        <div class="text-xs text-gray-500 mt-1">Nivel: <?= htmlspecialchars($data['pokemon']['trainer_level']) ?></div>
+                                    <?php else: ?>
+                                        <span class="text-gray-400">Sin entrenador</span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="divider">Estadísticas</div>
+
+                    <div class="space-y-3">
+                        <!-- Strength -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold">⚔️ Strength</span>
+                                <span class="text-sm font-bold"><?= htmlspecialchars($data['pokemon']['strength']) ?>/1500</span>
+                            </div>
+                            <progress class="progress progress-error w-full" value="<?= htmlspecialchars($data['pokemon']['strength']) ?>" max="1500"></progress>
+                        </div>
+
+                        <!-- Stamina -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold">❤️ Stamina</span>
+                                <span class="text-sm font-bold"><?= htmlspecialchars($data['pokemon']['staming']) ?>/320</span>
+                            </div>
+                            <progress class="progress progress-success w-full" value="<?= htmlspecialchars($data['pokemon']['staming']) ?>" max="320"></progress>
+                        </div>
+
+                        <!-- Speed -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold">⚡ Speed</span>
+                                <span class="text-sm font-bold"><?= htmlspecialchars($data['pokemon']['speed']) ?>/120</span>
+                            </div>
+                            <progress class="progress progress-warning w-full" value="<?= htmlspecialchars($data['pokemon']['speed']) ?>" max="120"></progress>
+                        </div>
+
+                        <!-- Accuracy -->
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-bold">🎯 Accuracy</span>
+                                <span class="text-sm font-bold"><?= htmlspecialchars($data['pokemon']['accuracy']) ?>/232</span>
+                            </div>
+                            <progress class="progress progress-info w-full" value="<?= htmlspecialchars($data['pokemon']['accuracy']) ?>" max="232"></progress>
                         </div>
                     </div>
                     

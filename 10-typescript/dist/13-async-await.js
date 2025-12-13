@@ -9,20 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const output13 = document.getElementById('output13');
-function getPerson() {
+function getPost() {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield fetch("https://jsonplaceholder.typicode.com/users/1");
+        const res = yield fetch("https://jsonplaceholder.typicode.com/posts/3");
         const data = yield res.json();
         return data;
     });
 }
 if (output13) {
-    getPerson().then(u => {
-        let user = u;
-        console.log(u);
-        for (let k in user) {
+    getPost().then(post => {
+        console.log(post);
+        for (let k in post) {
             let key = k;
-            output13.innerHTML += `<li>${user[key]}</li>`;
+            output13.innerHTML += `<li class="border m-auto px-5 my-1 rounded-sm">${key}: ${post[key]}</li>`;
         }
     });
 }
