@@ -1,4 +1,4 @@
-<x-guest-layout>
+{{-- <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -44,4 +44,25 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+</x-guest-layout>  --}}
+
+@extends('layouts.app')
+
+@section('title', 'larapets: login')
+    
+@section('content')
+    <section class="bg-[#0006] p-4 outline rounded-md w-80 flex flex-col  justify-center items-center">
+        <h1 class="text-4x1 flex border b-2 pb-2 gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentcolor" viewBox="0 0 256 256"><path d="M208,80H96V56a32,32,0,0,1,32-32c15.37,0,29.2,11,32.16,25.59a8,8,0,0,0,15.68-3.18C171.32,24.15,151.2,8,128,8A48.05,48.05,0,0,0,80,56V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80Zm0,128H48V96H208V208Zm-68-56a12,12,0,1,1-12-12A12,12,0,0,1,140,152Z"></path></svg>
+            Login
+        </h1>
+        <form class="flex flex-col gap-4" action="{{route('login')}}" method="POST">
+            @csrf
+            <label class="label">Email</label>
+            <input type="text" name="" id="">
+            <button class="btn btn-outline w-full">
+                Login
+            </button>
+        </form>
+    </section>
+@endsection
