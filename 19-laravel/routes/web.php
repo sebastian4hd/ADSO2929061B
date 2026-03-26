@@ -20,6 +20,11 @@ Route::middleware('auth')->group(function () {
         'pets' => PetController::class,
         'adoptions' => AdoptionController::class,
     ]);
+    //Exports PDF
+    Route::get('export/users/pdf', [UserController::class, 'pdf']);
+
+    // Exports Excel
+    Route::get('export/users/excel', [UserController::class, 'excel']);
 });
 
 require __DIR__.'/auth.php';
