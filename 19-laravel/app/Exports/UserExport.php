@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class UsersExport implements FromView, WithColumnWidths, WithStyles
+class UserExport implements FromView, WithColumnWidths, WithStyles
 {
     
 public function view(): View

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\pdf;
 // Excel
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\UsersExport;
+use App\Exports\UserExport;
+use App\Imports\UsersImport;
 
 class UserController extends Controller
 {
@@ -161,5 +162,22 @@ class UserController extends Controller
      */
     public function excel() {
        return \Excel::download(new UserExport, 'allusers.xlsx');
+    }
+
+      /**
+     * Import a Excel file
+     */
+    public function import(Request $request) {
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
+        return redirect()->back()->with('message', 'Users imported successfully!');
+    }
+
+      /**
+     * Import a Excel file
+     */
+    public function search(Request $request) {
+        $users = User::names($request->q)->orderBy('id', 'desc')->paginate(12);
+        return view('users.search')->with('users', $users);
     }
 }
