@@ -20,7 +20,7 @@ class Pet extends Model
         'kind',
         'weight',
         'age',
-        'breed',
+        'bread',
         'location',
         'description',
         'active',
@@ -33,4 +33,10 @@ class Pet extends Model
         return $this->hasOne(Adoption::class);
     }
 
+    // Search By Scope
+    public function scopenames($pets, $q) {
+        if(trim($q)) {
+            $pets->where('name', 'LIKE', "%$q%")->orWhere('kind', 'LIKE', "%$q%");
+        }
+    }
 }

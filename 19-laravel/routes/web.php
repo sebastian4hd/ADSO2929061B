@@ -3,8 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\petController;
+use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionController;
+use App\Models\User;
+use Carbon\Carbon;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,6 +33,18 @@ Route::middleware('auth')->group(function () {
     
     // Search Users
     Route::post('search/users', [UserController::class, 'search']);
+
+    //Exports Pets PDF
+    Route::get('export/pets/pdf', [PetController::class, 'pdf']);
+
+    // Exports Pets Excel
+    Route::get('export/pets/excel', [PetController::class, 'excel']);
+
+    // Import Pets Excel
+    Route::post('import/pets', [PetController::class, 'import']);
+    
+    // Search Pets
+    Route::post('search/pets', [PetController::class, 'search']);
 });
 
 
@@ -114,4 +128,40 @@ Route::get('challenge', function () {
 Route::get('getall/pets', function(){
     $pets = App\Models\Pet::all();
     return view('getallpets')->with('pets', $pets);
+});
+
+Route::get('challenge-pets', function () {
+    if (!file_exists(public_path('images'))) {
+        mkdir(public_path('images'), 0777, true);
+    }
+    
+    if (\App\Models\Pet::count() < 20) {
+        \App\Models\Pet::factory()->count(20 - \App\Models\Pet::count())->create();
+    }
+    
+    $pets = \App\Models\Pet::take(25)->get();
+
+    foreach ($pets as $pet) {
+        /** @var \App\Models\Pet $pet */
+        if ($pet->image == 'no-image.png' || !file_exists(public_path('images/' . $pet->image))) {
+            try {
+                $animal = strtolower($pet->kind);
+                if (!in_array($animal, ['dog', 'cat', 'bird', 'pig'])) {
+                    $animal = 'animal';
+                }
+                
+                $url = "https://loremflickr.com/320/240/{$animal}?lock=" . rand(1, 9999);
+                $imageName = time() . '-' . rand(1000, 9999) . '.jpg';
+                $imagePath = public_path('images/' . $imageName);
+                
+                file_put_contents($imagePath, file_get_contents($url));
+                
+                $pet->image = $imageName;
+                $pet->save();
+            } catch (\Exception $e) {
+            }
+        }
+    }
+    
+    return redirect('pets')->with('message', 'Mascotas de prueba (Challenge Pets) con imágenes generadas exitosamente!');
 });

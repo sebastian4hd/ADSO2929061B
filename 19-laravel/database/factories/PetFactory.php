@@ -45,7 +45,7 @@ class PetFactory extends Factory
         'kind'        => $kind,
         'weight'      => fake()->numerify('#.#'),
         'age'         => fake()->numberBetween(1, 15),
-        'breed'       => $breed,
+        'bread'       => $breed,
         'location'    => fake()->city,
         'description' => fake()->sentence(5),
         ];

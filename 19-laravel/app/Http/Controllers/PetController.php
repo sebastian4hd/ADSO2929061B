@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Pet;
 use Illuminate\Http\Request;
+// PDF
+use Barryvdh\DomPDF\Facade\Pdf;
+// Excel
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PetsExport;
+use App\Imports\PetsImport;
 
 class PetController extends Controller
 {
@@ -12,7 +18,8 @@ class PetController extends Controller
      */
     public function index()
     {
-        //
+        $pets = Pet::orderBy('id', 'desc')->paginate(12);
+        return view('pets.index')->with('pets', $pets);
     }
 
     /**
@@ -20,7 +27,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return view('pets.create');
     }
 
     /**
@@ -28,7 +35,37 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $validation = $request->validate([
+            'name' => ['required', 'string'],
+            'image' => ['required', 'image'],
+            'kind' => ['required', 'string'],
+            'weight' => ['required', 'numeric'],
+            'age' => ['required', 'numeric'],
+            'bread' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'description' => ['required', 'string'],
+        ]);
+
+        if($validation) {
+            if($request->hasFile('image')) {
+                $image = time().'.'.$request->image->extension();
+                $request->image->move(public_path('images'), $image);
+            }
+        }
+
+        $pet = new Pet;
+        $pet->name = $request->name;
+        $pet->image = $image ?? 'no-image.png';
+        $pet->kind   = $request->kind;
+        $pet->weight = $request->weight;
+        $pet->age = $request->age;
+        $pet->bread = $request->bread;
+        $pet->location = $request->location;
+        $pet->description = $request->description;
+
+        if($pet->save()) {
+            return redirect('pets')->with('message','The Pet: '.$pet->name.' was added successful!');
+        }
     }
 
     /**
@@ -36,7 +73,7 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        //
+        return view('pets.show')->with('pet', $pet);
     }
 
     /**
@@ -44,7 +81,7 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        //
+        return view('pets.edit')->with('pet', $pet);
     }
 
     /**
@@ -52,7 +89,41 @@ class PetController extends Controller
      */
     public function update(Request $request, Pet $pet)
     {
-        //
+         $validation = $request->validate([
+            'name' => ['required', 'string'],
+            'kind' => ['required', 'string'],
+            'weight' => ['required', 'numeric'],
+            'age' => ['required', 'numeric'],
+            'bread' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'description' => ['required', 'string'],
+        ]);
+
+        if($validation) {
+            if($request->hasFile('image')) {
+                $image = time().'.'.$request->image->extension();
+                $request->image->move(public_path('images'), $image);
+                // Delete old image
+                if($request->originimage != 'no-image.png' && file_exists(public_path('images/'.$pet->image))) {
+                    unlink(public_path('images/'.$pet->image));
+                }
+            } else {
+                $image = $request->originimage ?? $pet->image;
+            }
+        }
+
+        $pet->name = $request->name;
+        $pet->image = $image;
+        $pet->kind   = $request->kind;
+        $pet->weight = $request->weight;
+        $pet->age = $request->age;
+        $pet->bread = $request->bread;
+        $pet->location = $request->location;
+        $pet->description = $request->description;
+
+        if($pet->save()) {
+            return redirect('pets')->with('message','The Pet: '.$pet->name.' was edited successful!');
+        }
     }
 
     /**
@@ -60,6 +131,46 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
-        //
+        // Delete old image
+        if($pet->image != 'no-image.png' && file_exists(public_path('images/'.$pet->image))) {
+            unlink(public_path('images/'.$pet->image));
+        }
+
+        if($pet->delete()) {
+            return redirect('pets')->with('message','The Pet: '.$pet->name.' was deleted successful!');
+        }
+    }
+
+    /**
+     * Generate a PDF file
+     */
+    public function pdf() {
+        $pets = Pet::all();
+        $pdf = Pdf::loadView('pets.pdf', compact('pets'));
+        return $pdf->download('allpets.pdf');
+    }
+
+    /**
+     * Generate a Excel file
+     */
+    public function excel() {
+       return Excel::download(new PetsExport, 'allpets.xlsx');
+    }
+
+    /**
+     * Import a Excel file
+     */
+    public function import(Request $request) {
+        $file = $request->file('file');
+        Excel::import(new PetsImport, $file);
+        return redirect()->back()->with('message', 'Pets imported successfully!');
+    }
+
+    /**
+     * Search Pets
+     */
+    public function search(Request $request) {
+        $pets = Pet::names($request->q)->orderBy('id', 'desc')->paginate(12);
+        return view('pets.search')->with('pets', $pets);
     }
 }
