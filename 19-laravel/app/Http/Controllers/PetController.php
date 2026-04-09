@@ -9,7 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 // Excel
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PetsExport;
-use App\Imports\PetsImport;
+
 
 class PetController extends Controller
 {
@@ -157,14 +157,6 @@ class PetController extends Controller
        return Excel::download(new PetsExport, 'allpets.xlsx');
     }
 
-    /**
-     * Import a Excel file
-     */
-    public function import(Request $request) {
-        $file = $request->file('file');
-        Excel::import(new PetsImport, $file);
-        return redirect()->back()->with('message', 'Pets imported successfully!');
-    }
 
     /**
      * Search Pets

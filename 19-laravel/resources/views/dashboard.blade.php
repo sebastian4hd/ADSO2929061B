@@ -18,8 +18,8 @@
         <div class="card text-white bg-[#0006] w-96 shadow-sm">
                 <figure class="h-[240px]">
                 <img
-                    class="object-cover mt-2"
-                    src="{{ asset('images/user.png') }}" />
+                    class="object-cover mt-6"
+                    src="{{ asset('images/module-users.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -84,8 +84,8 @@
         <div class="card text-white bg-[#0006] w-96 shadow-sm">
                 <figure class="h-[240px]">
                 <img
-                    class="object-cover mt-2 "
-                    src="{{ asset('images/pet.png') }}" />
+                    class="object-cover mt-10"
+                    src="{{ asset('images/module-pets.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -151,8 +151,8 @@
         <div class="card text-white bg-[#0006] w-96 shadow-sm">
                 <figure class="h-[240px]">
                 <img
-                    class="object-cover mt-4"
-                    src="{{ asset('images/adoption.png') }}" />
+                    class="object-cover mt-6"
+                    src="{{ asset('images/module-adoption.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
