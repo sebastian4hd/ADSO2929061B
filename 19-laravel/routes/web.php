@@ -91,8 +91,6 @@ Route::get('challenge', function () {
         }
     }
     
-
-    // Tabla sin estilos (lo más simple posible). Solo la fila superior en rojo.
     $output = "<h2>Usuarios Challenge</h2>";
     $output .= "<table>";
     $output .= "<tr bgcolor='#d9534f'>";
