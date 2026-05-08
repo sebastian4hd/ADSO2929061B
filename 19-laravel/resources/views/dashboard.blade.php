@@ -222,7 +222,7 @@
                 <figure class="h-[270px]">
                 <img
                     class="object-cover mt-4"
-                    src="{{ asset('images/user.png') }}" />
+                    src="{{ asset('images/module-users.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -246,7 +246,7 @@
                 <figure class="h-[270px]">
                 <img
                     class="object-cover mt-4"
-                    src="{{ asset('images/pet.png') }}" />
+                    src="{{ asset('images/module-pets.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -271,7 +271,7 @@
                 <figure class="h-[270px]">
                 <img
                     class="object-cover mt-4"
-                    src="{{ asset('images/adoption.png') }}" />
+                    src="{{ asset('images/module-adoption.png') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -293,4 +293,28 @@
         @endif
 
     </div>
+@endsection
+
+@section('js')
+    <script>
+        @if (session('message'))
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "{{ session('message') }}",
+                showConfirmButton: false,
+                timer: 4500
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "{{ session('error') }}",
+                showConfirmButton: false,
+                timer: 4500
+            });
+        @endif
+    </script>
 @endsection

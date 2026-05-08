@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\CustomerController;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -17,33 +18,62 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resources([
-        'users' => UserController::class,
-        'pets' => PetController::class,
-        'adoptions' => AdoptionController::class,
-    ]);
-    //Exports PDF
-    Route::get('export/users/pdf', [UserController::class, 'pdf']);
+    // Rutas protegidas por el AdminMiddleware (Exclusivo para administradores)
+    Route::get('myadoptions', [AdoptionController::class, 'myadoptions']);
 
-    // Exports Excel
-    Route::get('export/users/excel', [UserController::class, 'excel']);
+    // Rutas protegidas por el AdminMiddleware (Exclusivo para administradores)
+    Route::middleware(\App\Http\Middleware\AdminMiddleware::class)->group(function () {
+        Route::resources([
+            'users' => UserController::class,
+            'adoptions' => AdoptionController::class,
+        ]);
+        Route::resource('pets', PetController::class)->except(['index', 'show']);
 
-    // Import Excel
-    Route::post('import/users', [UserController::class, 'import']);
-    
-    // Search Users
-    Route::post('search/users', [UserController::class, 'search']);
+        // Exports PDF
+        Route::get('export/users/pdf', [UserController::class, 'pdf']);
 
-    //Exports Pets PDF
-    Route::get('export/pets/pdf', [PetController::class, 'pdf']);
+        // Exports Excel
+        Route::get('export/users/excel', [UserController::class, 'excel']);
 
-    // Exports Pets Excel
-    Route::get('export/pets/excel', [PetController::class, 'excel']);
+        // Import Excel
+        Route::post('import/users', [UserController::class, 'import']);
+        
+        // Search Users
+        Route::post('search/users', [UserController::class, 'search']);
 
+        //Exports Pets PDF
+        Route::get('export/pets/pdf', [PetController::class, 'pdf']);
 
-    
-    // Search Pets
+        // Exports Pets Excel
+        Route::get('export/pets/excel', [PetController::class, 'excel']);
+
+        // Exports Adoptions PDF
+        Route::get('export/adoptions/pdf', [AdoptionController::class, 'pdf']);
+
+        // Exports Adoptions Excel
+        Route::get('export/adoptions/excel', [AdoptionController::class, 'excel']);
+
+        // Search Adoptions
+        Route::post('search/adoptions', [AdoptionController::class, 'search']);
+    });
+
+    // Solo lectura y búsqueda de mascotas para todos los usuarios autenticados
+    Route::resource('pets', PetController::class)->only(['index', 'show']);
     Route::post('search/pets', [PetController::class, 'search']);
+
+    Route::get('myprofile/', [CustomerController::class, 'myprofile']);
+    Route::put('myprofile/{id}', [CustomerController::class, 'updateprofile']);
+
+    Route::get('myadoptions/', [CustomerController::class, 'myadoptions']);
+    Route::get('myadoption/{id}', [CustomerController::class, 'showadoption']);
+    
+    Route::get('makeadoption', [CustomerController::class, 'makeadoption']);
+    Route::post('makeadoption', [CustomerController::class, 'storeAdoption']);
+    Route::post('search/adoptionpets', [CustomerController::class, 'search']);
+    Route::post('search/myadoptions', [CustomerController::class, 'searchMyAdoptions']);
+    Route::get('showpet/{id}', [CustomerController::class, 'showpet']);
+    Route::get('listpets', [CustomerController::class, 'listpets']);
+
 });
 
 

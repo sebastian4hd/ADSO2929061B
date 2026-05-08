@@ -18,7 +18,7 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::orderBy('id', 'desc')->paginate(12);
+        $pets = Pet::with('adoptions')->orderBy('id', 'desc')->paginate(12);
         return view('pets.index')->with('pets', $pets);
     }
 
@@ -162,7 +162,7 @@ class PetController extends Controller
      * Search Pets
      */
     public function search(Request $request) {
-        $pets = Pet::names($request->q)->orderBy('id', 'desc')->paginate(12);
+        $pets = Pet::with('adoptions')->names($request->q)->orderBy('id', 'desc')->paginate(12);
         return view('pets.search')->with('pets', $pets);
     }
 }

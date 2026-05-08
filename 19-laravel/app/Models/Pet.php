@@ -9,7 +9,7 @@ class Pet extends Model
 {
 
     use HasFactory;
-        /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
@@ -29,14 +29,27 @@ class Pet extends Model
 
     //RelationShip:
     //Pet has one Adoptions 
-    public function adoptions() {
+    public function adoptions()
+    {
         return $this->hasOne(Adoption::class);
     }
 
     // Search By Scope
-    public function scopenames($pets, $q) {
-        if(trim($q)) {
+    public function scopenames($pets, $q)
+    {
+        if (trim($q)) {
             $pets->where('name', 'LIKE', "%$q%")->orWhere('kind', 'LIKE', "%$q%");
+        }
+    }
+
+    //Scope Kind
+    public function scopekind($pets, $q)
+    {
+        if (trim($q)) {
+            $pets->where(function($query) use ($q) {
+                $query->where("name", "LIKE", "%$q%")
+                      ->orWhere('kind', 'LIKE', "%$q%");
+            })->whereDoesntHave('adoptions');
         }
     }
 }

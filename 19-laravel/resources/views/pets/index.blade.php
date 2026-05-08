@@ -82,7 +82,7 @@
                         <td class="hidden md:table-cell">{{ $pet->kind }}</td>
                         <td class="hidden md:table-cell">{{ $pet->bread }}</td>
                         <td class="hidden md:table-cell">
-                            @if ($pet->adopted)
+                            @if ($pet->adoptions)
                                 <span class="badge badge-outline badge-success">Adopted</span>
                             @else
                                 <span class="badge badge-outline badge-info">Available</span>
@@ -138,6 +138,15 @@
                 position: "top-end",
                 icon: "success",
                 title: "{{ session('message') }}",
+                showConfirmButton: false,
+                timer: 4500
+            });
+        @endif
+        @if (session('error'))
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "{{ session('error') }}",
                 showConfirmButton: false,
                 timer: 4500
             });
