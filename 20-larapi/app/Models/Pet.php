@@ -18,4 +18,5 @@ class Pet extends Model
         'active',
         'adopted'
     ];
-}
+    
+    }
