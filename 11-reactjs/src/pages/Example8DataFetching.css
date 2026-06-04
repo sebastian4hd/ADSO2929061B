@@ -1,0 +1,141 @@
+.example8-container {
+  padding-bottom: 30px;
+}
+
+.example8-header {
+  margin-top: 0;
+}
+
+.example8-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.example8-list-section {
+  flex: 1;
+  min-width: 280px;
+  max-width: 720px;
+}
+
+.example8-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.example8-pagination h3,
+.example8-pagination p {
+  margin: 0;
+}
+
+.example8-button-group button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2d8cf0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.example8-button-group button:disabled {
+  background-color: #9cbfee;
+  cursor: not-allowed;
+}
+
+.example8-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.example8-card {
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  min-height: 100px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: all 160ms ease;
+}
+
+.example8-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.example8-card.selected {
+  border-color: #2d8cf0;
+  background-color: #e7f3ff;
+}
+
+.example8-card strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.example8-details-panel {
+  flex: 0 0 320px;
+  min-width: 280px;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #0f274a;
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.example8-details-panel h3 {
+  margin-top: 0;
+}
+
+.example8-details-panel img {
+  width: 100%;
+  max-width: 180px;
+  height: 180px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.example8-details-panel p {
+  margin: 6px 0;
+}
+
+.example8-details-panel .example8-details-list {
+  display: grid;
+  gap: 8px;
+}
+
+@media (max-width: 860px) {
+  .example8-grid {
+    flex-direction: column;
+  }
+
+  .example8-details-panel {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .example8-pagination {
+    justify-content: center;
+  }
+
+  .example8-button-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .example8-card {
+    min-height: auto;
+  }
+}
