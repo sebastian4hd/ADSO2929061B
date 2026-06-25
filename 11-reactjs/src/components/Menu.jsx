@@ -11,7 +11,7 @@ const examples = [
     { id: 5, title: '05- Event Handling',      path: '/example5', emoji: '🖱️', desc: 'Interactions' },
     { id: 6, title: '06- Conditional & Lists', path: '/example6', emoji: '📋', desc: 'Conditional rendering' },
     { id: 7, title: '07- Routing',             path: '/example7', emoji: '🗺️', desc: 'Navigation' },
-    { id: 8, title: '08- Data Fetching',       path: '/example8', emoji: '🌐', desc: 'API calls' },
+    { id: 8, title: '08- Data Fetching',       path: '/challenge', emoji: '🌐', desc: 'API calls' },
 ];
 
   return (

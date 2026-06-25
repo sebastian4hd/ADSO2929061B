@@ -24,6 +24,11 @@ function App() {
           <Route path="/example6" element={<Example6CondicionalListas />} />
           <Route path="/example7/*" element={<Example7Routing />} />
           <Route path="/challenge" element={<Challenge />} />
+          <Route path="/challenge/login" element={<Challenge />} />
+          <Route path="/challenge/add" element={<Challenge />} />
+          <Route path="/challenge/show/:id" element={<Challenge />} />
+          <Route path="/challenge/edit/:id" element={<Challenge />} />
+          <Route path="/example8" element={<Challenge />} />
         </Routes>
       </div>
     </BrowserRouter>
