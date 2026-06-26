@@ -8,6 +8,7 @@ import Example4StateHooks from './pages/Example4StateHooks';
 import Example5Eventos from './pages/Example5Events';
 import Example6CondicionalListas from './pages/Example6ConditionalLists';
 import Example7Routing from './pages/Example7Routing';
+import Example8DataFetching from './pages/Example8DataFetching';
 import Challenge from './pages/Challenge';
 
 function App() {
@@ -23,12 +24,12 @@ function App() {
           <Route path="/example5" element={<Example5Eventos />} />
           <Route path="/example6" element={<Example6CondicionalListas />} />
           <Route path="/example7/*" element={<Example7Routing />} />
+          <Route path="/example8" element={<Example8DataFetching />} />
           <Route path="/challenge" element={<Challenge />} />
           <Route path="/challenge/login" element={<Challenge />} />
           <Route path="/challenge/add" element={<Challenge />} />
           <Route path="/challenge/show/:id" element={<Challenge />} />
           <Route path="/challenge/edit/:id" element={<Challenge />} />
-          <Route path="/example8" element={<Challenge />} />
         </Routes>
       </div>
     </BrowserRouter>

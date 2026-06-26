@@ -2,17 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./Challenge.css";
+import loginDog from "../assets/images/login_dog.png";
+import noDog from "../assets/images/no-dog.jpg";
+import noCat from "../assets/images/no-cat.jpg";
+import noHorse from "../assets/images/no-horse.png";
+import noPig from "../assets/images/no-pig.jpg";
+import noVaca from "../assets/images/no-vaca.jpg";
+import noTiger from "../assets/images/no-tiger.jpg";
+import noTigerAlbino from "../assets/images/no-tiger-albino.jpg";
 
-const LOGIN_IMAGE = "/assets/images/login_dog.png";
+const LOGIN_IMAGE = loginDog;
 
 const IMAGE_MAP = {
-  "no-dog.jpg": "/assets/images/no-dog.jpg",
-  "no-cat.jpg": "/assets/images/no-cat.jpg",
-  "no-horse.png": "/assets/images/no-horse.png",
-  "no-pig.jpg": "/assets/images/no-pig.jpg",
-  "no-vaca.jpg": "/assets/images/no-vaca.jpg",
-  "no-tiger.jpg": "/assets/images/no-tiger.jpg",
-  "no-tiger-albino.jpg": "/assets/images/no-tiger-albino.jpg"
+  "no-dog.jpg": noDog,
+  "no-cat.jpg": noCat,
+  "no-horse.png": noHorse,
+  "no-pig.jpg": noPig,
+  "no-vaca.jpg": noVaca,
+  "no-tiger.jpg": noTiger,
+  "no-tiger-albino.jpg": noTigerAlbino
 };
 
 const getFallbackImage = (kind) => {
@@ -26,7 +34,7 @@ const getFallbackImage = (kind) => {
 };
 
 function Challenge() {
-  const [screen, setScreen] = useState("login"); // 'login', 'dashboard', 'details', 'add', 'edit'
+  const [screen, setScreen] = useState("login");
   const screenTitles = {
     login: "Login",
     dashboard: "Mis mascotas",
@@ -53,7 +61,7 @@ function Challenge() {
     weight: "",
     location: "",
     description: "",
-    image: "no-dog.jpg",
+    image: "",
     active: 1,
     adopted: 0,
   });
@@ -81,9 +89,20 @@ function Challenge() {
     }
   }, [location.pathname, params.id, pets.length]);
 
+  useEffect(() => {
+    const token = getToken();
+    if (screen === "dashboard" && token && pets.length === 0 && !isLoading) {
+      fetchPets(token);
+    }
+  }, [screen, pets.length]);
+
   const syncScreenWithLocation = () => {
     const path = location?.pathname || window.location.pathname;
     const token = getToken();
+    if (!token && !path.endsWith("/login")) {
+      navigate("/challenge/login");
+      return;
+    }
     if (path.endsWith("/login")) {
       if (token) {
         navigate("/challenge");
@@ -105,22 +124,6 @@ function Challenge() {
       : { "Content-Type": "application/json" };
   };
 
-  const getExtraInfo = (petId) => {
-    const stored = localStorage.getItem(`pet_extra_${petId}`);
-    if (stored) {
-      return JSON.parse(stored);
-    }
-    return {
-      birth_date: "12 Mayo de 2024",
-      color: "beige claro",
-      microchip: "1234567890"
-    };
-  };
-
-  const saveExtraInfo = (petId, info) => {
-    localStorage.setItem(`pet_extra_${petId}`, JSON.stringify(info));
-  };
-
   // Auth Handlers
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -137,11 +140,11 @@ function Challenge() {
         throw new Error(data.message || "Credenciales inválidas");
       }
       localStorage.setItem("token", data.token);
-      const fullName = data.user?.fullname || "Usuario";
+      const fullName = data.user?.name || "Usuario";
       localStorage.setItem("user_fullname", fullName);
       setUserFullName(fullName);
       navigate('/challenge');
-      fetchPets(data.token);
+      await fetchPets(data.token);
       Swal.fire({
         title: "¡Bienvenido!",
         text: `Hola, ${fullName}`,
@@ -203,8 +206,16 @@ function Challenge() {
     if (localBase64) return localBase64;
 
     const normalizedName = (imgName || "").trim();
+    if (!normalizedName && !petId) {
+      return null;
+    }
+
     if (normalizedName.startsWith("http") || normalizedName.startsWith("data:")) {
       return normalizedName;
+    }
+
+    if (normalizedName && IMAGE_MAP[normalizedName]) {
+      return IMAGE_MAP[normalizedName];
     }
 
     if (normalizedName) {
@@ -351,7 +362,6 @@ function Challenge() {
       if (!res.ok) throw new Error(data.message || "Error al eliminar la mascota");
 
       Swal.fire("¡Eliminado!", "La mascota ha sido eliminada.", "success");
-      localStorage.removeItem(`pet_extra_${petId}`);
       fetchPets();
       navigate('/challenge');
       setSelectedPet(null);
@@ -372,7 +382,7 @@ function Challenge() {
       weight: "",
       location: "",
       description: "",
-      image: "no-dog.jpg",
+      image: "",
       active: 1,
       adopted: 0
     });
@@ -381,7 +391,6 @@ function Challenge() {
 
   const openEditForm = (pet) => {
     setTempImageBase64("");
-    const extra = getExtraInfo(pet.id);
     setFormData({
       name: pet.name || "",
       kind: pet.kind || "dog",
@@ -573,11 +582,10 @@ function Challenge() {
 
             <form onSubmit={handleAddSubmit}>
               <div className="photo-uploader-card" onClick={triggerFilePicker}>
-                {tempImageBase64 || formData.image ? (
+                {tempImageBase64 ? (
                   <img
                     className="uploaded-preview-img"
-                    src={tempImageBase64 || getPetImageSrc(null, formData.image, formData.kind)}
-                    onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getFallbackImage(formData.kind); }}
+                    src={tempImageBase64}
                     alt="Preview"
                   />
                 ) : (
