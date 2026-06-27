@@ -3,30 +3,231 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 32px 16px;
+  font-family: "Segoe UI", system-ui, sans-serif;
   background: linear-gradient(180deg, #0e2b4e 0%, #071822 100%);
   color: #ffffff;
 }
 
 .example8-card {
-  max-width: 520px;
   width: 100%;
-  background: rgba(8, 20, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+  max-width: 1100px;
+  background: rgba(0, 0, 0, 0.57);
+  border: 1.5px solid rgba(114, 170, 194, 0.06);
+  border-radius: 18px;
+  padding: 28px 32px 32px;
+  position: relative;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.example8-card h1 {
-  margin-bottom: 18px;
-  font-size: 2rem;
+.example8-title {
+  margin: 0 0 2px 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #e2eef9;
 }
 
-.example8-card p {
-  margin-bottom: 14px;
-  line-height: 1.6;
-  color: #b8c7e0;
+.example8-description {
+  margin: 0 0 22px 6px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.example8-body {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.example8-list-panel {
+  flex: 0 0 600px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(26, 175, 238, 0.15);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  overflow: hidden;
+}
+
+.example8-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.example8-page-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.example8-page-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.example8-page-btn {
+  background: rgba(27, 172, 235, 0.77);
+  border: 1px solid rgba(205, 217, 223, 0.94);
+  color: #ffffff;
+  border-radius: 7px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.example8-page-btn.is-disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.example8-scroll-area {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.example8-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.example8-poke-btn {
+  border-radius: 9px;
+  padding: 12px 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: background 0.15s, transform 0.12s;
+  font-family: inherit;
+  background: rgb(255, 255, 255);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  color: #414141;
+}
+
+.example8-poke-btn:hover {
+  transform: translateY(-1px);
+}
+
+.example8-poke-btn.is-selected {
+  background: #1aafee;
+  border: 2px solid #1aafee;
+  color: #2e2e2e;
+}
+
+.example8-poke-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #525252;
+}
+
+.example8-poke-btn.is-selected .example8-poke-num {
+  color: rgba(41, 41, 41, 0.75);
+}
+
+.example8-poke-name {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+  line-height: 1.2;
+}
+
+.example8-msg {
+  text-align: center;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 28px 0;
+  margin: 0;
+}
+
+.example8-detail-panel {
+  flex: 1;
+  min-width: 0;
+}
+
+.example8-detail-title {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8ba0b4;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.example8-detail-box {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(26, 175, 238, 0.15);
+  border-radius: 14px;
+  padding: 20px 18px;
+  min-height: 480px;
+}
+
+.example8-detail-img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  display: block;
+  margin: 4px auto 10px;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+}
+
+.example8-detail-name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: capitalize;
+  color: #e2eef9;
+  margin: 0 0 12px;
+}
+
+.example8-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.example8-info-label {
+  color: #8ba0b4;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.example8-info-value {
+  color: #c8dff0;
+  text-transform: capitalize;
+  text-align: right;
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.example8-badges {
+  display: flex;
+  gap: 5px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.example8-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  letter-spacing: 0.4px;
+  background: var(--type-color, #888);
 }
 
 .example8-back-link {
